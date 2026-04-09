@@ -152,61 +152,70 @@ const WP_SVG = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.75
 // ========================================
   // PRODUCTOS - Carga y procesamiento JSON catálogo
   // ========================================
-  // Array global productos procesados (formato normalizado)
-  let products = [];
+// Array global productos procesados (formato normalizado)
+let products = [];
 
-  // Función asíncrona carga datos JSON y normaliza estructura productos
-  async function loadProducts() {
-    try {
-      // Fetch asíncrono archivo JSON productos
-      const response = await fetch("data/products.json");
-      // Parsea JSON respuesta a objeto data
-      const data = await response.json();
-      // Transforma array raw → formato interno normalizado
-      products = data.map(p => {
-        // Extrae imagen principal o cadena vacía si no existe
-        const mainImg    = p.images?.main || "";
-        // Obtiene array gallery raw del producto
-        const rawGallery = p.images?.gallery;
-        // Convierte a array si existe, sino array vacío
-        const extraImgs  = Array.isArray(rawGallery) ? rawGallery : [];
-        // Gallery final = main + extras únicos (sin duplicados main)
-        const gallery    = [mainImg, ...extraImgs.filter(u => u && u !== mainImg)].filter(Boolean);
-        return {
-          // ID único lowercase-kebab-case desde name
-          id:        p.name.toLowerCase().replace(/\s+/g, '-'),
-          // Nombre en mayúsculas
-          name:      p.name.toUpperCase(),
-          // Categoría o "Parlantes" por defecto
-          cat:       p.category || "Parlantes",
-          badge:     "Producto", // Badge fijo todos productos
-          // Descripción o texto por defecto
-          desc:      p.description || "Producto de audio profesional",
-          imgs:      gallery, // Array imágenes procesado
-          // Watermark opcional
-          watermark: p.images?.watermark || null,
-          // Specs como array pares key-value (excluye 'aplicaciones')
-          specs:     p.specs ? Object.entries(p.specs).filter(([k]) => k !== 'aplicaciones') : [],
-          // Aplicaciones procesadas desde specs.aplicaciones
-          apps:      p.specs?.aplicaciones
-                     ? (typeof p.specs.aplicaciones === 'string'
-                         ? p.specs.aplicaciones.split(',').map(s => s.trim()) // String → array limpio
-                         : p.specs.aplicaciones) // Ya array
-                     : [],
-          tags:      [], // Placeholder tags futuros
-          video:     p.video || null, // URL video opcional
-          doc:       p.document || null // PDF ficha técnica opcional
-        };
-      });
-      // Renderiza banner con productos cargados
-      renderBanner();
-      // Renderiza grid productos inicial
-      renderProducts();
-    } catch (e) {
-      // Log error consola (desarrollo/debug)
-      console.error("Error cargando products.json:", e);
-    }
+// Función asíncrona carga datos JSON y normaliza estructura productos
+async function loadProducts() {
+  try {
+    // Fetch asíncrono archivo JSON productos
+    const response = await fetch("data/products.json");
+    // Parsea JSON respuesta a objeto data
+    const data = await response.json();
+    // Transforma array raw → formato interno normalizado
+    products = data.map(p => {
+      // Extrae imagen principal o cadena vacía si no existe
+      const mainImg    = p.images?.main || "";
+      // Obtiene array gallery raw del producto
+      const rawGallery = p.images?.gallery;
+      // Convierte a array si existe, sino array vacío
+      const extraImgs  = Array.isArray(rawGallery) ? rawGallery : [];
+      // Gallery final = main + extras únicos (sin duplicados main)
+      const gallery    = [mainImg, ...extraImgs.filter(u => u && u !== mainImg)].filter(Boolean);
+      
+      // ✅ Multi-video support: collect video, video2, video3+, etc.
+      const videos = [];
+      for (let key of Object.keys(p)) {
+        if (key.startsWith('video') && p[key]) {
+          videos.push(p[key]);
+        }
+      }
+      
+      return {
+        // ID único lowercase-kebab-case desde name
+        id:        p.name.toLowerCase().replace(/\s+/g, '-'),
+        // Nombre en mayúsculas
+        name:      p.name.toUpperCase(),
+        // Categoría o "Parlantes" por defecto
+        cat:       p.category || "Parlantes",
+        badge:     "Producto", // Badge fijo todos productos
+        // Descripción o texto por defecto
+        desc:      p.description || "Producto de audio profesional",
+        imgs:      gallery, // Array imágenes procesado
+        videos,    // ✅ Array videos procesado
+        // Watermark opcional
+        watermark: p.images?.watermark || null,
+        // Specs como array pares key-value (excluye 'aplicaciones')
+        specs:     p.specs ? Object.entries(p.specs).filter(([k]) => k !== 'aplicaciones') : [],
+        // Aplicaciones procesadas desde specs.aplicaciones
+        apps:      p.specs?.aplicaciones
+                   ? (typeof p.specs.aplicaciones === 'string'
+                       ? p.specs.aplicaciones.split(',').map(s => s.trim()) // String → array limpio
+                       : p.specs.aplicaciones) // Ya array
+                   : [],
+        tags:      [], // Placeholder tags futuros
+        doc:       p.document || null // PDF ficha técnica opcional
+      };
+    });
+    // Renderiza banner con productos cargados
+    renderBanner();
+    // Renderiza grid productos inicial
+    renderProducts();
+  } catch (e) {
+    // Log error consola (desarrollo/debug)
+    console.error("Error cargando products.json:", e);
   }
+}
 
 // ========================================
 // BANNER
@@ -218,8 +227,10 @@ function onBannerItemClick(id) {
 function renderBanner() {
   const track = document.getElementById('bannerTrack');
   if (!track) return;
-  const items = products.map(p => ({ src: p.imgs[0], alt: p.name, id: p.id }));
-  const dup   = [...items, ...items, ...items];
+  const items = products
+    .filter(p => p.imgs[0] && /\.(jpg|jpeg)$/i.test(p.imgs[0]))
+    .map(p => ({ src: p.imgs[0], alt: p.name, id: p.id }));
+  const dup = [...items, ...items, ...items];
   track.innerHTML = dup.map(({ src, alt, id }) => `
     <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">
       <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy"/>
@@ -350,27 +361,30 @@ function renderProducts() {
   let html = ''; let delay = 0;
   Object.keys(grouped).forEach((cat, i) => {
     if (i > 0) html += `<div class="prod-category-header"><span>${escapeHtml(cat)}</span></div>`;
-    grouped[cat].forEach(p => {
-      const hasMedia   = p.imgs.length > 1 || !!p.video;
-      const mediaCount = p.imgs.length + (p.video ? 1 : 0);
-      html += `
-        <div class="prod-card" style="--card-delay:${delay*0.07}s" onclick="openModal('${p.id}')">
-          <div class="prod-img-wrap">
-            <img src="${escapeAttr(p.imgs[0])}" alt="${escapeAttr(p.name)}" loading="lazy"/>
-            ${p.watermark ? `<img src="${escapeAttr(p.watermark)}" alt="" class="prod-watermark"/>` : ''}
-            <span class="prod-badge">${escapeHtml(p.badge)}</span>
-            ${hasMedia ? `<span class="prod-gallery-count">${p.video ? '🎬' : '📷'} ${mediaCount}</span>` : ''}
-          </div>
-          <div class="prod-body">
-            <div class="prod-cat">${escapeHtml(p.cat)}</div>
-            <div class="prod-name">${escapeHtml(p.name)}</div>
-            <div class="prod-desc">${escapeHtml(p.desc)}</div>
-            <div class="prod-specs">${(p.tags||[]).map(t=>`<span class="spec-tag">${escapeHtml(t)}</span>`).join('')}</div>
-            <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>
-          </div>
-        </div>`;
-      delay++;
-    });
+      grouped[cat].forEach(p => {
+        // ✅ Updated for multi-video: count all videos + imgs >1
+        const numVideos = (p.videos || []).length;
+        const hasMedia  = p.imgs.length > 1 || numVideos > 0;
+        const mediaCount = p.imgs.length + numVideos;
+        const mediaIcon = numVideos > 0 ? '🎬' : (p.imgs.length > 1 ? '📷' : '');
+        html += `
+          <div class="prod-card" style="--card-delay:${delay*0.07}s" onclick="openModal('${p.id}')">
+            <div class="prod-img-wrap">
+              <img src="${escapeAttr(p.imgs[0])}" alt="${escapeAttr(p.name)}" loading="lazy"/>
+              ${p.watermark ? `<img src="${escapeAttr(p.watermark)}" alt="" class="prod-watermark"/>` : ''}
+              <span class="prod-badge">${escapeHtml(p.badge)}</span>
+              ${hasMedia ? `<span class="prod-gallery-count">${mediaIcon} ${mediaCount}</span>` : ''}
+            </div>
+            <div class="prod-body">
+              <div class="prod-cat">${escapeHtml(p.cat)}</div>
+              <div class="prod-name">${escapeHtml(p.name)}</div>
+              <div class="prod-desc">${escapeHtml(p.desc)}</div>
+              <div class="prod-specs">${(p.tags||[]).map(t=>`<span class="spec-tag">${escapeHtml(t)}</span>`).join('')}</div>
+              <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>
+            </div>
+          </div>`;
+        delay++;
+      });
   });
   grid.innerHTML = html;
   renderPaginationControls(tp, PAGINATION_CONFIG.currentPage);
@@ -491,43 +505,50 @@ function openModal(id) {
   mainImg.onclick = (e) => { e.stopPropagation(); abrirLightbox(mainImg.src, p.name); };
 
   mainWrap.querySelectorAll('.modal-nav-arrow').forEach(a => a.remove());
-  if (p.imgs.length > 1) {
+  // ✅ Show arrows if total media > 1 (imgs + videos)
+  const totalMedia = p.imgs.length + (p.videos || []).length;
+  if (totalMedia > 1) {
     const arrowL = document.createElement('button');
     arrowL.className = 'modal-nav-arrow left'; arrowL.innerHTML = '&#8249;';
-    arrowL.setAttribute('aria-label', 'Imagen anterior');
+    arrowL.setAttribute('aria-label', 'Medio anterior');
     arrowL.onclick = (e) => { e.stopPropagation(); if (typeof modalZoomCleanup==='function') modalZoomCleanup(); navegarGaleria(-1); };
     const arrowR = document.createElement('button');
     arrowR.className = 'modal-nav-arrow right'; arrowR.innerHTML = '&#8250;';
-    arrowR.setAttribute('aria-label', 'Imagen siguiente');
+    arrowR.setAttribute('aria-label', 'Medio siguiente');
     arrowR.onclick = (e) => { e.stopPropagation(); if (typeof modalZoomCleanup==='function') modalZoomCleanup(); navegarGaleria(1); };
     mainWrap.appendChild(arrowL);
     mainWrap.appendChild(arrowR);
   }
 
   const thumbsEl   = document.getElementById('modalThumbs');
-  const hasVideo   = !!p.video;
-  const totalItems = p.imgs.length + (hasVideo ? 1 : 0);
+  // ✅ Multi-video: use p.videos array
+  const numVideos = (p.videos || []).length;
+  const hasVideo  = numVideos > 0;
+  const totalItems = p.imgs.length + numVideos;
 
   if (totalItems > 1) {
-    const imgThumbs = p.imgs.map((img, i) => `
+    let thumbsHTML = p.imgs.map((img, i) => `
       <div class="modal-thumb ${i === 0 ? 'active' : ''}"
            onclick="if(typeof modalZoomCleanup==='function')modalZoomCleanup(); cambiarImg('${escapeAttr(img)}', this)"
            role="tab" data-type="img" aria-label="Imagen ${i + 1} de ${p.imgs.length}">
         <img src="${escapeAttr(img)}" alt="Vista ${i + 1}" loading="lazy"/>
       </div>`).join('');
-    const videoThumb = hasVideo ? (() => {
-      const embed   = getVideoEmbed(p.video);
+    
+    // ✅ Render all videos as thumbs
+    (p.videos || []).forEach((videoUrl, vIdx) => {
+      const embed = getVideoEmbed(videoUrl);
       const thumbBg = embed?.thumb
-        ? `style="background-image:url('${embed.thumb}');background-size:cover;background-position:center;"`
+        ? `style="background-image:url('${escapeAttr(embed.thumb)}');background-size:cover;background-position:center;"`
         : '';
-      return `
+      thumbsHTML += `
         <div class="modal-thumb modal-thumb-video"
-             onclick="if(typeof modalZoomCleanup==='function')modalZoomCleanup(); cambiarAVideo('${escapeAttr(p.video)}', this)"
-             role="tab" data-type="video" ${thumbBg} aria-label="Ver video del producto">
+             onclick="if(typeof modalZoomCleanup==='function')modalZoomCleanup(); cambiarAVideo('${escapeAttr(videoUrl)}', this)"
+             role="tab" data-type="video" ${thumbBg} aria-label="Video ${vIdx + 1} del producto">
           <span class="thumb-play-icon">&#9654;</span>
         </div>`;
-    })() : '';
-    thumbsEl.innerHTML = imgThumbs + videoThumb;
+    });
+    
+    thumbsEl.innerHTML = thumbsHTML;
     thumbsEl.style.display = 'flex';
   } else {
     thumbsEl.innerHTML = '';
@@ -549,8 +570,10 @@ function openModal(id) {
     <a href="${WP}?text=${encodeURIComponent('Hola, me interesa el '+p.name+'. ¿Pueden darme información y precio?')}"
        target="_blank" rel="noopener noreferrer" class="modal-wp">${WP_SVG} Consultar por WhatsApp</a>`;
 
-  openModal._currentImgIdx = 0;
-  openModal._imgs          = p.imgs;
+  // ✅ Init gallery state for mixed media
+  openModal._currentThumbIdx = 0;
+  openModal._imgs = p.imgs;
+  openModal._videos = p.videos || [];
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   openModal._prev = document.activeElement;
@@ -570,12 +593,18 @@ function openModal(id) {
 }
 
 function navegarGaleria(dir) {
-  const imgs = openModal._imgs;
-  if (!imgs || imgs.length <= 1) return;
-  openModal._currentImgIdx = (openModal._currentImgIdx + dir + imgs.length) % imgs.length;
-  const idx   = openModal._currentImgIdx;
-  const thumb = document.querySelectorAll('.modal-thumb[data-type="img"]')[idx];
-  if (thumb) cambiarImg(imgs[idx], thumb);
+  // ✅ Updated for mixed media gallery
+  const thumbs = document.querySelectorAll('.modal-thumb');
+  if (thumbs.length <= 1) return;
+  
+  // Update current index cycling through ALL thumbs (img + video)
+  let currentIdx = openModal._currentThumbIdx || 0;
+  currentIdx = (currentIdx + dir + thumbs.length) % thumbs.length;
+  openModal._currentThumbIdx = currentIdx;
+  
+  // Activate thumb and trigger its content
+  const targetThumb = thumbs[currentIdx];
+  targetThumb.click(); // Triggers cambiarImg or cambiarAVideo
 }
 
 function cambiarAVideo(url, el) {
@@ -625,8 +654,10 @@ function cambiarImg(src, el) {
   }, 150);
   document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  const idx = Array.from(document.querySelectorAll('.modal-thumb[data-type="img"]')).indexOf(el);
-  if (idx !== -1) openModal._currentImgIdx = idx;
+  // ✅ Track thumb index in mixed gallery
+  const allThumbs = document.querySelectorAll('.modal-thumb');
+  const newIdx = Array.from(allThumbs).indexOf(el);
+  if (newIdx !== -1) openModal._currentThumbIdx = newIdx;
 }
 
 function cerrarModal(e) { if (e.target === document.getElementById('modalOverlay')) cerrarModalBtn(); }

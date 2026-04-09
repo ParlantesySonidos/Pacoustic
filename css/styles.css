@@ -189,33 +189,33 @@ nav { position: sticky; top: 0; z-index: 200; display: flex; align-items: center
 
 .prod-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); width: 70%; max-width: 180px; opacity: 0.08; pointer-events: none; z-index: 1; mix-blend-mode: normal; object-fit: contain; filter: grayscale(100%) brightness(0.4); }
 
-/* ── BANNER CARRUSEL — 400px alto ── */
+/* ── BANNER CARRUSEL — MÁS GRANDES Y SIN ESPACIOS ── */
 .banner-wrap {
   width: 100%;
   overflow: hidden;
   background: var(--bg2);
   border-top: 1px solid var(--borde);
   border-bottom: 1px solid var(--borde);
-  padding: 2.5rem 0;
+  padding: 1rem 0;
   position: relative;
 }
 .banner-track {
   display: flex;
-  gap: 2rem;
-  animation: bannerScroll 30s linear infinite;
+  gap: 0;
+  animation: bannerScroll 20s linear infinite;
   width: max-content;
 }
 .banner-wrap:hover .banner-track { animation-play-state: paused; }
 .banner-item {
-  width: 440px;
-  height: 480px;
+  width: 500px;
+  height: 570px;
   background: #ffffff;
   border: 1px solid var(--borde);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 0.4rem;
   box-shadow: var(--shadow-md);
   transition: border-color .3s, box-shadow .3s, transform .3s;
   cursor: pointer;
@@ -223,19 +223,19 @@ nav { position: sticky; top: 0; z-index: 200; display: flex; align-items: center
 }
 .banner-item:hover {
   border-color: rgba(196,30,58,0.4);
-  box-shadow: 0 8px 28px rgba(196,30,58,0.18);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(196,30,58,0.22);
+  transform: translateY(-6px);
 }
 .banner-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   filter: drop-shadow(0 2px 8px rgba(13,27,42,0.12));
   transition: filter .3s, transform .3s;
 }
 .banner-item:hover img {
-  filter: drop-shadow(0 6px 20px rgba(196,30,58,0.38));
-  transform: scale(1.03);
+  filter: drop-shadow(0 8px 24px rgba(196,30,58,0.45));
+  transform: scale(1.05);
 }
 @keyframes bannerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -454,7 +454,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   .sec, .sec-alt { padding: 4rem 2rem; }
   .nos-grid, .con-grid { gap: 3rem; }
   .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1.5rem; }
-  .banner-item { width: 360px; height: 400px; }
+  .banner-item { width: 420px; height: 520px; padding: 0; }
   .wp-float { display: flex; bottom: 2rem; right: 2rem; }
 }
 
@@ -529,7 +529,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 
   /* Banner */
   .banner-wrap { padding: 1.5rem 0; }
-  .banner-item { width: 340px; height: 420px; }
+  .banner-item { width: 360px; height: 480px; padding: 0.4rem; }
 
   footer { padding: 2rem 1.5rem 5rem; flex-direction: column; text-align: center; gap: 1.5rem; }
   .wp-float { bottom: 5.5rem; right: 1.5rem; width: 50px; height: 50px; }
@@ -539,7 +539,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 }
 
 @media (max-width: 480px) {
-  .banner-item { width: 300px; height: 380px; }
+  .banner-item { width: 340px; height: 460px; padding: 0; }
 
   .pagination-controls { gap: 0.5rem; padding: 0.75rem 1rem; border-radius: 30px; }
   .pagination-btn { width: 32px; height: 32px; font-size: 1rem; }
