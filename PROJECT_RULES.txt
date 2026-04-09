@@ -1,0 +1,212 @@
+================================================================================
+PA ACOUSTIC - POLÍTICAS DEL PROYECTO
+================================================================================
+
+REGLAS OBLIGATORIAS PARA CUALQUIER MODIFICACIÓN DEL CÓDIGO
+
+================================================================================
+1. ESTADO INICIAL DEL CATÁLOGO
+================================================================================
+- Al cargar la página NO debe haber filtros activos.
+- NO debe haber categoría seleccionada por defecto.
+- El catálogo debe mostrar TODOS los productos al inicio.
+
+================================================================================
+2. LÓGICA DE FILTRADO
+================================================================================
+- El filtrado por categoría SOLO se ejecuta cuando el usuario selecciona una.
+- El filtrado por búsqueda SOLO se ejecuta cuando el usuario escribe texto.
+- El mensaje "No hay productos con los filtros seleccionados"
+  SOLO se muestra cuando el resultado final sea realmente cero productos.
+
+================================================================================
+3. DISEÑO
+================================================================================
+- NO modificar el diseño visual sin autorización.
+- NO agregar ni eliminar animaciones si no se solicita explícitamente.
+- Mantener el diseño original del catálogo sin particiones innecesarias.
+- Cuidar el contraste en modo claro y oscuro.
+
+================================================================================
+4. GIT
+================================================================================
+- El repositorio YA existe.
+- Usar únicamente el Git integrado de Visual Studio Code.
+- NO sugerir GitHub CLI (gh).
+- NO crear ni subir repositorios nuevos.
+- NUNCA iniciar instrucciones usando comandos encadenados con && en PowerShell.
+  Si se requieren varios comandos, indicarlos en líneas separadas o usar git -C.
+
+================================================================================
+5. CÓDIGO (OBLIGATORIO)
+================================================================================
+- Comentar CADA línea de código (HTML, CSS y JavaScript)
+  explicando qué hace, incluso si no se solicita explícitamente.
+- Escribir comentarios claros, simples y útiles para repasar
+  o modificar el código en el futuro.
+- NO omitir comentarios por considerarlos "obvios".
+
+================================================================================
+REGLA FINAL
+================================================================================
+Si algo ya funcionaba, NO lo rompas.
+Si no se pidió, NO lo haces.
+
+================================================================================
+NUEVAS REGLAS DE TRABAJO (Agregado posteriormente)
+================================================================================
+REGLA PRINCIPAL (OBLIGATORIA):
+Antes de realizar CUALQUIER cambio, modificación, sugerencia de código, diseño o estilos, 
+DEBES preguntarme explícitamente:
+
+1. Qué archivo se va a modificar
+2. Qué líneas o secciones se verán afectadas
+3. Qué se va a cambiar exactamente
+4. Qué NO se va a tocar
+5. Qué impacto tendrá el cambio (visual o funcional)
+
+Solo después de que yo confirme por escrito con un "SÍ, CONFIRMO", puedes proceder.
+
+REGLAS ADICIONALES:
+- No hagas cambios automáticos.
+- No asumas permisos.
+- No modifiques nada que no se te haya pedido explícitamente.
+- No toques JavaScript ni HTML si no se autoriza.
+- Si el cambio afecta algo que ya funciona, debes advertillo antes.
+- Si no estás 100% seguro, debes preguntar.
+- PROHIBIDO modificar código si eso implica romper la página.
+
+FORMATO DE RESPUESTA OBLIGATORIO:
+Antes de cualquier acción, responde SIEMPRE usando este formato:
+
+CAMBIO PROPUESTO:
+- Archivo:
+- Sección:
+- Cambio exacto:
+- Qué se mantiene intacto:
+- Riesgo estimado:
+- ¿Confirmas para continuar? (SÍ / NO)
+
+Si no recibes confirmación, NO continúes.
+
+Si incumples estas reglas, el trabajo se considera inválido.
+
+================================================================================
+POLÍTICA DE SOBRESCRIBIR ARCHIVOS (OBLIGATORIO)
+================================================================================
+A partir de este momento queda estrictamente PROHIBIDO usar `create_file` o cualquier acción que reescriba completamente un archivo existente, especialmente `index.html`, archivos principales de layout o componentes críticos.
+
+Reglas obligatorias:
+1. NO sobrescribir archivos completos.
+2. NO eliminar estructura existente.
+3. NO duplicar código.
+4. NO modificar secciones que no fueron solicitadas.
+5. SOLO editar la sección específica indicada.
+6. Mostrar exactamente qué líneas se van a modificar antes de aplicar cambios grandes.
+
+Si la tarea requiere cambios estructurales mayores:
+* Primero explicar qué se va a hacer.
+* Esperar confirmación.
+* Luego aplicar modificaciones controladas.
+
+Si no es posible editar sin sobrescribir, se debe informar antes de ejecutar cualquier acción.
+
+Objetivo: mantener estabilidad del proyecto y evitar pérdidas de código o reprocesos innecesarios.
+
+================================================================================
+POLÍTICA DE IDIOMA OBLIGATORIA
+================================================================================
+A partir de ahora, todas las respuestas, explicaciones, comentarios en el código y confirmaciones deben realizarse exclusivamente en ESPAÑOL.
+
+Reglas:
+1. No responder en inglés.
+2. No mezclar español con inglés, salvo términos técnicos estrictamente necesarios.
+3. Los comentarios dentro del código deben estar en español.
+4. Si se detecta que la respuesta está en inglés, corregir inmediatamente antes de continuar.
+
+El proyecto está definido para comunicación técnica en español y debe respetarse en todo momento.
+
+================================================================================
+POLÍTICA DE ESTADO OPERATIVO DE LA IA
+================================================================================
+Antes de ejecutar cambios relevantes en el proyecto, la IA debe indicar claramente su estado operativo.
+
+Debe confirmar explícitamente una de las siguientes opciones:
+* "Operativa correctamente" → Puede ejecutar cambios con normalidad.
+* "Presenta limitaciones" → Debe explicar qué limitaciones tiene antes de continuar.
+* "Presenta fallas" → No debe ejecutar cambios hasta que se confirme cómo proceder.
+
+Si la IA detecta comportamientos anómalos (duplicación de código, errores recurrentes, problemas para editar sin sobrescribir, pérdida de contexto, etc.), debe informarlo inmediatamente antes de aplicar cualquier modificación.
+
+Objetivo: evitar ejecuciones inestables, pérdida de código y reprocesos innecesarios.
+
+================================================================================
+POLÍTICA DE CONFIRMACIÓN DE FINALIZACIÓN
+================================================================================
+Al terminar cualquier tarea o modificación, la IA debe indicar explícitamente que el proceso ha finalizado.
+
+Debe incluir una confirmación clara como:
+* "Tarea finalizada correctamente."
+* "Cambios aplicados y proceso completado."
+* "Implementación terminada sin errores detectados."
+
+Además, debe:
+1. Resumir brevemente qué se modificó.
+2. Confirmar que no se alteraron otras partes del proyecto.
+3. Indicar si se recomienda validar algo manualmente.
+
+No se debe dar una tarea por concluida sin esta confirmación explícita.
+
+================================================================================
+POLÍTICA ESTRICTA DE CÓDIGO (OBLIGATORIO)
+================================================================================
+Las siguientes reglas son DE CUMPLIMIENTO OBLIGATORIO y se aplican a TODO el código
+del proyecto (HTML, CSS, JavaScript). Su incumplimiento genera deuda técnica.
+
+REGLAS OBLIGATORIAS:
+1. No permitir scripts duplicados.
+2. No permitir funciones duplicadas.
+3. No permitir procesos redundantes.
+4. No permitir lógica DOM repetida.
+5. No permitir reglas CSS duplicadas.
+6. No permitir variables o código sin usar.
+
+APLICACIÓN:
+- Si se detecta código duplicado: OPTIMIZAR o ELIMINAR sin romper funcionalidad.
+- Si se detecta código sin usar: ELIMINAR inmediatamente.
+- Si se detectan procesos redundantes: CONSOLIDAR en una sola función.
+- Si se detectan selectores CSS duplicados: UNIFICAR en un solo bloque.
+
+VERIFICACIÓN OBLIGATORIA:
+- Antes de cada commit, verificar que no existan duplicados.
+- Usar herramientas de linting para detectar código muerto.
+- Revisar que no haya funciones定義adas sin llamar.
+
+SANCIONES POR INCUMPLIMIENTO:
+- Cualquier violación debe corregirse antes de entregar código.
+- El código con duplicaciones será rechazado en revisión.
+
+================================================================================
+POLÍTICA DE ACTUALIZACIÓN DEL README (OBLIGATORIO)
+================================================================================
+Cada vez que se realice un cambio, modificación o actualización en el código del proyecto,
+DEBE actualizarse el archivo README.md para reflejar los cambios realizados.
+
+Reglas obligatorias:
+1. Incluir una sección de "Historial de cambios" o "Última actualización" en el README.
+2. Documentar qué archivos fueron modificados.
+3. Describir brevemente el cambio realizado.
+4. **PREGUNTAR LA FECHA ACTUAL AL USUARIO ANTES DE ACTUALIZAR** - Esta es la regla más importante.
+5. Si se agregan nuevas características, añadirlas a la sección correspondiente.
+6. Si se corrigen errores, documentar qué error se corrigió.
+
+Esta política asegura que el README.md siempre esté sincronizado con el estado actual del proyecto.
+
+Ejemplo de formato de entrada:
+- Fecha: [DD/MM/AAAA]
+- Cambios: [Descripción breve]
+- Archivos afectados: [Lista de archivos]
+
+**IMPORTANTE**: Antes de agregar cualquier fecha, PREGUNTAR al usuario: "¿Qué fecha debo usar para el registro de cambios?"
+
+================================================================================

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="P.Acoustic — Fabricantes y distribuidores de equipos de audio profesional en Medellín, Colombia. Line arrays activos, woofers y parlantes de alta potencia para eventos e instalaciones."/>
+  <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/>
+  <meta name="author" content="P.Acoustic"/>
+  <meta name="theme-color" content="#c41e3a"/>
+  <!-- PageSpeed 100%: Preloads críticos -->
+  <link rel="preload" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" as="image" fetchpriority="high"/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap"/></noscript>
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com"/>
+  <link rel="dns-prefetch" href="https://wa.me"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <meta property="og:title" content="P.Acoustic — Audio Profesional"/>
+  <meta property="og:description" content="Equipos de audio de alta potencia: line arrays, woofers y parlantes profesionales. Envíos a todo Colombia."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="es_CO"/>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/>
+  <title>P.Acoustic — Audio Profesional | Audio Pro Medellín</title>
+<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'"/>
+<link rel="stylesheet" href="css/pdf-btn.css"/>
+</head>
+
+<body data-theme="light">
+
+<!-- SVG WHATSAPP -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ico-wp" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </symbol>
+</svg>
+
+<div class="page-watermark"></div>
+
+<!-- WP FLOTANTE -->
+<a class="wp-float" href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
+</a>
+
+<!-- NAVEGACIÓN -->
+<nav aria-label="Navegación principal">
+  <div class="nav-logo">
+    <a href="#" onclick="handleLogoClick(event); return false;">
+      <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic" loading="lazy"/>
+    </a>
+  </div>
+
+  <div class="nav-mobile-overlay" id="navMobileOverlay" onclick="toggleMobileMenu()"></div>
+
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-mobile-search">
+      <input type="search" id="mobileMenuSearch" class="nav-mobile-search-input" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+    </li>
+    <li class="nav-mobile-category">
+      <label class="nav-mobile-category-label">Filtrar por categoría</label>
+      <select id="mobileMenuCategory" class="nav-mobile-category-select">
+        <option value="">Todas las categorías</option>
+      </select>
+    </li>
+    <li><a href="#products" class="nav-link" onclick="handleNavClick(event,'products')">Productos</a></li>
+    <li><a href="#nosotros" class="nav-link" onclick="handleNavClick(event,'nosotros')">Nosotros</a></li>
+    <li><a href="#contacto" class="nav-link" onclick="handleNavClick(event,'contacto')">Contacto</a></li>
+    <li class="nav-wp-mobile">
+      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
+        WhatsApp
+      </a>
+    </li>
+  </ul>
+
+  <div class="nav-catalog-controls">
+    <div class="nav-search-box" id="navSearchBox">
+      <button type="button" class="nav-search-trigger" id="navSearchTrigger" title="Buscar" aria-label="Abrir búsqueda" aria-expanded="false" aria-controls="catalogSearch">
+        <span class="nav-search-icon" aria-hidden="true">🔍</span>
+      </button>
+      <input type="search" id="catalogSearch" class="nav-search-input" placeholder="Buscar..." autocomplete="off" aria-label="Buscar productos"/>
+    </div>
+    <select id="catalogCategory" class="nav-category-select" title="Filtrar por categoría" aria-label="Filtrar por categoría">
+      <option value="">Todas las categorías</option>
+    </select>
+  </div>
+
+  <button type="button" class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a class="nav-wp" href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
+    WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <!-- ✅ class="hero-logo-img" y alt añadidos — sin esto el CSS no limita el tamaño -->
+    <img
+      src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"
+      alt="P.Acoustic"
+      class="hero-logo-img"
+      fetchpriority="high"
+    />
+    <div class="hero-tag">Audio Profesional Medellin - Colombia</div>
+    <h1 class="hero-titulo">
+      Equipos de
+      <span class="linea2">Alta Potencia</span>
+    </h1>
+    <p class="hero-sub">Line arrays, woofers y parlantes profesionales diseñados para eventos de gran formato, instalaciones fijas y sistemas de refuerzo sonoro de alto rendimiento.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-rojo" onclick="handleNavClick(event,'products')">Ver productos</a>
+      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información%20sobre%20PA%20Acoustic" target="_blank" rel="noopener noreferrer" class="btn-outline">Cotizar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner-wrap">
+  <div class="banner-track" id="bannerTrack"></div>
+</div>
+
+<!-- CATÁLOGO -->
+<section id="products" class="sec" aria-labelledby="titulo-products">
+  <div class="reveal">
+    <div class="sec-label">— Nuestros Equipos</div>
+    <h2 class="sec-titulo" id="titulo-products">Catálogo de productos</h2>
+    <div class="products-count" id="productsCount"></div>
+    <div id="categoryActive" class="category-active" style="display:none;">
+      <span class="categoria-badge">Categoría:</span>
+      <span id="categoryName" class="category-name"></span>
+    </div>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="sec-alt" aria-labelledby="titulo-nosotros">
+  <div class="nos-grid">
+    <div class="nos-logo-box reveal">
+      <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic"/>
+    </div>
+    <div class="reveal">
+      <div class="sec-label">— Quiénes Somos</div>
+      <h2 class="nos-titulo" id="titulo-nosotros">Soluciones en <span>Audio Pro</span></h2>
+      <p class="nos-texto">Somos fabricantes y distribuidores de equipos de audio profesional de alta potencia. Nuestros productos están diseñados para cumplir las exigencias de los profesionales del sonido en eventos, instalaciones y producción en vivo.</p>
+      <p class="nos-texto">Cada equipo es desarrollado con tecnología de punta, componentes de neodimio y amplificación clase D para garantizar el máximo rendimiento con la mayor eficiencia energética.</p>
+      <div class="nos-items">
+        <div class="nos-item"><div class="nos-ico">⚡</div><div><h4>Alta Potencia</h4><p>Sistemas desde 700W hasta 2200W RMS para cualquier escala de evento.</p></div></div>
+        <div class="nos-item"><div class="nos-ico">🎯</div><div><h4>Precisión Acústica</h4><p>DSP integrado, cobertura controlada y SPL máximo de hasta 137 dB.</p></div></div>
+        <div class="nos-item"><div class="nos-ico">🛡️</div><div><h4>Garantía y Soporte</h4><p>Respaldo técnico especializado y garantía en todos nuestros equipos.</p></div></div>
+        <div class="nos-item"><div class="nos-ico">🚚</div><div><h4>Envíos a Colombia</h4><p>Despachamos a cualquier ciudad con empaque seguro.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="sec" aria-labelledby="titulo-contacto">
+  <div class="reveal" style="margin-bottom:2.5rem">
+    <div class="sec-label">— Estamos para ayudarte</div>
+    <h2 class="sec-titulo" id="titulo-contacto">Contáctanos</h2>
+  </div>
+  <div class="con-grid">
+    <div class="reveal">
+      <h3 class="con-titulo">Hablemos de <span>Tu Proyecto</span></h3>
+      <p class="con-sub">¿Necesitas un equipo específico o asesoría técnica? Escríbenos por WhatsApp y te respondemos de inmediato.</p>
+      <div class="con-items">
+        <div class="con-item"><div class="con-ico">📱</div><div><div class="con-lbl">WhatsApp</div><div class="con-val">+57 305 340 2732</div></div></div>
+        <div class="con-item"><div class="con-ico">🕐</div><div><div class="con-lbl">Horario</div><div class="con-val">Lun – Vie: 8:45 – 18:00 · Sáb: 8:45 – 15:00</div></div></div>
+        <div class="con-item"><div class="con-ico">📍</div><div><div class="con-lbl">Dirección</div><div class="con-val">Cl 44 #66-75, Laureles - Estadio</div></div></div>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.245075972068!2d-75.5875842259037!3d6.248611926298559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429a80156c9a7%3A0xf59872fe7db7070b!2sCl%2044%20%2366-75%2C%20Laureles%20-%20Estadio%2C%20Medell%C3%ADn%2C%20Laureles%2C%20Medell%C3%ADn%2C%20Antioquia!5e1!3m2!1ses-419!2sco!4v1773288774904!5m2!1ses-419!2sco"
+        width="100%" height="250"
+        style="border:0;border-radius:12px;margin:1rem 0"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de P.Acoustic">
+      </iframe>
+      <div class="con-item"><div class="con-ico">🇨🇴</div><div><div class="con-lbl">País / ciudad</div><div class="con-val">Colombia / Medellín</div></div></div>
+    </div>
+    <div class="reveal con-card">
+      <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic" style="width:120px;margin-bottom:1.5rem;display:block"/>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.8;margin-bottom:1rem">Especialistas en sistemas de audio profesional de alta potencia. Contáctanos para recibir asesoría técnica personalizada y cotización de nuestros equipos.</p>
+      <p style="font-size:0.78rem;color:var(--rojo);font-weight:600">📦 Envíos a todo Colombia</p>
+      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer" class="btn-wp-grande" style="margin-top:1.5rem">
+        <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
+        Escribir por WhatsApp Ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic"/></div>
+  <div class="footer-info">
+    <p>© 2026 P.Acoustic — Audio Profesional Medellin - Colombia 🇨🇴</p>
+    <p class="footer-credit">Desarrollado por Juan Pablo Vélez · Web Developer</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="cerrarModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-titulo" id="modalTitulo"></div>
+      <button class="modal-close" onclick="cerrarModalBtn()" aria-label="Cerrar modal">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-imgs">
+        <div class="modal-img-main"><img id="modalImgMain" src="" alt="" role="img"/></div>
+        <div class="modal-img-thumbs" id="modalThumbs" role="tablist"></div>
+      </div>
+      <div class="modal-info" id="modalInfo"></div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="introAudio" preload="metadata">
+  <source src="audio/intro.mp3" type="audio/mpeg">
+</audio>
+
+<script src="js/modalZoom.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

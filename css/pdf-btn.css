@@ -1,0 +1,41 @@
+/* Botón PDF Ficha Técnica - Estilo consistente con modal */
+.modal-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  width: 100%;
+  margin: 1rem 0;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+}
+
+.modal-pdf-btn:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+  transform: translateY(-2px);
+}
+
+.modal-pdf-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.3);
+}
+
+@media (max-width: 768px) {
+  .modal-pdf-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
