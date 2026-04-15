@@ -1,13 +1,13 @@
 // ========================================
 // PA ACOUSTIC — modalZoom.js
-// Modal: min 1x, max 3x (no encoge)
-// Lightbox: min 1x, max 4x (no encoge)
+// Modal: min 1x, max según MODAL_ZOOM_CONFIG (no encoge)
+// Lightbox: min 1x, max en main.js LB_MAX (no encoge)
 // ========================================
 
 // ── MODAL ZOOM ──
 const MODAL_ZOOM_CONFIG = {
   currentZoom: 1,
-  maxZoom: 1.15,  // Usuario: límite 15% aumento
+  maxZoom: 1.45,
   minZoom: 1,
   step: 0.05     // Paso fino control preciso
 };

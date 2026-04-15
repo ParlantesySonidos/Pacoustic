@@ -24,8 +24,9 @@
   <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/>
   <title>P.Acoustic — Audio Profesional | Audio Pro Medellín</title>
-<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'"/>
-<link rel="stylesheet" href="css/pdf-btn.css"/>
+<link rel="stylesheet" href="css/styles.css?v=stats-v3"/>
+<link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/>
+<link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/>
 </head>
 
 <body data-theme="light">
@@ -39,57 +40,50 @@
 
 <div class="page-watermark"></div>
 
-<!-- WP FLOTANTE -->
-<a class="wp-float" href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
-  <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
-</a>
-
 <!-- NAVEGACIÓN -->
-<nav aria-label="Navegación principal">
+<nav aria-label="Navegación principal" id="mainNavbar" class="nav-shell">
+  <button type="button" class="nav-sidebar-toggle" id="navSidebarToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar" aria-label="Menú categorías">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-logo">
     <a href="#" onclick="handleLogoClick(event); return false;">
       <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic" loading="lazy"/>
     </a>
   </div>
 
-  <div class="nav-mobile-overlay" id="navMobileOverlay" onclick="toggleMobileMenu()"></div>
-
-  <ul class="nav-links" id="navLinks">
-    <li class="nav-mobile-search">
-      <input type="search" id="mobileMenuSearch" class="nav-mobile-search-input" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
-    </li>
-    <li class="nav-mobile-category">
-      <label class="nav-mobile-category-label">Filtrar por categoría</label>
-      <select id="mobileMenuCategory" class="nav-mobile-category-select">
-        <option value="">Todas las categorías</option>
-      </select>
-    </li>
-    <li><a href="#products" class="nav-link" onclick="handleNavClick(event,'products')">Productos</a></li>
-    <li><a href="#nosotros" class="nav-link" onclick="handleNavClick(event,'nosotros')">Nosotros</a></li>
-    <li><a href="#contacto" class="nav-link" onclick="handleNavClick(event,'contacto')">Contacto</a></li>
-    <li class="nav-wp-mobile">
-      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
-        WhatsApp
-      </a>
-    </li>
-  </ul>
-
   <div class="nav-catalog-controls">
-    <div class="nav-search-box" id="navSearchBox">
-      <button type="button" class="nav-search-trigger" id="navSearchTrigger" title="Buscar" aria-label="Abrir búsqueda" aria-expanded="false" aria-controls="catalogSearch">
-        <span class="nav-search-icon" aria-hidden="true">🔍</span>
+    <div class="nav-search-field">
+      <span class="nav-search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="catalogSearch" class="nav-search-input" placeholder="Buscar en catálogo…" autocomplete="off" aria-label="Buscar productos"/>
+      <button type="button" id="catalogSearchVoiceBtn" class="nav-voice-btn" hidden aria-label="Buscar por voz" title="Buscar por voz (español)">
+        <svg class="nav-voice-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+          <rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/>
+          <path d="M5 11v1a7 7 0 0014 0v-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 18v3M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </button>
-      <input type="search" id="catalogSearch" class="nav-search-input" placeholder="Buscar..." autocomplete="off" aria-label="Buscar productos"/>
     </div>
-    <select id="catalogCategory" class="nav-category-select" title="Filtrar por categoría" aria-label="Filtrar por categoría">
-      <option value="">Todas las categorías</option>
-    </select>
   </div>
 
-  <button type="button" class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-mobile-controls" id="navMobileSearchPanel">
+    <input type="search" id="mobileMenuSearch" class="nav-mobile-search-input" placeholder="Buscar productos…" autocomplete="off" aria-label="Buscar productos"/>
+    <button type="button" id="mobileMenuSearchVoiceBtn" class="nav-voice-btn nav-voice-btn--mobile" hidden aria-label="Buscar por voz" title="Buscar por voz (español)">
+      <svg class="nav-voice-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+        <rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/>
+        <path d="M5 11v1a7 7 0 0014 0v-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 18v3M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="nav-mobile-trailing">
+    <button type="button" class="nav-icon-btn" id="navMobileSearchToggle" aria-expanded="false" aria-controls="navMobileSearchPanel" aria-label="Mostrar u ocultar búsqueda">
+      <svg class="nav-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    </button>
+    <a class="nav-icon-link nav-wp-icon" href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <svg class="nav-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wp"/></svg>
+    </a>
+  </div>
 
   <a class="nav-wp" href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer">
     <svg viewBox="0 0 24 24"><use href="#ico-wp"/></svg>
@@ -97,6 +91,37 @@
   </a>
 </nav>
 
+<!-- Estado de filtros catálogo (sincronizado con el sidebar) -->
+<select id="catalogCategory" class="visually-hidden" aria-hidden="true" tabindex="-1" title="Categoría seleccionada"></select>
+<input type="hidden" id="catalogSubcategory" name="catalogSubcategory" value="" autocomplete="off"/>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" aria-label="Menú de categorías">
+  <div class="sidebar-panel-header">
+    <h2 class="sidebar-panel-title">Categorías</h2>
+    <button type="button" class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Cerrar menú de categorías">
+      <span class="sidebar-close-ico" aria-hidden="true"></span>
+    </button>
+  </div>
+  <nav class="sidebar-nav" aria-label="Categorías del catálogo">
+    <div class="sidebar-nav-scroll">
+      <ul id="sidebarCategories" class="sidebar-cat-list"></ul>
+    </div>
+    <div class="sidebar-nav-footer">
+      <hr class="sidebar-divider">
+      <p class="sidebar-section-label">Empresa</p>
+      <ul class="sidebar-section">
+        <li><a href="#nosotros" class="sidebar-link" onclick="handleSidebarLink(event, 'nosotros')">Nosotros</a></li>
+        <li><a href="#contacto" class="sidebar-link" onclick="handleSidebarLink(event, 'contacto')">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+</aside>
+<div id="sidebarFlyout" class="sidebar-flyout" aria-hidden="true"></div>
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+<!-- MAIN CONTENT -->
+<main id="main-content">
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -132,9 +157,13 @@
   <div class="reveal">
     <div class="sec-label">— Nuestros Equipos</div>
     <h2 class="sec-titulo" id="titulo-products">Catálogo de productos</h2>
-    <div class="products-count" id="productsCount"></div>
-    <div id="categoryActive" class="category-active" style="display:none;">
-      <span class="categoria-badge">Categoría:</span>
+    <div class="products-count catalog-stats" id="productsCount"></div>
+    <div class="mobile-catalog-category-wrap" id="mobileCatalogCategoryWrap">
+      <label for="mobileCatalogCategory" class="mobile-catalog-category-label visually-hidden">Categoría del catálogo</label>
+      <select id="mobileCatalogCategory" class="mobile-catalog-category-select" aria-label="Categoría del catálogo"></select>
+    </div>
+    <div id="categoryActive" class="category-active" style="display:none;" role="status" aria-live="polite">
+      <span class="categoria-badge visually-hidden">Filtro activo</span>
       <span id="categoryName" class="category-name"></span>
     </div>
   </div>
@@ -200,6 +229,7 @@
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="footer-logo"><img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic"/></div>
   <div class="footer-info">
@@ -230,8 +260,9 @@
   <source src="audio/intro.mp3" type="audio/mpeg">
 </audio>
 
-<script src="js/modalZoom.js"></script>
-<script src="js/main.js"></script>
+<script src="js/modalZoom.js?v=stats-v3"></script>
+<script src="js/main.js?v=stats-v3"></script>
+<script src="js/chatAdvisor.js?v=stats-v3" defer></script>
 
 </body>
 </html>
