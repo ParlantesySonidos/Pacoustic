@@ -106,7 +106,7 @@
     "id": 4,
     "name": "pa10n-900",
     "category": "Woofer",
-    "subcategory": "Line Array",
+    "subcategory": "Neodimio",
     "bannerImg": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775766120/pa10n900_qbmz76.jpg",
     "images": {
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1774999066/pa10n900_qagfmz.png",
@@ -131,7 +131,7 @@
     "id": 5,
     "name": "pa12n1000",
     "category": "Woofer",
-    "subcategory": "Line Array",
+    "subcategory": "Neodimio",
     "bannerImg": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775766336/pa12n1000_hahmae.jpg",
     "images": {
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1773505883/pa12n1000-1_qaoenb.png",
