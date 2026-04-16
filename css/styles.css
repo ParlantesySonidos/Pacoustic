@@ -1057,6 +1057,15 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); width: 70%; opacity: 0.06; pointer-events: none; z-index: 0; mix-blend-mode: normal; object-fit: contain; filter: grayscale(100%) brightness(0.4) contrast(1.2); }
 
 .modal-imgs { display: flex; flex-direction: column; gap: 1rem; }
+.modal-gallery-hint {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.45;
+  text-align: center;
+  margin: -0.35rem 0 0;
+  padding: 0 0.35rem;
+  letter-spacing: 0.02em;
+}
 
 /* Imagen principal del modal con posición relativa para flechas */
 .modal-img-main {
@@ -1925,6 +1934,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 #lightboxOverlay.open { display: flex; animation: modalIn .2s ease; }
 
 .lb-img-wrap {
+  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
@@ -1933,7 +1943,58 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   overflow: hidden;
 }
 
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 42px;
+  min-height: 44px;
+  padding: 0 0.15rem;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--titulo);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: 'Rajdhani', sans-serif;
+}
+.lb-nav:hover {
+  background: var(--rojo);
+  border-color: var(--rojo);
+  color: #fff;
+}
+.lb-nav--prev { left: max(0.35rem, env(safe-area-inset-left, 0px)); }
+.lb-nav--next { right: max(0.35rem, env(safe-area-inset-right, 0px)); }
+
+.lb-counter {
+  display: none;
+  position: absolute;
+  bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  pointer-events: none;
+}
+
 #lbImg {
+  position: relative;
+  z-index: 1;
   max-width: 70vw;
   max-height: 55vh;  /* ✅ Más pequeña/representativa como modal */
   width: 85%;        /* ✅ Fija más pequeña */
@@ -1986,14 +2047,20 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .lb-ctrl-btn:hover { background: var(--rojo); border-color: var(--rojo); color: #fff; }
 
 .lb-hint {
+  flex: 1 1 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding-top: 0.35rem;
   font-size: 0.65rem;
   color: var(--muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  text-align: center;
 }
 
 #modalImgMain { cursor: zoom-in; }
 
 @media (max-width: 768px) {
   #lbImg { max-width: 95%; max-height: 65vh; }
-  .lb-hint { display: none; }
+  .lb-hint { font-size: 0.58rem; max-width: 92vw; padding-top: 0.45rem; }
 }
