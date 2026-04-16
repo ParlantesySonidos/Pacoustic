@@ -7,16 +7,9 @@
   <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/>
   <meta name="author" content="P.Acoustic"/>
   <meta name="theme-color" content="#c41e3a"/>
-  <!-- PageSpeed 100%: Preloads críticos -->
-  <link rel="preload" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" as="image" fetchpriority="high"/>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap"/></noscript>
+  <!-- Fuentes en /fonts (css/fonts.css) — sin Google Fonts: evita timeouts y el refreshCSS de Live Server sobre URLs externas -->
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com"/>
   <link rel="dns-prefetch" href="https://wa.me"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <meta property="og:title" content="P.Acoustic — Audio Profesional"/>
   <meta property="og:description" content="Equipos de audio de alta potencia: line arrays, woofers y parlantes profesionales. Envíos a todo Colombia."/>
   <meta property="og:type" content="website"/>
@@ -24,7 +17,8 @@
   <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/>
   <title>P.Acoustic — Audio Profesional | Audio Pro Medellín</title>
-<link rel="stylesheet" href="css/styles.css?v=wm-pahl20a-1"/>
+<link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/>
+<link rel="stylesheet" href="css/styles.css?v=wm-mafondo-1"/>
 <link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/>
 <link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/>
 </head>
@@ -47,7 +41,7 @@
   </button>
   <div class="nav-logo">
     <a href="#" onclick="handleLogoClick(event); return false;">
-      <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic" loading="lazy"/>
+      <img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic" width="160" height="40" fetchpriority="low" decoding="async"/>
     </a>
   </div>
 
@@ -134,15 +128,23 @@
       class="hero-logo-img"
       fetchpriority="high"
     />
-    <div class="hero-tag">Audio Profesional Medellin - Colombia</div>
+    <div class="hero-tag">Audio profesional · Medellín, Colombia</div>
     <h1 class="hero-titulo">
       Equipos de
       <span class="linea2">Alta Potencia</span>
     </h1>
-    <p class="hero-sub">Line arrays, woofers y parlantes profesionales diseñados para eventos de gran formato, instalaciones fijas y sistemas de refuerzo sonoro de alto rendimiento.</p>
+    <div class="hero-intro">
+      <p class="hero-sub">
+        <span class="hero-sub-line">Line arrays, woofers y parlantes profesionales diseñados para</span>
+        <span class="hero-sub-line"><strong>eventos de gran formato</strong>, <strong>instalaciones fijas</strong> y <strong>sistemas de refuerzo sonoro</strong> de alto rendimiento.</span>
+      </p>
+    </div>
     <div class="hero-btns">
       <a href="#products" class="btn-rojo" onclick="handleNavClick(event,'products')">Ver productos</a>
-      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información%20sobre%20PA%20Acoustic" target="_blank" rel="noopener noreferrer" class="btn-outline">Cotizar por WhatsApp</a>
+      <a href="https://wa.me/573053402732?text=Hola,%20quiero%20más%20información%20sobre%20PA%20Acoustic" target="_blank" rel="noopener noreferrer" class="btn-hero-wp">
+        <svg class="btn-hero-wp-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#ico-wp"/></svg>
+        Cotizar por WhatsApp
+      </a>
     </div>
   </div>
 </section>
@@ -204,16 +206,33 @@
       <div class="con-items">
         <div class="con-item"><div class="con-ico">📱</div><div><div class="con-lbl">WhatsApp</div><div class="con-val">+57 305 340 2732</div></div></div>
         <div class="con-item"><div class="con-ico">🕐</div><div><div class="con-lbl">Horario</div><div class="con-val">Lun – Vie: 8:45 – 18:00 · Sáb: 8:45 – 15:00</div></div></div>
-        <div class="con-item"><div class="con-ico">📍</div><div><div class="con-lbl">Dirección</div><div class="con-val">Cl 44 #66-75, Laureles - Estadio</div></div></div>
       </div>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.245075972068!2d-75.5875842259037!3d6.248611926298559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429a80156c9a7%3A0xf59872fe7db7070b!2sCl%2044%20%2366-75%2C%20Laureles%20-%20Estadio%2C%20Medell%C3%ADn%2C%20Laureles%2C%20Medell%C3%ADn%2C%20Antioquia!5e1!3m2!1ses-419!2sco!4v1773288774904!5m2!1ses-419!2sco"
-        width="100%" height="250"
-        style="border:0;border-radius:12px;margin:1rem 0"
-        allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación de P.Acoustic">
-      </iframe>
+      <div class="con-map-block" role="region" aria-label="Ubicación en mapa">
+        <div class="con-map-unified">
+          <div class="con-map-unified-head">
+            <span class="con-map-unified-pin" aria-hidden="true">📍</span>
+            <div class="con-map-unified-text">
+              <span class="con-map-unified-kicker">Ubicación</span>
+              <span class="con-map-unified-addr">Cl 44 #66-75 · Laureles–Estadio, Medellín</span>
+              <span class="con-map-unified-hint">Elige la app para ver la ruta</span>
+            </div>
+          </div>
+          <div class="con-map-unified-actions">
+            <a
+              class="con-map-app con-map-app--google"
+              href="https://www.google.com/maps/search/?api=1&amp;query=Cl.+44+%2366-75,+Laureles+Estadio,+Medell%C3%ADn,+Antioquia,+Colombia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Google Maps</a>
+            <a
+              class="con-map-app con-map-app--waze"
+              href="https://waze.com/ul?q=Cl%2044%20%2366-75%2C%20Medell%C3%ADn%2C%20Colombia&amp;navigate=yes"
+              target="_blank"
+              rel="noopener noreferrer"
+            ><span class="con-map-app-w" aria-hidden="true">W</span><span>Waze</span></a>
+          </div>
+        </div>
+      </div>
       <div class="con-item"><div class="con-ico">🇨🇴</div><div><div class="con-lbl">País / ciudad</div><div class="con-val">Colombia / Medellín</div></div></div>
     </div>
     <div class="reveal con-card">
