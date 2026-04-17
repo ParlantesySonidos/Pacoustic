@@ -30,8 +30,8 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .page-watermark {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: -1; opacity: 0.30;
-  /* Misma URL que .hero-bg en ≤1024px: el navegador reutiliza una sola descarga en móvil. */
-  background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_960,c_limit/v1776290344/mafondo_mo86qx.jpg');
+  /* Misma URL que .hero-bg en ≤1024px; w_720 baja bytes en 4G (PSI móvil). Escritorio redefine en ≥1025px. */
+  background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1776290344/mafondo_mo86qx.jpg');
   /* Móvil / tablet: una sola imagen que cubre el fondo */
   background-size: cover;
   background-repeat: no-repeat;
@@ -1220,12 +1220,23 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   #main-content {
     margin-left: 0;
   }
+  /* Marca de agua: sin filter (grayscale+brightness es caro en GPU móvil); opacidad similar al look anterior. */
+  .page-watermark {
+    background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1776290344/mafondo_mo86qx.jpg');
+    filter: none;
+    opacity: 0.26;
+  }
+  /* Catálogo bajo el pliegue: el motor puede saltar layout/pintura hasta scroll (mejor TBT/Speed Index en móvil). */
+  #products {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 720px;
+  }
   /* Hero: misma imagen que la marca de página, visible en móvil (el watermark fijo a veces no se nota detrás del hero). */
   .hero-bg {
     background-image:
       radial-gradient(ellipse 60% 70% at 65% 50%, rgba(196, 30, 58, 0.07) 0%, transparent 65%),
       linear-gradient(to bottom, rgba(240, 245, 249, 0.9) 0%, rgba(240, 245, 249, 0.5) 42%, rgba(240, 245, 249, 0.18) 100%),
-      url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_960,c_limit/v1776290344/mafondo_mo86qx.jpg');
+      url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1776290344/mafondo_mo86qx.jpg');
     background-size: auto, auto, cover;
     background-position: center, center, center;
     background-repeat: no-repeat;
@@ -1237,8 +1248,8 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(44, 62, 80, 0.78);
-    backdrop-filter: blur(4px);
+    background: rgba(44, 62, 80, 0.86);
+    backdrop-filter: none;
   }
   /* Menú categorías: ancho completo debajo del navbar (como referencia) */
   .sidebar {
