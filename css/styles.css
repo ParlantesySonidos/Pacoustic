@@ -1057,15 +1057,6 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); width: 70%; opacity: 0.06; pointer-events: none; z-index: 0; mix-blend-mode: normal; object-fit: contain; filter: grayscale(100%) brightness(0.4) contrast(1.2); }
 
 .modal-imgs { display: flex; flex-direction: column; gap: 1rem; }
-.modal-gallery-hint {
-  font-size: 0.72rem;
-  color: var(--muted);
-  line-height: 1.45;
-  text-align: center;
-  margin: -0.35rem 0 0;
-  padding: 0 0.35rem;
-  letter-spacing: 0.02em;
-}
 
 /* Imagen principal del modal con posición relativa para flechas */
 .modal-img-main {

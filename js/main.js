@@ -1260,9 +1260,6 @@ function openModal(id) {
   const hasVideo  = numVideos > 0;
   const totalItems = p.imgs.length + numVideos;
 
-  const galleryHint = document.getElementById('modalGalleryHint');
-  if (galleryHint) galleryHint.hidden = totalItems <= 1;
-
   if (totalItems > 1) {
     let thumbsHTML = p.imgs.map((img, i) => `
       <div class="modal-thumb ${i === 0 ? 'active' : ''}"
@@ -1290,7 +1287,6 @@ function openModal(id) {
   } else {
     thumbsEl.innerHTML = '';
     thumbsEl.style.display = 'none';
-    if (galleryHint) galleryHint.hidden = true;
   }
 
   document.getElementById('modalInfo').innerHTML = `
