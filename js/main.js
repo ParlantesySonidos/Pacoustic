@@ -159,7 +159,7 @@ const CATALOG_JSON_VERSION = 3;
 // Array global productos procesados (formato normalizado)
 let products = [];
 
-/** Aplaza trabajo pesado para no bloquear pintura inicial (mejor puntuación Lighthouse escritorio). */
+/** Escritorio: aplaza DOM pesado al idle (mejor TBT en PSI). Móvil: ejecuta ya (idle retrasaba banner/grid y bajaba el 90). */
 function scheduleIdleWork(fn) {
   const run = () => {
     try {
@@ -168,6 +168,13 @@ function scheduleIdleWork(fn) {
       console.error(e);
     }
   };
+  const narrow =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(max-width: 1024px)').matches;
+  if (narrow) {
+    run();
+    return;
+  }
   if (typeof requestIdleCallback === 'function') {
     requestIdleCallback(run, { timeout: 900 });
   } else {
@@ -268,13 +275,18 @@ function onBannerItemClick(id) {
 function renderBanner() {
   const track = document.getElementById('bannerTrack');
   if (!track) return;
+  const bannerLoading =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(max-width: 1024px)').matches
+      ? 'lazy'
+      : 'eager';
   const items = products
     .filter(p => p.bannerImg && p.bannerImg.trim() !== '')
     .map(p => ({ src: p.bannerImg, alt: p.name, id: p.id }));
   const dup = [...items, ...items, ...items];
   track.innerHTML = dup.map(({ src, alt, id }) => `
     <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">
-      <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="eager" decoding="async"/>
+      <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="${bannerLoading}" decoding="async"/>
     </div>`).join('');
   initBannerItemSizing(track);
 }
