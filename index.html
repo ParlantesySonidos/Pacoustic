@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/>
   <title>P.Acoustic — Audio Profesional | Audio Pro Medellín</title>
 <link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/>
-<link rel="stylesheet" href="css/styles.css?v=wm-mafondo-1"/>
+<link rel="stylesheet" href="css/styles.css?v=wm-lcp-2"/>
 <link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/>
 <link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/>
 </head>
@@ -124,10 +124,18 @@
   <div class="hero-content">
     <!-- ✅ class="hero-logo-img" y alt añadidos — sin esto el CSS no limita el tamaño -->
     <img
-      src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"
-      alt="P.Acoustic"
       class="hero-logo-img"
+      src="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto:good,w_560,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"
+      srcset="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto:good,w_280,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png 280w,
+https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto:good,w_400,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png 400w,
+https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto:good,w_560,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png 560w,
+https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto:good,w_720,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png 720w"
+      sizes="(max-width: 640px) 72vw, (max-width: 1024px) 50vw, 480px"
+      width="480"
+      height="120"
+      alt="P.Acoustic"
       fetchpriority="high"
+      decoding="async"
     />
     <div class="hero-tag">Audio profesional · Medellín, Colombia</div>
     <h1 class="hero-titulo">
@@ -280,8 +288,8 @@
   <source src="audio/intro.mp3" type="audio/mpeg">
 </audio>
 
-<script src="js/modalZoom.js?v=stats-v3"></script>
-<script src="js/main.js?v=stats-v3"></script>
+<script src="js/modalZoom.js?v=stats-v3" defer></script>
+<script src="js/main.js?v=stats-v3" defer></script>
 <script src="js/chatAdvisor.js?v=stats-v3" defer></script>
 
 </body>
