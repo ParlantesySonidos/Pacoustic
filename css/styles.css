@@ -40,8 +40,8 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 @media (min-width: 1025px) {
   .page-watermark {
-    /* Escritorio: JPEG acotado + progresivo (menos bytes/decodificación que el original ni que f_auto en mosaico). */
-    background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_jpg,q_auto,fl_progressive,w_1800,c_limit/v1776290344/mafondo_mo86qx.jpg');
+    /* Escritorio: asset original en mosaico (combinación estable con PSI en tu hosting). */
+    background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/v1776290344/mafondo_mo86qx.jpg');
     background-size: contain;
     background-repeat: repeat;
     background-position: center;
