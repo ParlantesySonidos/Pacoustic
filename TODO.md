@@ -1,1 +1,0 @@
-- [x] 1. Edit index.html: Update main.js version to v6\n- [x] 2. Git add, commit, push
