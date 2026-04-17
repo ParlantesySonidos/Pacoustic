@@ -257,7 +257,7 @@ function renderBanner() {
   const dup = [...items, ...items, ...items];
   track.innerHTML = dup.map(({ src, alt, id }) => `
     <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">
-      <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async"/>
+      <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="eager" decoding="async"/>
     </div>`).join('');
   initBannerItemSizing(track);
 }
