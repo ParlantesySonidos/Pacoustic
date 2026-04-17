@@ -159,11 +159,27 @@ const CATALOG_JSON_VERSION = 3;
 // Array global productos procesados (formato normalizado)
 let products = [];
 
+/** Aplaza trabajo pesado para no bloquear pintura inicial (mejor puntuación Lighthouse escritorio). */
+function scheduleIdleWork(fn) {
+  const run = () => {
+    try {
+      fn();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(run, { timeout: 900 });
+  } else {
+    setTimeout(run, 1);
+  }
+}
+
 // Función asíncrona carga datos JSON y normaliza estructura productos
 async function loadProducts() {
   try {
     // Fetch asíncrono archivo JSON productos
-    const response = await fetch(`data/products.json?v=${CATALOG_JSON_VERSION}`, { cache: 'no-store' });
+    const response = await fetch(`data/products.json?v=${CATALOG_JSON_VERSION}`);
     // Parsea JSON respuesta a objeto data
     const data = await response.json();
     // Transforma array raw → formato interno normalizado
@@ -224,12 +240,13 @@ async function loadProducts() {
     try {
       document.dispatchEvent(new CustomEvent('pacoustic:catalog-ready', { bubbles: true }));
     } catch (_) {}
-    // Renderiza banner con productos cargados
-    renderBanner();
-    fillCategorySelect();
-    renderSidebarCategories();
-    // Renderiza grid productos inicial
-    renderProducts();
+    // Catálogo: aplazar DOM pesado al tiempo inactivo mejora TBT/LCP en escritorio (PSI).
+    scheduleIdleWork(() => {
+      renderBanner();
+      fillCategorySelect();
+      renderSidebarCategories();
+      renderProducts();
+    });
   } catch (e) {
     // Log error consola (desarrollo/debug)
     console.error("Error cargando products.json:", e);
