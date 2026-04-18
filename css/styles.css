@@ -29,14 +29,17 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 .page-watermark {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: -1; opacity: 0.30;
+  pointer-events: none; z-index: -1;
+  opacity: 0.36;
   /* ≤1024px: solo móvil/tablet; w_640 limita bytes en 4G. Escritorio ≥1025px redefine la imagen. */
   background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_640,c_limit/v1776290344/mafondo_mo86qx.jpg');
   /* Móvil / tablet: una sola imagen que cubre el fondo */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  mix-blend-mode: normal; filter: grayscale(100%) brightness(0.7);
+  mix-blend-mode: normal;
+  /* Color natural del asset; solo suaviza un poco (antes grayscale apagaba todo el color). */
+  filter: brightness(0.94) saturate(1.12) contrast(1.02);
 }
 
 @media (min-width: 1025px) {
@@ -46,6 +49,8 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
     background-size: contain;
     background-repeat: repeat;
     background-position: center;
+    opacity: 0.34;
+    filter: brightness(0.93) saturate(1.1) contrast(1.02);
   }
 }
 
@@ -1220,10 +1225,10 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   #main-content {
     margin-left: 0;
   }
-  /* Marca de agua: sin filter (GPU móvil); el fondo foto solo aquí (una capa, una descarga). */
+  /* Marca de agua: color visible (sin grayscale); un poco más de opacidad que en el bloque base móvil. */
   .page-watermark {
-    filter: none;
-    opacity: 0.26;
+    filter: brightness(0.92) saturate(1.18) contrast(1.02);
+    opacity: 0.4;
   }
   /* Hero: solo velos; el mafondo lo pinta .page-watermark (evita doble capa / doble trabajo con la misma URL). */
   .hero-bg {
