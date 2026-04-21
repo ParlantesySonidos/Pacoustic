@@ -632,6 +632,14 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 #main-content { margin-left: var(--sidebar-w); }
 
+/* PageSpeed: menos trabajo de pintura bajo el fold (no altera color ni calidad de las imágenes). */
+#products.sec,
+#nosotros.sec-alt,
+#contacto.sec {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px; height: 1px;
