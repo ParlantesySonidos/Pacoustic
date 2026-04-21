@@ -730,7 +730,10 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a_lwia6s.png",
       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a1_za9ka4.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a2_gabo60.png"]
     },
-    "description": "Bumper de protección para el módulo activo PA HL-10A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
+    "description": "El sistema de suspension  para sistemas PA HL 10-A está diseñado para ofrecer una solución segura, resistente y eficiente en la suspensión de arreglos line array. Fabricado en acero de alta resistencia con acabado industrial anticorrosivo, permite colgar múltiples módulos PA HL 10-A garantizando estabilidad estructural y correcta distribución del peso durante montajes profesionales. Su diseño optimizado facilita una instalación rápida, segura y precisa, siendo ideal para empresas de alquiler, eventos en vivo, iglesias, teatros y producciones corporativas que requieren confiabilidad y seguridad certificada. Gracias a su ingeniería estructural, permite configuraciones flexibles de ángulo y cobertura sonora, asegurando un desempeño óptimo del sistema line array.",
+    "specs": {
+      "Aplicaciones": "Eventos en vivo, conciertos, iglesias, teatros, auditorios, instalaciones fijas y rental profesional."
+    }
   },
   {
     "id": 28,
@@ -741,7 +744,10 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798870/bumperpahl20-a1_zuecxt.png",
       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798870/bumperpahl20-a_b0jqlb.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a1_za9ka4.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a2_gabo60.png"]
     },
-    "description": "Bumper de protección para el módulo activo PA HL-20A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
+    "description": "El sistema de suspensión para PA HL 20-A está desarrollado específicamente para soportar arreglos line array de alto rendimiento, ofreciendo máxima seguridad en montajes suspendidos. Fabricado en acero de alta resistencia con acabado industrial anticorrosivo, permite colgar múltiples módulos PA HL 20-A garantizando estabilidad estructural y correcta distribución del peso durante montajes profesionales. Este accesorio permite ajustes precisos de inclinación, optimizando la cobertura sonora vertical y garantizando una dispersión uniforme del audio en espacios medianos y grandes. Su diseño compacto facilita el transporte, armado rápido y reducción de tiempos de montaje en producciones profesionales.",
+    "specs": {
+      "Aplicaciones": "Conciertos, eventos corporativos, escenarios móviles, iglesias grandes, auditorios y empresas de sonido."
+    }
   },
   {
     "id": 29,
@@ -752,7 +758,10 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798914/bumperpahl30-a_b9e57m.png",
       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798914/bumperpahl30-a_b9e57m.png"]
     },
-    "description": "Bumper de protección para el módulo activo PA HL-30A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
+    "description": "El sistema de suspensión para PA HL 30-A es un sistema profesional diseñado para sistemas line array de gran formato y alta potencia. Su construcción en acero estructural de alta resistencia permite soportar configuraciones pesadas con total seguridad operacional. Diseñado para aplicaciones touring y producción profesional, permite suspender múltiples módulos PA HL 30-A manteniendo estabilidad mecánica, precisión angular y distribución equilibrada de carga. Integra puntos de rigging certificados que garantizan montajes seguros tanto en estructuras truss como en instalaciones permanentes.",
+    "specs": {
+      "Aplicaciones": "Conciertos masivos, festivales, touring profesional, escenarios principales, arenas, coliseos e instalaciones permanentes de alto nivel."
+    }
   },
   {
     "id": 30,
