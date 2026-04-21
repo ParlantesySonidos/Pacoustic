@@ -791,5 +791,17 @@
       "Aplicación": "Touring / Instalacion / Eventos",
       "aplicaciones": "Sistemas Line Array profesionales, Refuerzo sonoro para conciertos en vivo, Eventos corporativos y espectáculos, Discotecas y cludes nocturnos, DJ profesionales y shows electrónicos, Alquiler de sonido profesional, Iglesias y auditorios, Producción de eventos"
      }
-  }]
+  },
+  {
+    "id": 31,
+    "name": "PA10MB26-8",
+    "category": "Woofer",
+    "subcategory": "Ferrita", 
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776807981/10mb26-8_lkremo.jpg",
+       "gallery": []
+     },
+     "description": "El subwoofer pasivo de 18 pulgadas ha sido diseñado para aplicaciones de refuerzo sonoro que requieren alta potencia, excelente respuesta en bajas frecuencias y máximo rendimiento en aplicaciones de mediano y gran formato."
+  }
+]
   
