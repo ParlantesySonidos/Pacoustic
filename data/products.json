@@ -753,6 +753,34 @@
       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798914/bumperpahl30-a_b9e57m.png"]
     },
     "description": "Bumper de protección para el módulo activo PA HL-30A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
-  }
+  },
+  {
+    "id": 30,
+    "name": "PA 118A SUB",
+    "category": "Subwoofers",
+    "subcategory": "Activos", 
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776803244/subwoofer_118asub_mrkd95.png",
+       "gallery": []
+     },
+     "description": "El subwoofer activo profesional de 18 pulgadas ha sido diseñado para aplicaciones de refuerzo sonoro que requieren alta potencia, excelente respuesta en bajas frecuencias y máximo rendimiento en aplicaciones de mediano y gran formato. Cuenta con un transductor de 18 pulgadas que ofrece una potencia de 1800 W RMS y 3600 W programa, proporcionando graves profundos, firmes y definidos capaces de alcanzar niveles de presión sonora de hasta 135 dB SPL, garantizando gran impacto sonoro. Su amplicador digital Clase D permite una operación altamente eficiente, mientras mantiene un desempeño estable durante largas jornadas de trabajo continuo. La respuesta en frecuencia de 37 Hz a 120 Hz asegura una reproducción precisa de frecuencias subgraves y bajas frecuencias con excelente control y calidad.",
+    "document": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776803139/FICHA_TECNICA_PA_118_A_SUB_an0yun.pdf",
+    "specs": {
+      "Tipo": "Subwoofer activo",
+      "Tamaño del parlante": "18 pulgadas",
+      "Potencia RMS": "1800 W RMS",
+      "Potencia programa": "3600 W",
+      "Tipo de amplificador": "Clase D Digital",
+      "Respuesta en frecuencia": "37 Hz - 120 Hz",
+      "SPL máximo": "135 dB",
+      "Procesamiento": "DSP Digital integrado",
+      "Entradas": "XLR balanciadas",
+      "Salida": "XLR Link",
+      "Material del gabinete": "Madera",
+      "Acabado": "Pintura texturizada resistente",
+      "Montaje": "Base para poste",
+      "Aplicación": "Touring / Instalacion / Eventos",
+      "aplicaciones": "Sistemas Line Array profesionales, Refuerzo sonoro para conciertos en vivo, Eventos corporativos y espectáculos, Discotecas y cludes nocturnos, DJ profesionales y shows electrónicos, Alquiler de sonido profesional, Iglesias y auditorios, Producción de eventos"
+     }
+  }]
   
-]
