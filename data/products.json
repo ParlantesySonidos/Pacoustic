@@ -798,10 +798,24 @@
     "category": "Woofer",
     "subcategory": "Ferrita", 
     "images": {
-      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776807981/10mb26-8_lkremo.jpg",
-       "gallery": []
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776808537/10mb26-8_lkremo.png",
+       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776808549/10mb26-8_yw8d9p.png"]
      },
-     "description": "El subwoofer pasivo de 18 pulgadas ha sido diseñado para aplicaciones de refuerzo sonoro que requieren alta potencia, excelente respuesta en bajas frecuencias y máximo rendimiento en aplicaciones de mediano y gran formato."
+     "description": "El parlante de 10 pulgadas ha sido diseñado para ofrecer un excelente rendimiento en sistemas de sonido profesional donde se requiere alta eficiencia, claridad sonora y confiabilidad operativa. Gracias a su construcción robusta y componentes de alta calidad, proporciona una reproducción precisa en frecuencias medias y bajas, ideal paraaplicaciones de refuerzo sonoro en vivo e instalaciones fijas. Cuenta con un diámetro nominal de 250 mm (10”) y una impedancia nominal de 8 Ω, lo que permite una integración eficiente con amplificadores profesionales y configuraciones de sistemas pasivos o activos. Su manejo de potencia nominal de 500 W y potencia continua de 1000 W garantizan un desempeño estable incluso bajo condiciones de trabajo exigentes. La sensibilidad de 100 dB asegura una excelente eficiencia acústica, logrando altos niveles de presión sonora con menor consumo de potencia.",
+     "document": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776810055/FICHA_TECNICA_10MB26-8_tjjmv7.pdf",
+      "specs": {
+        "Diámetro nominal": "10 pulgadas 250 mm (10.0 in)",
+        "Potencia RMS": "500 W",
+        "Potencia programa": "1000 W",
+        "Impedancia nominal": "8 0hmios",
+        "impedancia minima": "7.2 0hmios",
+        "Sensibilidad (1W/1m)": "100 dB",
+        "Respuesta de frecuencia": "50 Hz - 3.5 kHz",
+        "Diámetro de bobina": "3 pulgadas in out 76 mm",
+        "Material del cono": "Papel tratado",
+        "Material de imán": "Ferrita",
+        "aplicaciones": "Cajas acústicas full rango, Monitores de escenario, Refuerzo sonoro en eventos en vivo, Instalaciones fijas y sonido comercial, Proyectos de sonido móvil y discotecas, Sistemas Line Array compactos, Sistemas de dos o tres vías como woofer o medio-bajo"
+       }
   }
 ]
   
