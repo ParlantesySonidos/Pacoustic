@@ -464,12 +464,136 @@ function isFlyoutItemActive(flyCategory, btnSub) {
   return normFilterStr(cs) === normFilterStr(s);
 }
 
-/** Catálogo: A–Z por categoría, luego subcategoría, luego nombre (números en orden natural). */
+function parseFloatLocale(s) {
+  if (s == null || s === '') return NaN;
+  return parseFloat(String(s).replace(',', '.'));
+}
+
+/** Pulgadas relevantes en un texto (evita Hz, mm pequeños, etc.). */
+function maxInchesInText(text) {
+  if (!text) return 0;
+  const t = String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  let max = 0;
+  let m;
+  const rePul = /(\d+(?:[.,]\d+)?)\s*pulgadas?/gi;
+  while ((m = rePul.exec(t)) !== null) {
+    const n = parseFloatLocale(m[1]);
+    if (n >= 1 && n <= 32) max = Math.max(max, n);
+  }
+  const reX = /(\d+)\s*[x×]\s*(\d+(?:[.,]\d+)?)\s*pulgadas?/gi;
+  while ((m = reX.exec(t)) !== null) {
+    const n1 = parseInt(m[1], 10);
+    const n2 = parseFloatLocale(m[2]);
+    if (n1 >= 1 && n1 <= 32) max = Math.max(max, n1);
+    if (n2 >= 1 && n2 <= 32) max = Math.max(max, n2);
+  }
+  const reMultInch = /(\d+)\s*[x×]\s*(\d+(?:[.,]\d+)?)\s*[″""]/g;
+  while ((m = reMultInch.exec(t)) !== null) {
+    const n2 = parseFloatLocale(m[2]);
+    if (n2 >= 2 && n2 <= 32) max = Math.max(max, n2);
+  }
+  const reQuote = /(\d+(?:[.,]\d+)?)\s*[″""]/g;
+  while ((m = reQuote.exec(t)) !== null) {
+    const n = parseFloatLocale(m[1]);
+    if (n >= 2 && n <= 32) max = Math.max(max, n);
+  }
+  return max;
+}
+
+/** Volumen caja en mm³ (etiquetas Alto/Ancho/Prof o “850 x 482 x 647 mm”). */
+function parseVolumeMm3FromDimensions(text) {
+  if (!text || typeof text !== 'string') return 0;
+  const xyz = text.match(/([\d.,]+)\s*[x×]\s*([\d.,]+)\s*[x×]\s*([\d.,]+)\s*mm/i);
+  if (xyz) {
+    const a = parseFloatLocale(xyz[1]);
+    const b = parseFloatLocale(xyz[2]);
+    const c = parseFloatLocale(xyz[3]);
+    if (a > 0 && b > 0 && c > 0) return a * b * c;
+  }
+  const getVal = (re) => {
+    const mm = text.match(re);
+    return mm ? parseFloatLocale(mm[1]) : 0;
+  };
+  const alto = getVal(/Alto\s*:\s*([\d.,]+)\s*mm/i) || getVal(/Altura\s*:\s*([\d.,]+)\s*mm/i);
+  const ancho = getVal(/Ancho\s*:\s*([\d.,]+)\s*mm/i) || getVal(/Anchura\s*:\s*([\d.,]+)\s*mm/i);
+  const prof = getVal(/Profundidad\s*:\s*([\d.,]+)\s*mm/i) || getVal(/Prof\.?\s*:\s*([\d.,]+)\s*mm/i);
+  if (alto > 0 && ancho > 0 && prof > 0) return alto * ancho * prof;
+  return 0;
+}
+
+function maxInchesFromRelevantSpecLines(specsArr) {
+  let max = 0;
+  if (!Array.isArray(specsArr)) return 0;
+  for (const [k, v] of specsArr) {
+    const key = String(k || '').toLowerCase();
+    if (/bobina(\s|$)|voice\s*coil|vc\s|diafrag/i.test(key) && !/parlante|woofer|transductor/i.test(key)) continue;
+    if (/woofer|parlante|transductor|altavoz|dia.*nominal/i.test(key)) {
+      max = Math.max(max, maxInchesInText(String(v)));
+    }
+  }
+  return max;
+}
+
+/** Tamaño representativo en mm (menor = producto más compacto). Accesorios al final. */
+function getProductSortSizeMm(p) {
+  const ACCESSORY = 80000;
+  const name = String(p.name || '');
+  const lname = name.toLowerCase();
+  if (/bumper|pahl\d/i.test(lname)) {
+    const m = lname.match(/pahl?(\d+)/i);
+    return ACCESSORY + (m ? parseInt(m[1], 10) : 0);
+  }
+  if (/crossover/i.test(String(p.cat || '')) || /^crossover/i.test(name)) return ACCESSORY + 400;
+
+  const specsArr = Array.isArray(p.specs) ? p.specs : [];
+  const specBlob = specsArr.map(([k, v]) => `${k} ${v}`).join('\n');
+  const desc = String(p.desc || '');
+
+  for (const [k, v] of specsArr) {
+    const kn = String(k || '').trim();
+    if (/bobina/i.test(kn)) continue;
+    if (/^di[aá]metro(\s+nominal)?$/i.test(kn)) {
+      const inch = maxInchesInText(String(v));
+      if (inch >= 2) return inch * 25.4;
+    }
+  }
+
+  let inch = maxInchesFromRelevantSpecLines(specsArr);
+  if (inch >= 2) return inch * 25.4;
+
+  inch = maxInchesInText(`${specBlob}\n${desc.slice(0, 420)}`);
+  if (inch >= 4) return inch * 25.4;
+
+  for (const [k, v] of specsArr) {
+    if (/dimensiones/i.test(String(k))) {
+      const vol = parseVolumeMm3FromDimensions(String(v));
+      if (vol > 0) return Math.cbrt(vol);
+    }
+  }
+  const volAny = parseVolumeMm3FromDimensions(specBlob) || parseVolumeMm3FromDimensions(desc);
+  if (volAny > 0) return Math.cbrt(volAny);
+
+  if (inch >= 1) return inch * 25.4;
+
+  let m;
+  if ((m = lname.match(/\blf(\d{2})/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/(\d{2})lw/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/^pa(8|10|12|15|18)\d/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/^pa(\d{1,2})n/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/^pa(12|15)0/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/(\d{2})ndl/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/(\d{2})md/))) return parseInt(m[1], 10) * 25.4;
+
+  return 0;
+}
+
+/** Catálogo: por tamaño físico (aprox. mm), luego nombre. */
 function compareProductsCatalog(a, b) {
-  const byCat = String(a.cat || '').localeCompare(String(b.cat || ''), 'es', { sensitivity: 'base', numeric: true });
-  if (byCat !== 0) return byCat;
-  const bySub = String(a.subcat || '').localeCompare(String(b.subcat || ''), 'es', { sensitivity: 'base', numeric: true });
-  if (bySub !== 0) return bySub;
+  const sa = getProductSortSizeMm(a);
+  const sb = getProductSortSizeMm(b);
+  const aa = sa > 0 ? sa : Number.POSITIVE_INFINITY;
+  const bb = sb > 0 ? sb : Number.POSITIVE_INFINITY;
+  if (aa !== bb) return aa < bb ? -1 : 1;
   return String(a.name || '').localeCompare(String(b.name || ''), 'es', { sensitivity: 'base', numeric: true });
 }
 function getRepresentativeImage(cat, subOptional) {
