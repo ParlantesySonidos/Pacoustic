@@ -816,6 +816,50 @@
         "Material de imán": "Ferrita",
         "aplicaciones": "Cajas acústicas full rango, Monitores de escenario, Refuerzo sonoro en eventos en vivo, Instalaciones fijas y sonido comercial, Proyectos de sonido móvil y discotecas, Sistemas Line Array compactos, Sistemas de dos o tres vías como woofer o medio-bajo"
        }
-  }
+  },
+  {
+    "id": 32,
+    "name": "Crossover 2 vias Ref:PS2V",
+    "category": "Crossover",
+    "subcategory": "Pasivo", 
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776811731/crossover2viasps2v_bkhse0.png",
+       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776811731/crossover2viasps2v1_orrv1f.png"]
+     },
+     "description": "Crossover pasivo de 2 vías diseñado para dividir la señal de audio entre un woofer y un driver de compresión en sistemas de sonido profesional. Con componentes de alta calidad, ofrece una respuesta precisa y confiable, ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas."
+  },
+  {
+    "id": 33,
+    "name": "Crossover 1 via Ref:F215",
+    "category": "Crossover",
+    "subcategory": "Pasivo", 
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812085/crossover1viarf215_im29al.png",
+       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812085/crossover1viarf2151_fuieq4.png"]
+     },
+     "description": "Crossover pasivo de 1 vía diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división simple de la señal."
+  },
+    {
+      "id": 34,
+      "name": "Crossover 3 vias Ref:F315",
+      "category": "Crossover",
+      "subcategory": "Pasivo", 
+      "images": {
+        "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812467/crossover3viasf315_ebl8n6.png",
+        "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812467/crossover3viasf3151_ql9h5c.png"]
+      },
+      "description": "Crossover pasivo de 3 vías diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas, medias y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división detallada de la señal para optimizar el rendimiento de cada transductor."
+    },
+    {
+      "id": 35,
+      "name": "Crossover 1 vias Ref:PS1V",
+      "category": "Crossover",
+      "subcategory": "Pasivo", 
+      "images": {
+        "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812434/crossover1viaPS1V1_khzyad.png",
+        "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812434/crossover1viaPS1V_nbfnxz.png"]
+      },
+      "description": "Crossover pasivo de 1 vía diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división simple de la señal."
+    }
 ]
   
