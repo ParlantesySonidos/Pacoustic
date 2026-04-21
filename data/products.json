@@ -706,20 +706,7 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775085304/crosover_x02v8h.jpg",
       "gallery": []
     },
-    "description": "Crossover pasivo para integrar subwoofer en sistemas de refuerzo, con ajuste de frecuencia de corte y conexiones pensadas para rack o instalación fija.",
-    "document": "",
-    "specs": {
-      "Tipo": "Crossover pasivo / filtro para subwoofer",
-      "Vías / función": "División o corte LF hacia subwoofer (según modelo)",
-      "Frecuencia de cruce (crossover)": "Ajustable según versión",
-      "Impedancia de trabajo": "",
-      "Conectores": "",
-      "Alimentacion": "No requiere alimentación (pasivo)",
-      "Material / acabado": "",
-      "Dimensiones": "",
-      "Peso neto": "",
-      "aplicaciones": "Sistemas con subwoofer, bi-amping pasivo, refuerzo en vivo, instalaciones fijas"
-    }
+    "description": "Crossover pasivo para integrar subwoofer en sistemas de refuerzo, con ajuste de frecuencia de corte y conexiones pensadas para rack o instalación fija."
   },
   {
     "id": 27,
