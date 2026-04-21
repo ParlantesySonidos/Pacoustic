@@ -44,10 +44,10 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 @media (min-width: 1025px) {
   .page-watermark {
-    /* Escritorio: asset original en mosaico (combinación estable con PSI en tu hosting). */
-    background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/v1776290344/mafondo_mo86qx.jpg');
-    background-size: contain;
-    background-repeat: repeat;
+    /* Escritorio: misma lógica que móvil (cover) — evita franjas/mosaico horizontal del repeat+contain. */
+    background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_1600,c_limit/v1776290344/mafondo_mo86qx.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
     opacity: 0.34;
     filter: brightness(0.93) saturate(1.1) contrast(1.02);
@@ -55,7 +55,21 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 
 .theme-toggle { display: none !important; }
-.prod-category-header { display: none; }
+/* Encabezados de grupo por categoría en la cuadrícula (renderProducts en main.js) */
+.prod-category-header {
+  grid-column: 1 / -1;
+  margin: 0.25rem 0 0.35rem;
+  padding: 0.55rem 0 0.35rem;
+  border-bottom: 1px solid var(--borde);
+}
+.prod-category-header span {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 .nav-category-mobile { display: none; }
 
 /* ── SEARCH FIELD (navbar) ── */

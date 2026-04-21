@@ -732,5 +732,39 @@
       "Peso neto": "",
       "aplicaciones": "Sistemas con subwoofer, bi-amping pasivo, refuerzo en vivo, instalaciones fijas"
     }
+  },
+  {
+    "id": 27,
+    "name": "Bumper pahl10a",
+    "category": "Accesorios",
+    "subcategory": "Bumper",
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a_lwia6s.png",
+      "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a1_za9ka4.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a2_gabo60.png"]
+    },
+    "description": "Bumper de protección para el módulo activo PA HL-10A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
+  },
+  {
+    "id": 28,
+    "name": "Bumper pahl20a",
+    "category": "Accesorios",
+    "subcategory": "Bumper",
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798870/bumperpahl20-a1_zuecxt.png",
+      "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798870/bumperpahl20-a_b0jqlb.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a1_za9ka4.png", "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798795/bumperpahl10-a2_gabo60.png"]
+    },
+    "description": "Bumper de protección para el módulo activo PA HL-20A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
+  },
+  {
+    "id": 29,
+    "name": "Bumper pahl30a",
+    "category": "Accesorios",
+    "subcategory": "Bumper",
+    "images": {
+      "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776798914/bumperpahl30-a_b9e57m.png",
+      "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776798914/bumperpahl30-a_b9e57m.png"]
+    },
+    "description": "Bumper de protección para el módulo activo PA HL-30A, diseñado para proteger la parte frontal del altavoz durante transporte y almacenamiento, fabricado con materiales resistentes y acolchados para absorber impactos y prevenir daños en el driver y componentes frontales."
   }
+  
 ]

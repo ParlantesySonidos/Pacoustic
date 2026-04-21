@@ -48,7 +48,7 @@
     return String(s || '')
       .toLowerCase()
       .normalize('NFD')
-      .replace(/\p{Diacritic}/gu, '');
+      .replace(/[\u0300-\u036f]/g, '');
   }
 
   function esc(t) {

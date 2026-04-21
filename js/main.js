@@ -159,13 +159,26 @@ const CATALOG_JSON_VERSION = 3;
 // Array global productos procesados (formato normalizado)
 let products = [];
 
+/** Tras cargar o vaciar catálogo: banner, filtros, sidebar y grid (también en error de red/JSON). */
+function refreshCatalogViews() {
+  try {
+    document.dispatchEvent(new CustomEvent('pacoustic:catalog-ready', { bubbles: true }));
+  } catch (_) {}
+  renderBanner();
+  fillCategorySelect();
+  renderSidebarCategories();
+  renderProducts();
+}
+
 // Función asíncrona carga datos JSON y normaliza estructura productos
 async function loadProducts() {
   try {
     // Fetch asíncrono archivo JSON productos
     const response = await fetch(`data/products.json?v=${CATALOG_JSON_VERSION}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     // Parsea JSON respuesta a objeto data
     const data = await response.json();
+    if (!Array.isArray(data)) throw new Error('El catálogo no es un array JSON');
     // Transforma array raw → formato interno normalizado
     products = data.map(p => {
       // Extrae imagen principal o cadena vacía si no existe
@@ -220,21 +233,13 @@ async function loadProducts() {
     });
     products.sort(compareProductsCatalog);
     window.PAcousticCatalog = products;
-    // document (no window): CustomEvent no burbujea por defecto; chatAdvisor escucha en document.
-    try {
-      document.dispatchEvent(new CustomEvent('pacoustic:catalog-ready', { bubbles: true }));
-    } catch (_) {}
-    renderBanner();
-    fillCategorySelect();
-    renderSidebarCategories();
-    renderProducts();
+    refreshCatalogViews();
   } catch (e) {
     // Log error consola (desarrollo/debug)
     console.error("Error cargando products.json:", e);
+    products = [];
     window.PAcousticCatalog = [];
-    try {
-      document.dispatchEvent(new CustomEvent('pacoustic:catalog-ready', { bubbles: true }));
-    } catch (_) {}
+    refreshCatalogViews();
   }
 }
 
@@ -445,7 +450,7 @@ function getVideoEmbed(url) {
 // FILTROS
 // ========================================
 function normFilterStr(s) {
-  return String(s || '').trim().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+  return String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 /** Fila/tile del flyout activo si coincide categoría + sub con el filtro del catálogo. */
@@ -475,13 +480,13 @@ function getRepresentativeImage(cat, subOptional) {
 }
 function getProductSearchText(p) {
   return [p.name, p.cat, p.subcat, p.desc, (p.tags||[]).join(' '), (p.apps||[]).join(' ')]
-    .join(' ').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+    .join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 function getFilteredProducts() {
   const se = document.getElementById('catalogSearch');
   const ce = document.getElementById('catalogCategory');
   const su = document.getElementById('catalogSubcategory');
-  const q  = se?.value ? se.value.trim().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') : '';
+  const q  = se?.value ? se.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
   const c  = ce?.value ? normFilterStr(ce.value) : '';
   const s  = su?.value ? normFilterStr(su.value) : '';
   let list = products;
@@ -1007,32 +1012,32 @@ function renderProducts() {
   page.forEach(p => { if (!grouped[p.cat]) grouped[p.cat] = []; grouped[p.cat].push(p); });
 
   let html = ''; let delay = 0;
-  Object.keys(grouped).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base', numeric: true })).forEach((cat, i) => {
-    if (i > 0) html += `<div class="prod-category-header"><span>${escapeHtml(cat)}</span></div>`;
-      grouped[cat].forEach(p => {
-        // ✅ Updated for multi-video: count all videos + imgs >1
-        const numVideos = (p.videos || []).length;
-        const hasMedia  = p.imgs.length > 1 || numVideos > 0;
-        const mediaCount = p.imgs.length + numVideos;
-        const mediaIcon = numVideos > 0 ? '🎬' : (p.imgs.length > 1 ? '📷' : '');
-        html += `
-          <div class="prod-card" style="--card-delay:${delay*0.07}s" onclick="openModal('${p.id}')">
-            <div class="prod-img-wrap">
-              <img src="${escapeAttr(p.imgs[0])}" alt="${escapeAttr(p.name)}" loading="lazy"/>
-              ${p.watermark ? `<img src="${escapeAttr(p.watermark)}" alt="" class="prod-watermark"/>` : ''}
-              <span class="prod-badge">${escapeHtml(p.badge)}</span>
-              ${hasMedia ? `<span class="prod-gallery-count">${mediaIcon} ${mediaCount}</span>` : ''}
-            </div>
-            <div class="prod-body">
-              <div class="prod-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="prod-sub">· ${escapeHtml(p.subcat)}</span>` : ''}</div>
-              <div class="prod-name">${escapeHtml(p.name)}</div>
-              <div class="prod-desc">${escapeHtml(p.desc)}</div>
-              <div class="prod-specs">${(p.tags||[]).map(t=>`<span class="spec-tag">${escapeHtml(t)}</span>`).join('')}</div>
-              <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>
-            </div>
-          </div>`;
-        delay++;
-      });
+  Object.keys(grouped).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base', numeric: true })).forEach(cat => {
+    html += `<div class="prod-category-header"><span>${escapeHtml(cat)}</span></div>`;
+    grouped[cat].forEach(p => {
+      // ✅ Updated for multi-video: count all videos + imgs >1
+      const numVideos = (p.videos || []).length;
+      const hasMedia  = p.imgs.length > 1 || numVideos > 0;
+      const mediaCount = p.imgs.length + numVideos;
+      const mediaIcon = numVideos > 0 ? '🎬' : (p.imgs.length > 1 ? '📷' : '');
+      html += `
+        <div class="prod-card" style="--card-delay:${delay*0.07}s" onclick="openModal('${p.id}')">
+          <div class="prod-img-wrap">
+            <img src="${escapeAttr(p.imgs[0])}" alt="${escapeAttr(p.name)}" loading="lazy"/>
+            ${p.watermark ? `<img src="${escapeAttr(p.watermark)}" alt="" class="prod-watermark"/>` : ''}
+            <span class="prod-badge">${escapeHtml(p.badge)}</span>
+            ${hasMedia ? `<span class="prod-gallery-count">${mediaIcon} ${mediaCount}</span>` : ''}
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="prod-sub">· ${escapeHtml(p.subcat)}</span>` : ''}</div>
+            <div class="prod-name">${escapeHtml(p.name)}</div>
+            <div class="prod-desc">${escapeHtml(p.desc)}</div>
+            <div class="prod-specs">${(p.tags||[]).map(t=>`<span class="spec-tag">${escapeHtml(t)}</span>`).join('')}</div>
+            <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>
+          </div>
+        </div>`;
+      delay++;
+    });
   });
   grid.innerHTML = html;
   renderPaginationControls(tp, PAGINATION_CONFIG.currentPage);
