@@ -37,7 +37,7 @@
   },
   {
     "id": 2,
-    "name": "hl30a",
+    "name": "PAhl30a",
     "category": "Cabinas",
     "subcategory": "Line Array",
     "images": {
@@ -76,7 +76,7 @@
     "name": "lf18x401+",
     "category": "Woofer",
     "subcategory": "Ferrita",
-    "bannerImg": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775765590/lf18x401_enks9g.jpg",
+    "bannerImg": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776820070/lf18x401_wadtyy.jpg",
     "images": {
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1774910048/lf18x-1_whg5pa.png",
       "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1774822247/lf18x-2_mo3t5g.png"]
@@ -828,17 +828,6 @@
   },
     {
       "id": 34,
-      "name": "Crossover 3 vias Ref:F315",
-      "category": "Crossover",
-      "subcategory": "Pasivo", 
-      "images": {
-        "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812467/crossover3viasf315_ebl8n6.png",
-        "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812467/crossover3viasf3151_ql9h5c.png"]
-      },
-      "description": "Crossover pasivo de 3 vías diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas, medias y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división detallada de la señal para optimizar el rendimiento de cada transductor."
-    },
-    {
-      "id": 35,
       "name": "Crossover 1 vias Ref:PS1V",
       "category": "Crossover",
       "subcategory": "Pasivo", 
