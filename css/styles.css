@@ -840,6 +840,15 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   filter: drop-shadow(0 0 16px rgba(196,30,58,0.4));
 }
 
+/* Tarjetas: imagen un poco mayor (p. ej. bumper / sub con mucho “aire” en el PNG) */
+.prod-card--media-lg .prod-img-wrap img:first-child {
+  padding: 0.4rem;
+  transform: scale(1.12);
+}
+.prod-card--media-lg:hover .prod-img-wrap img:first-child {
+  transform: scale(1.22);
+}
+
 .prod-badge { position: absolute; top: .75rem; left: .75rem; background: var(--rojo); color: white; font-size: 0.6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 4px; z-index: 2; }
 
 /* Contador de medios en la tarjeta (no estilo “chip de categoría”) */
@@ -1131,6 +1140,9 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   padding: 0.5rem;
   image-rendering: -webkit-optimize-contrast;
   transition: opacity .15s ease, transform .15s ease;
+}
+.modal-img-main.modal-img-main--media-lg img {
+  padding: 0.12rem;
 }
 
 /* Flechas de navegación de galería */
