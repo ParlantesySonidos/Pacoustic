@@ -1,10 +1,16 @@
 /**
  * P.Acoustic — Asesor de producto (chat flotante)
  * Usa window.PAcousticCatalog (rellenado en main.js al cargar el JSON).
+ *
+ * Flujo: IIFE arranca → espera `pacoustic:catalog-ready` o catálogo ya en window → buildUI()
+ * → el usuario abre el panel → showWelcome() con chips → onMessagesClick maneja chips/tarjetas
+ * → búsqueda por texto o Web Speech API si el navegador lo permite (HTTPS/localhost).
  */
 (function () {
+  // Base URL de WhatsApp; el texto del mensaje se concatena con encodeURIComponent al abrir.
   const WA = 'https://wa.me/573053402732?text=';
 
+  // Ponderaciones por “intención”: palabras clave en specs/nombre + refuerzo por categoría/subcategoría.
   const SCENARIOS = {
     eventos: {
       label: 'Eventos y conciertos',
@@ -44,6 +50,7 @@
     }
   };
 
+  /** Texto comparable: minúsculas y sin acentos (búsqueda tolerante a tildes). */
   function norm(s) {
     return String(s || '')
       .toLowerCase()
@@ -51,16 +58,19 @@
       .replace(/[\u0300-\u036f]/g, '');
   }
 
+  /** Igual que escapeHtml en main.js: texto → entidades HTML para innerHTML seguro. */
   function esc(t) {
     const d = document.createElement('div');
     d.textContent = t == null ? '' : String(t);
     return d.innerHTML;
   }
 
+  /** Catálogo global publicado por main.js tras fetch; si aún no hay, array vacío. */
   function getCatalog() {
     return Array.isArray(window.PAcousticCatalog) ? window.PAcousticCatalog : [];
   }
 
+  /** Puntuación heurística de un producto `p` para el escenario `key` (id de SCENARIOS). */
   function scoreProduct(p, key) {
     if (key === 'ver_cats') return 0;
     const sc = SCENARIOS[key];
@@ -78,6 +88,7 @@
     return score;
   }
 
+  /** Ordena por score y devuelve hasta 5 productos; si no hay matches, fallback por familia. */
   function suggestForScenario(key) {
     const list = getCatalog().slice();
     if (!list.length) return [];
@@ -96,14 +107,16 @@
     return list.slice(0, 4);
   }
 
+  /** Productos de una categoría concreta, orden alfabético numérico del nombre. */
   function suggestForCategory(cat) {
     const list = getCatalog().filter(p => norm(p.cat) === norm(cat));
     list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'es', { numeric: true }));
     return list.slice(0, 6);
   }
 
-  let root, msgs;
+  let root, msgs; // Contenedor raíz del widget y div de mensajes (se asignan en buildUI).
 
+  /** Añade un globo de chat (HTML del bot o texto escapado del usuario). */
   function appendMsg(html, user) {
     const el = document.createElement('div');
     el.className = 'pa-advisor-msg ' + (user ? 'pa-advisor-msg--user' : 'pa-advisor-msg--bot');
@@ -112,6 +125,7 @@
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  /** Botones de opción rápida (escenarios o “nueva consulta”). */
   function renderChips(chipDefs) {
     const wrap = document.createElement('div');
     wrap.className = 'pa-advisor-chips';
@@ -127,6 +141,7 @@
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  /** Mini-tarjetas con imagen, nombre y botón “Ver” que llama a window.openModal(id). */
   function renderProductCards(products) {
     const wrap = document.createElement('div');
     wrap.className = 'pa-advisor-products';
@@ -148,6 +163,7 @@
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  /** Opciones iniciales del asistente (mapean a claves de SCENARIOS + ver_cats). */
   function welcomeChips() {
     return [
       { id: 'eventos', label: 'Conciertos / eventos grandes' },
@@ -160,6 +176,7 @@
     ];
   }
 
+  /** Categorías únicas presentes en el catálogo cargado, ordenadas para chips. */
   function categoryChips() {
     const set = new Set();
     getCatalog().forEach(p => {
@@ -168,6 +185,7 @@
     return [...set].sort((a, b) => a.localeCompare(b, 'es')).map(c => ({ id: 'cat:' + c, label: c }));
   }
 
+  /** Delegación de clics: “Ver” en tarjeta, chips de escenario/categoría/WhatsApp/reinicio. */
   function onMessagesClick(e) {
     const t = e.target;
     if (t.classList.contains('pa-advisor-pcard-btn')) {
@@ -230,6 +248,7 @@
     ]);
   }
 
+  /** Mensaje de bienvenida + chips iniciales. */
   function showWelcome() {
     appendMsg(
       '<p>¡Hola! Soy el <strong>asesor de producto</strong> de P.Acoustic. Con un par de clics te propongo modelos según tu escenario (eventos, instalación, graves…).</p><p>¿Qué se acerca más a lo que buscas?</p>',
@@ -238,6 +257,7 @@
     renderChips(welcomeChips());
   }
 
+  /** Crea el DOM del asistente, engancha eventos y opcionalmente el micrófono (SpeechRecognition). */
   function buildUI() {
     root = document.createElement('div');
     root.id = 'paAdvisorRoot';
@@ -277,8 +297,8 @@
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><path d="M7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/></svg>
         </button>
       </div>`;
-    document.body.appendChild(root);
-    msgs = root.querySelector('.pa-advisor-messages');
+    document.body.appendChild(root); // Widget al final del body (position:fixed en CSS).
+    msgs = root.querySelector('.pa-advisor-messages'); // Área scrollable de conversación.
 
     root.querySelector('.pa-advisor-toggle').addEventListener('click', () => {
       root.classList.add('is-open');
@@ -292,7 +312,7 @@
       root.classList.remove('is-open');
       root.querySelector('.pa-advisor-toggle')?.setAttribute('aria-expanded', 'false');
     });
-    msgs.addEventListener('click', onMessagesClick);
+    msgs.addEventListener('click', onMessagesClick); // Un solo listener para chips y tarjetas.
 
     root.querySelector('.pa-advisor-restart').addEventListener('click', () => {
       msgs.innerHTML = '';
@@ -301,6 +321,7 @@
       msgs.dataset.inited = '1';
     });
 
+    /** Lee el input del pie, busca substring en nombre/cat/subcat/desc y muestra hasta 6 resultados. */
     function runAdvisorTextSearch() {
       const inp = root.querySelector('.pa-advisor-input');
       const q = (inp && inp.value) ? inp.value.trim() : '';
