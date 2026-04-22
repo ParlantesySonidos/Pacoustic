@@ -748,44 +748,64 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .nav-wp:hover { background: #1e6b35; box-shadow: 0 0 20px rgba(45,140,78,0.4); }
 .nav-wp svg { width: 16px; height: 16px; fill: white; }
 
-/* Redes en barra superior (junto a WhatsApp) */
+/* Redes en barra superior — colores de marca (solo navbar) */
 #mainNavbar .social-nav--nav {
-  gap: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
 }
 #mainNavbar .social-nav--nav .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 2.1rem;
   height: 2.1rem;
   padding: 0;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.92);
-  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-sizing: border-box;
 }
-#mainNavbar .social-nav--nav .social-link:hover {
-  border-color: rgba(196, 30, 58, 0.55);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-1px);
+#mainNavbar .social-nav--nav .social-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+#mainNavbar .social-nav--nav .social-link--fb {
+  background: #1877f2;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 2px 8px rgba(24, 119, 242, 0.45);
 }
 #mainNavbar .social-nav--nav .social-link--fb:hover {
-  border-color: rgba(24, 119, 242, 0.65);
-  color: #fff;
-  background: rgba(24, 119, 242, 0.35);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 12px rgba(24, 119, 242, 0.55);
+}
+#mainNavbar .social-nav--nav .social-link--ig {
+  background: linear-gradient(35deg, #f9ce34, #ef8a39 18%, #e6683c 38%, #dc2743 55%, #cc2366 72%, #bc1888 100%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(188, 24, 136, 0.35);
 }
 #mainNavbar .social-nav--nav .social-link--ig:hover {
-  border-color: rgba(228, 64, 95, 0.55);
-  color: #fff;
-  background: rgba(228, 64, 95, 0.28);
+  filter: brightness(1.06) saturate(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 12px rgba(220, 39, 67, 0.45);
+}
+#mainNavbar .social-nav--nav .social-link--tt {
+  background: #000;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 #mainNavbar .social-nav--nav .social-link--tt:hover {
-  border-color: rgba(255, 255, 255, 0.45);
-  color: #fff;
-  background: rgba(0, 0, 0, 0.35);
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+/* Nota TikTok: doble sombra cian / magenta (marca) */
+#mainNavbar .social-nav--nav .social-link--tt .social-svg-tiktok path {
+  filter: drop-shadow(-0.45px 0 0 #25f4ee) drop-shadow(0.55px 0 0 #fe2c55);
 }
 #mainNavbar .social-nav--nav .social-link svg {
   width: 17px;
   height: 17px;
+  display: block;
 }
 .nav-wp-mobile { display: none; }
 .nav-mobile-search { display: none; }
@@ -1128,52 +1148,6 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .con-map-app--waze:focus-visible {
   outline-color: #0ea5e9;
 }
-.con-social-wrap { margin-top: 1.25rem; }
-.con-social-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 0.55rem;
-}
-.social-nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-}
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.65rem;
-  height: 2.65rem;
-  border-radius: 10px;
-  border: 1px solid var(--borde);
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--titulo);
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-.social-link:hover {
-  border-color: rgba(196, 30, 58, 0.45);
-  color: var(--rojo);
-  box-shadow: 0 2px 12px rgba(196, 30, 58, 0.12);
-  transform: translateY(-1px);
-}
-.social-link:focus-visible {
-  outline: 2px solid var(--rojo);
-  outline-offset: 2px;
-}
-.social-link--fb:hover { color: #1877f2; border-color: rgba(24, 119, 242, 0.45); }
-.social-link--ig:hover { color: #e4405f; border-color: rgba(228, 64, 95, 0.4); }
-.social-link--tt:hover { color: #000; border-color: rgba(0, 0, 0, 0.25); }
-.social-nav--footer .social-link {
-  width: 2.45rem;
-  height: 2.45rem;
-  border-radius: 50%;
-}
 .con-card { background: #fefdfb; border: 1px solid var(--borde); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-sm); }
 .btn-wp-grande { display: flex; align-items: center; justify-content: center; gap: .75rem; padding: 1.1rem 2rem; background: var(--wp); color: white; border: none; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; transition: all .25s; margin-top: 2rem; width: 100%; }
 .btn-wp-grande:hover { background: #1e6b35; box-shadow: 0 0 28px rgba(45,140,78,0.4); transform: translateY(-2px); }
@@ -1181,7 +1155,6 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 /* ── FOOTER ── */
 footer { background: #ffffff; border-top: 1px solid var(--borde); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 -2px 12px rgba(13,27,42,0.06); }
-.footer-left { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
 .footer-logo img { height: 40px; object-fit: contain; }
 footer p { font-size: 0.72rem; color: var(--muted); }
 .footer-info { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
@@ -1840,7 +1813,6 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   }
 
   footer { padding: 2rem clamp(0.65rem, 4vw, 1.5rem) max(2rem, env(safe-area-inset-bottom, 0px)); flex-direction: column; text-align: center; gap: 1.5rem; }
-  .footer-left { align-items: center; width: 100%; }
   .footer-info { align-items: center; }
   body { overflow-x: clip; }
   .mobile-catalog-controls {
