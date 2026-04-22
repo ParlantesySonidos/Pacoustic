@@ -962,7 +962,16 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   font-size: 0.58rem;
   font-weight: 600;
 }
-.prod-name { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--titulo); margin-bottom: .35rem; line-height: 1.2; }
+.prod-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--titulo);
+  margin-bottom: .35rem;
+  line-height: 1.2;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
+}
 .prod-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
 .prod-specs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .spec-tag { font-size: 0.62rem; padding: .2rem .5rem; border-radius: 3px; background: rgba(196,30,58,0.06); border: 1px solid rgba(196,30,58,0.2); color: var(--rojo); }
@@ -1172,7 +1181,14 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal { background: #ffffff; border: 1px solid var(--borde); border-radius: 16px; width: 100%; max-width: 960px; max-height: 90vh; overflow-y: auto; animation: modalIn .3s ease; position: relative; box-shadow: var(--shadow-lg); }
 .modal-body { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; position: relative; z-index: 1; }
 .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid var(--borde); background: #ffffff; z-index: 10; position: relative; }
-.modal-titulo { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--titulo); }
+.modal-titulo {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--titulo);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
+}
 .modal-close { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--borde); background: transparent; color: var(--texto); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
 .modal-close:hover { border-color: var(--rojo); color: var(--rojo); background: rgba(196,30,58,0.05); }
 .modal-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); width: 70%; opacity: 0.06; pointer-events: none; z-index: 0; mix-blend-mode: normal; object-fit: contain; filter: grayscale(100%) brightness(0.4) contrast(1.2); }
@@ -1303,7 +1319,16 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   color: var(--muted);
   font-weight: 600;
 }
-.modal-name { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--titulo); line-height: 1; margin-bottom: 1rem; }
+.modal-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--titulo);
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
+}
 .modal-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
 .modal-tabla { width: 100%; border-collapse: collapse; font-size: 0.75rem; margin-bottom: 1.5rem; }
 .modal-tabla tr { border-bottom: 1px solid var(--borde); }
