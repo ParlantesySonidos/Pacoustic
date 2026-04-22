@@ -68,6 +68,9 @@ const CATALOG_JSON_VERSION = 3;
   // Objeto configuración paginación (6 productos por página, página actual 1)
   const PAGINATION_CONFIG = { itemsPerPage: 6, currentPage: 1 };
 
+  /** Orden del catálogo y sidebar: familia de producto → subcategoría → tamaño aproximado. */
+  const CATALOG_CATEGORY_ORDER = ['Cabinas', 'Subwoofers', 'Woofer', 'Drivers', 'Crossover', 'Accesorios'];
+
   /** Estado del audio intro (hero); compartido para pausar al abrir catálogo o modal. */
   const introAudioState = { started: false };
 
@@ -587,12 +590,41 @@ function getProductSortSizeMm(p) {
   return 0;
 }
 
-/** Catálogo: por tamaño físico (aprox. mm), luego nombre. */
+function catalogCategoryOrderIndex(cat) {
+  const c = String(cat || '').trim();
+  const i = CATALOG_CATEGORY_ORDER.indexOf(c);
+  return i >= 0 ? i : CATALOG_CATEGORY_ORDER.length;
+}
+
+/** Encabezados de grupo en la cuadrícula: mismo orden que el menú lateral. */
+function compareCategoryNamesForCatalog(a, b) {
+  const ca = String(a || '').trim();
+  const cb = String(b || '').trim();
+  const ia = catalogCategoryOrderIndex(ca);
+  const ib = catalogCategoryOrderIndex(cb);
+  if (ia !== ib) return ia - ib;
+  return ca.localeCompare(cb, 'es', { sensitivity: 'base', numeric: true });
+}
+
+/** Catálogo: categoría (orden fijo) → subcategoría → tamaño físico aprox. → nombre. */
 function compareProductsCatalog(a, b) {
-  const sa = getProductSortSizeMm(a);
-  const sb = getProductSortSizeMm(b);
-  const aa = sa > 0 ? sa : Number.POSITIVE_INFINITY;
-  const bb = sb > 0 ? sb : Number.POSITIVE_INFINITY;
+  const ca = String(a.cat || '').trim();
+  const cb = String(b.cat || '').trim();
+  const ia = catalogCategoryOrderIndex(ca);
+  const ib = catalogCategoryOrderIndex(cb);
+  if (ia !== ib) return ia - ib;
+  const catCmp = ca.localeCompare(cb, 'es', { sensitivity: 'base', numeric: true });
+  if (catCmp !== 0) return catCmp;
+
+  const sa = String(a.subcat || '').trim();
+  const sb = String(b.subcat || '').trim();
+  const subCmp = sa.localeCompare(sb, 'es', { sensitivity: 'base', numeric: true });
+  if (subCmp !== 0) return subCmp;
+
+  const sza = getProductSortSizeMm(a);
+  const szb = getProductSortSizeMm(b);
+  const aa = sza > 0 ? sza : Number.POSITIVE_INFINITY;
+  const bb = szb > 0 ? szb : Number.POSITIVE_INFINITY;
   if (aa !== bb) return aa < bb ? -1 : 1;
   return String(a.name || '').localeCompare(String(b.name || ''), 'es', { sensitivity: 'base', numeric: true });
 }
@@ -627,7 +659,7 @@ function getUniqueCategories() {
     const c = (p.cat || '').trim();
     if (c) set.add(c);
   });
-  const preferred = ['Cabinas', 'Woofer', 'Drivers', 'Crossover'];
+  const preferred = CATALOG_CATEGORY_ORDER;
   const rest = [...set].filter(c => !preferred.includes(c)).sort((a, b) => a.localeCompare(b, 'es'));
   const ordered = [];
   preferred.forEach(p => { if (set.has(p)) ordered.push(p); });
@@ -1136,7 +1168,7 @@ function renderProducts() {
   page.forEach(p => { if (!grouped[p.cat]) grouped[p.cat] = []; grouped[p.cat].push(p); });
 
   let html = ''; let delay = 0;
-  Object.keys(grouped).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base', numeric: true })).forEach(cat => {
+  Object.keys(grouped).sort(compareCategoryNamesForCatalog).forEach(cat => {
     html += `<div class="prod-category-header"><span>${escapeHtml(cat)}</span></div>`;
     grouped[cat].forEach(p => {
       // ✅ Updated for multi-video: count all videos + imgs >1
