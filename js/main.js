@@ -626,7 +626,17 @@ function compareProductsCatalog(a, b) {
   const aa = sza > 0 ? sza : Number.POSITIVE_INFINITY;
   const bb = szb > 0 ? szb : Number.POSITIVE_INFINITY;
   if (aa !== bb) return aa < bb ? -1 : 1;
+  const ta = catalogSortTiebreakAfterSize(a);
+  const tb = catalogSortTiebreakAfterSize(b);
+  if (ta !== tb) return ta - tb;
   return String(a.name || '').localeCompare(String(b.name || ''), 'es', { sensitivity: 'base', numeric: true });
+}
+
+/** Valor mayor = más atrás cuando `getProductSortSizeMm` empata (mismo “tamaño” de catálogo). */
+function catalogSortTiebreakAfterSize(p) {
+  const n = String(p.name || '').toLowerCase().replace(/\s+/g, '');
+  if (n === '10ndl76') return 1;
+  return 0;
 }
 function getRepresentativeImage(cat, subOptional) {
   const c = normFilterStr(cat);
