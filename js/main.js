@@ -1,8 +1,24 @@
 /**
-======================================================================
-PA ACOUSTIC — main.js
-======================================================================
-**/
+ * ======================================================================
+ * PA ACOUSTIC — main.js
+ * ======================================================================
+ * Orden aproximado de lectura (búsqueda con Ctrl+F por título):
+ * 1) Constantes globales (WhatsApp, redes, versión JSON, zoom de media).
+ * 2) domCache / initCache / $() — referencias DOM reutilizables.
+ * 3) CONFIG — paginación, orden de categorías, audio intro.
+ * 4) Navegación — logo, enlaces, menú móvil, scroll.
+ * 5) Audio intro — hero vs catálogo/modal.
+ * 6) Productos — loadProducts, normalización JSON, refreshCatalogViews.
+ * 7) Banner — carrusel, medidas, IntersectionObserver.
+ * 8) Video embed — Cloudinary / YouTube / archivo directo.
+ * 9) Filtros — normFilterStr, flyout, voz, búsqueda texto.
+ * 10) Orden catálogo — pulgadas/volumen/nombre, compareProductsCatalog.
+ * 11) renderProducts, tarjetas, modal, PDF, lightbox (LB_*).
+ * 12) Bloqueo scroll página, sidebar, redes applySocialLinks.
+ * 13) DOMContentLoaded — cableado de eventos e IntersectionObserver .reveal.
+ * Las funciones suelen llevar JSDoc /** … */ o comentarios // encima de cada paso.
+ * ======================================================================
+ */
 
 const WP = 'https://wa.me/573053402732';
 const WP_SVG = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
@@ -259,18 +275,20 @@ async function loadProducts() {
 // ========================================
 // BANNER
 // ========================================
+// Click en un slide del carrusel: silencia intro, baja al catálogo y abre la ficha del producto.
 function onBannerItemClick(id) {
-  forceStopIntroAudio();
-  document.getElementById('products').scrollIntoView({ behavior: 'instant' });
-  setTimeout(() => openModal(id), 450);
+  forceStopIntroAudio(); // El usuario ya salió del hero “puro”.
+  document.getElementById('products').scrollIntoView({ behavior: 'instant' }); // Salto sin animación.
+  setTimeout(() => openModal(id), 450); // Pequeño retraso para que el scroll pinte antes del modal.
 }
+// Rellena #bannerTrack con tres copias de la lista (bucle infinito visual) y recalcula alturas.
 function renderBanner() {
   const track = document.getElementById('bannerTrack');
   if (!track) return;
   const items = products
-    .filter(p => p.bannerImg && p.bannerImg.trim() !== '')
+    .filter(p => p.bannerImg && p.bannerImg.trim() !== '') // Solo productos con imagen de banner.
     .map(p => ({ src: p.bannerImg, alt: p.name, id: p.id }));
-  const dup = [...items, ...items, ...items];
+  const dup = [...items, ...items, ...items]; // Triplicado para animación CSS tipo marquesina.
   track.innerHTML = dup.map(({ src, alt, id }) => `
     <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">
       <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async"/>
@@ -485,30 +503,31 @@ function parseFloatLocale(s) {
 /** Pulgadas relevantes en un texto (evita Hz, mm pequeños, etc.). */
 function maxInchesInText(text) {
   if (!text) return 0;
+  // Texto sin tildes para que “pulgadas” coincida igual con variantes Unicode.
   const t = String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  let max = 0;
-  let m;
+  let max = 0; // Mayor pulgada encontrada en el fragmento.
+  let m;       // Coincidencia actual de cada regex con .exec en bucle.
   const rePul = /(\d+(?:[.,]\d+)?)\s*pulgadas?/gi;
   while ((m = rePul.exec(t)) !== null) {
     const n = parseFloatLocale(m[1]);
-    if (n >= 1 && n <= 32) max = Math.max(max, n);
+    if (n >= 1 && n <= 32) max = Math.max(max, n); // Filtra valores absurdos (ej. años).
   }
   const reX = /(\d+)\s*[x×]\s*(\d+(?:[.,]\d+)?)\s*pulgadas?/gi;
   while ((m = reX.exec(t)) !== null) {
-    const n1 = parseInt(m[1], 10);
-    const n2 = parseFloatLocale(m[2]);
+    const n1 = parseInt(m[1], 10);              // Primer número (casi siempre entero).
+    const n2 = parseFloatLocale(m[2]);         // Segundo número puede ser decimal.
     if (n1 >= 1 && n1 <= 32) max = Math.max(max, n1);
     if (n2 >= 1 && n2 <= 32) max = Math.max(max, n2);
   }
   const reMultInch = /(\d+)\s*[x×]\s*(\d+(?:[.,]\d+)?)\s*[″""]/g;
   while ((m = reMultInch.exec(t)) !== null) {
-    const n2 = parseFloatLocale(m[2]);
+    const n2 = parseFloatLocale(m[2]);         // Formato tipo “15 × 2″” (driver + bobina).
     if (n2 >= 2 && n2 <= 32) max = Math.max(max, n2);
   }
   const reQuote = /(\d+(?:[.,]\d+)?)\s*[″""]/g;
   while ((m = reQuote.exec(t)) !== null) {
     const n = parseFloatLocale(m[1]);
-    if (n >= 2 && n <= 32) max = Math.max(max, n);
+    if (n >= 2 && n <= 32) max = Math.max(max, n); // Comillas tipográficas = pulgadas.
   }
   return max;
 }
@@ -549,55 +568,55 @@ function maxInchesFromRelevantSpecLines(specsArr) {
 
 /** Tamaño representativo en mm (menor = producto más compacto). Accesorios al final. */
 function getProductSortSizeMm(p) {
-  const ACCESSORY = 80000;
+  const ACCESSORY = 80000; // Base alta para empujar bumpers/crossovers al final del orden por tamaño.
   const name = String(p.name || '');
   const lname = name.toLowerCase();
   if (/bumper|pahl\d/i.test(lname)) {
-    const m = lname.match(/pahl?(\d+)/i);
+    const m = lname.match(/pahl?(\d+)/i); // Número del modelo PAHL → desempate fino entre bumpers.
     return ACCESSORY + (m ? parseInt(m[1], 10) : 0);
   }
   if (/crossover/i.test(String(p.cat || '')) || /^crossover/i.test(name)) return ACCESSORY + 400;
 
   const specsArr = Array.isArray(p.specs) ? p.specs : [];
-  const specBlob = specsArr.map(([k, v]) => `${k} ${v}`).join('\n');
+  const specBlob = specsArr.map(([k, v]) => `${k} ${v}`).join('\n'); // Un solo texto para regex de volumen/pulgadas.
   const desc = String(p.desc || '');
 
   for (const [k, v] of specsArr) {
     const kn = String(k || '').trim();
-    if (/bobina/i.test(kn)) continue;
+    if (/bobina/i.test(kn)) continue; // Evita confundir “2 pulgadas” de bobina con woofer.
     if (/^di[aá]metro(\s+nominal)?$/i.test(kn)) {
       const inch = maxInchesInText(String(v));
-      if (inch >= 2) return inch * 25.4;
+      if (inch >= 2) return inch * 25.4; // Diámetro nominal del transductor → mm.
     }
   }
 
-  let inch = maxInchesFromRelevantSpecLines(specsArr);
+  let inch = maxInchesFromRelevantSpecLines(specsArr); // Solo líneas de specs “de tamaño” (woofer, etc.).
   if (inch >= 2) return inch * 25.4;
 
-  inch = maxInchesInText(`${specBlob}\n${desc.slice(0, 420)}`);
-  if (inch >= 4) return inch * 25.4;
+  inch = maxInchesInText(`${specBlob}\n${desc.slice(0, 420)}`); // Fallback: texto libre acotado.
+  if (inch >= 4) return inch * 25.4; // Umbral más alto para no ordenar por ruido en descripciones cortas.
 
   for (const [k, v] of specsArr) {
     if (/dimensiones/i.test(String(k))) {
       const vol = parseVolumeMm3FromDimensions(String(v));
-      if (vol > 0) return Math.cbrt(vol);
+      if (vol > 0) return Math.cbrt(vol); // Lado equivalente de un cubo con mismo volumen.
     }
   }
   const volAny = parseVolumeMm3FromDimensions(specBlob) || parseVolumeMm3FromDimensions(desc);
   if (volAny > 0) return Math.cbrt(volAny);
 
-  if (inch >= 1) return inch * 25.4;
+  if (inch >= 1) return inch * 25.4; // Último recurso con pulgadas pequeñas del texto mezclado.
 
   let m;
-  if ((m = lname.match(/\blf(\d{2})/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/(\d{2})lw/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/^pa(8|10|12|15|18)\d/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/^pa(\d{1,2})n/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/^pa(12|15)0/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/(\d{2})ndl/))) return parseInt(m[1], 10) * 25.4;
-  if ((m = lname.match(/(\d{2})md/))) return parseInt(m[1], 10) * 25.4;
+  if ((m = lname.match(/\blf(\d{2})/))) return parseInt(m[1], 10) * 25.4;   // LF15…
+  if ((m = lname.match(/(\d{2})lw/))) return parseInt(m[1], 10) * 25.4;     // 15LW…
+  if ((m = lname.match(/^pa(8|10|12|15|18)\d/))) return parseInt(m[1], 10) * 25.4; // PA12…
+  if ((m = lname.match(/^pa(\d{1,2})n/))) return parseInt(m[1], 10) * 25.4;  // PA10N…
+  if ((m = lname.match(/^pa(12|15)0/))) return parseInt(m[1], 10) * 25.4;   // PA120…
+  if ((m = lname.match(/(\d{2})ndl/))) return parseInt(m[1], 10) * 25.4;    // 10NDL…
+  if ((m = lname.match(/(\d{2})md/))) return parseInt(m[1], 10) * 25.4;     // …MD
 
-  return 0;
+  return 0; // Sin señal de tamaño → se ordena al final vía Infinity en compareProductsCatalog.
 }
 
 function catalogCategoryOrderIndex(cat) {
