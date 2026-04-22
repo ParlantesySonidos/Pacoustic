@@ -1,59 +1,59 @@
-/* Rajdhani + Nunito (subset latino) — autohospedadas para evitar timeouts a CDNs externos y recargas Live Server. */
-/* Cada bloque @font-face enlaza un .woff2; font-display:swap muestra texto del sistema hasta que cargue la fuente. */
+
+
 
 @font-face {
-  font-family: 'Rajdhani'; /* Encabezados y cifras con aspecto “industrial”. */
+  font-family: 'Rajdhani'; 
   font-style: normal;
-  font-weight: 400; /* Regular. */
+  font-weight: 400; 
   font-display: swap;
   src: url('../fonts/rajdhani-latin-400-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Rajdhani';
   font-style: normal;
-  font-weight: 500; /* Medium. */
+  font-weight: 500; 
   font-display: swap;
   src: url('../fonts/rajdhani-latin-500-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Rajdhani';
   font-style: normal;
-  font-weight: 600; /* Semibold. */
+  font-weight: 600; 
   font-display: swap;
   src: url('../fonts/rajdhani-latin-600-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Rajdhani';
   font-style: normal;
-  font-weight: 700; /* Bold. */
+  font-weight: 700; 
   font-display: swap;
   src: url('../fonts/rajdhani-latin-700-normal.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Nunito'; /* Cuerpo de texto redondeado y legible. */
+  font-family: 'Nunito'; 
   font-style: normal;
-  font-weight: 300; /* Light (subtítulos suaves). */
+  font-weight: 300; 
   font-display: swap;
   src: url('../fonts/nunito-latin-300-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 400; /* Regular — párrafos por defecto. */
+  font-weight: 400; 
   font-display: swap;
   src: url('../fonts/nunito-latin-400-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 500; /* Medium. */
+  font-weight: 500; 
   font-display: swap;
   src: url('../fonts/nunito-latin-500-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 600; /* Semibold — énfasis sin llegar a bold. */
+  font-weight: 600; 
   font-display: swap;
   src: url('../fonts/nunito-latin-600-normal.woff2') format('woff2');
 }

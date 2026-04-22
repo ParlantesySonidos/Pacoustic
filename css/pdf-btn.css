@@ -1,11 +1,11 @@
-/* Estilo del enlace/botón “Ficha técnica PDF” dentro del modal de producto (generado en main.js). */
+
 
 .modal-pdf-btn {
-  display: inline-flex; /* Icono + texto alineados en fila. */
+  display: inline-flex; 
   align-items: center;
-  gap: 0.6rem; /* Espacio entre icono y etiqueta. */
+  gap: 0.6rem; 
   padding: 0.85rem 1.25rem;
-  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); /* Azul institucional (contraste con rojo marca). */
+  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); 
   color: white;
   border: none;
   border-radius: 8px;
@@ -15,28 +15,28 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  text-decoration: none; /* Por si el PDF se abre como <a> con esta clase. */
+  text-decoration: none; 
   transition: all 0.25s;
-  width: 100%; /* Ocupa el ancho de la columna del modal en móvil. */
+  width: 100%; 
   margin: 1rem 0;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
 }
 
 .modal-pdf-btn:hover {
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); /* Un tono más claro al pasar el puntero. */
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); 
   box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
-  transform: translateY(-2px); /* Ligero “levitar” para feedback táctil/ratón. */
+  transform: translateY(-2px); 
 }
 
 .modal-pdf-btn:focus {
-  outline: none; /* Sustituido por sombra accesible. */
-  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.3); /* Anillo visible con teclado. */
+  outline: none; 
+  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.3); 
 }
 
 @media (max-width: 768px) {
   .modal-pdf-btn {
-    padding: 0.75rem 1rem; /* Menos padding en pantallas estrechas. */
+    padding: 0.75rem 1rem; 
     font-size: 0.9rem;
   }
 }

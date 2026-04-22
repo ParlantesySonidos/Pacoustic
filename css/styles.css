@@ -1,16 +1,3 @@
-/* ══════════════════════════════════════
-   PA ACOUSTIC — styles.css
-   TEMA CLARO PERMANENTE - Sin modo oscuro
-   ══════════════════════════════════════
-   Cómo leer este archivo (no está comentado propiedad por propiedad):
-   - :root … variables de color, sombras y anchos reutilizados en todo el sitio.
-   - Reset breve (*, html, body) y .page-watermark (foto LCP de fondo).
-   - Navegación: .nav-shell, búsqueda, redes (#mainNavbar .social-nav--nav).
-   - Hero, banner, secciones .sec / .sec-alt, tarjetas de catálogo y modal/lightbox.
-   - Sidebar, paginación, contacto, footer, utilidades (.reveal, .visually-hidden).
-   Busca comentarios /* … */ encima de bloques para decisiones de diseño o PageSpeed.
-   ══════════════════════════════════════ */
-
 :root {
   --bg:          #f0f5f9;
   --bg2:         #ffffff;
@@ -39,20 +26,20 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: -1;
   opacity: 0.36;
-  /* ≤1024px: solo móvil/tablet; w_640 limita bytes en 4G. Escritorio ≥1025px redefine la imagen. */
+  
   background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_640,c_limit/v1776290344/mafondo_mo86qx.jpg');
-  /* Móvil / tablet: una sola imagen que cubre el fondo */
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   mix-blend-mode: normal;
-  /* Color natural del asset; solo suaviza un poco (antes grayscale apagaba todo el color). */
+  
   filter: brightness(0.94) saturate(1.12) contrast(1.02);
 }
 
 @media (min-width: 1025px) {
   .page-watermark {
-    /* Escritorio: misma lógica que móvil (cover) — evita franjas/mosaico horizontal del repeat+contain. */
+    
     background-image: url('https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_1600,c_limit/v1776290344/mafondo_mo86qx.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -63,7 +50,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 
 .theme-toggle { display: none !important; }
-/* Encabezados de grupo por categoría en la cuadrícula (renderProducts en main.js) */
+
 .prod-category-header {
   grid-column: 1 / -1;
   margin: 0.25rem 0 0.35rem;
@@ -80,7 +67,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 .nav-category-mobile { display: none; }
 
-/* ── SEARCH FIELD (navbar) ── */
+
 .nav-search-field { position: relative; overflow: visible; }
 .nav-search-field::before { content: ''; position: absolute; inset: -2px; border-radius: 10px; background: linear-gradient(135deg, var(--rojo), var(--rojo2)); opacity: 0; z-index: -1; transition: opacity 0.3s ease; }
 .nav-search-field:focus-within::before { opacity: 0.15; animation: searchPulse 2s ease-in-out infinite; }
@@ -90,8 +77,8 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--rojo); border-radius: 4px; }
 
-/* ── NAV ── */
-/* ── NAVBAR (Fixed + Sidebar-aware) ── */
+
+
 #mainNavbar {
   position: fixed;
   top: 0; left: var(--sidebar-w); right: 0;
@@ -104,7 +91,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
   backdrop-filter: none;
 }
-/* Escritorio: el botón menú no se usa (sidebar fijo); si no se oculta, se ve un cuadrado junto al logo */
+
 #mainNavbar .nav-sidebar-toggle {
   display: none;
 }
@@ -119,7 +106,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 2px; background: var(--rojo); border-radius: 2px; transition: width .3s ease, left .3s ease; }
 .nav-links a:hover::after { width: 100%; left: 0; }
 
-/* ── Overlay: solo móvil / tablet (cajón hamburguesa) ── */
+
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -137,7 +124,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   pointer-events: auto;
 }
 
-/* ── SIDEBAR: escritorio = fijo a la izquierda; móvil = cajón ── */
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -219,9 +206,9 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .sidebar-close-ico::before { transform: translate(-50%, -50%) rotate(45deg); }
 .sidebar-close-ico::after { transform: translate(-50%, -50%) rotate(-45deg); }
 
-/* Escritorio: mismo tono que navbar + cabecera roja */
+
 @media (min-width: 1025px) {
-  /* Altura exacta del navbar: padding 0.8rem + logo 48px + borde inferior 2px (coincide con .nav-logo img) */
+  
   :root {
     --topbar-unified-h: calc(0.8rem + 48px + 0.8rem + 2px);
   }
@@ -230,7 +217,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
     min-height: var(--topbar-unified-h);
     max-height: var(--topbar-unified-h);
     box-sizing: border-box;
-    /* Solapa 1px el borde del sidebar y evita la “costura” clara entre rojo y barra */
+    
     left: calc(var(--sidebar-w) - 1px);
     box-shadow: 0 6px 22px rgba(0, 0, 0, 0.16);
   }
@@ -246,9 +233,9 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   .sidebar-panel-header {
     margin: 0 -0.85rem 0.85rem -0.85rem;
     background: var(--rojo);
-    /* Sin sombra hacia la derecha: unifica visualmente con el navbar */
+    
     box-shadow: none;
-    /* Misma caja que #mainNavbar: sin padding vertical extra (evita que el rojo quede más alto) */
+    
     padding: 0 1rem;
     height: var(--topbar-unified-h);
     min-height: var(--topbar-unified-h);
@@ -316,7 +303,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   .sidebar-nav-scroll {
     scrollbar-color: var(--rojo) rgba(255, 255, 255, 0.06);
   }
-  /* Con flyout abierto por hover: "Todas" no debe verse como filtro activo */
+  
   .sidebar.sidebar--flyout-preview .sidebar-cat.sidebar-cat--all.active {
     background: transparent;
     color: rgba(255, 255, 255, 0.92);
@@ -640,7 +627,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 #main-content { margin-left: var(--sidebar-w); }
 
-/* PageSpeed: menos trabajo de pintura bajo el fold (no altera color ni calidad de las imágenes). */
+
 #products.sec,
 #nosotros.sec-alt,
 #contacto.sec {
@@ -756,7 +743,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .nav-wp:hover { background: #1e6b35; box-shadow: 0 0 20px rgba(45,140,78,0.4); }
 .nav-wp svg { width: 16px; height: 16px; fill: white; }
 
-/* Redes en barra superior — colores de marca (solo navbar) */
+
 #mainNavbar .social-nav--nav {
   display: flex;
   flex-wrap: wrap;
@@ -807,7 +794,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   filter: brightness(1.12);
   transform: translateY(-1px);
 }
-/* Nota TikTok: doble sombra cian / magenta (marca) */
+
 #mainNavbar .social-nav--nav .social-link--tt .social-svg-tiktok path {
   filter: drop-shadow(-0.45px 0 0 #25f4ee) drop-shadow(0.55px 0 0 #fe2c55);
 }
@@ -830,11 +817,11 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .nav-mobile-search { display: none; }
 .nav-mobile-category { display: none; }
 
-/* ── HERO ── */
+
 .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 6rem 3rem 4rem; }
 .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 65% 50%, rgba(196,30,58,0.04) 0%, transparent 65%); }
 .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(13,27,42,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(13,27,42,0.06) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%); }
-/* Opacidad 1 desde el primer frame: el retraso + fadeUp retrasaba el LCP (logo hero) en móvil. */
+
 .hero-content { position: relative; z-index: 2; max-width: 600px; opacity: 1; animation: heroSlideUp .5s ease both; }
 .hero-logo-img { height: 180px; max-width: min(480px, 80vw); width: auto; margin-bottom: 1.5rem; object-fit: contain; display: block; }
 .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 1rem; border: 1px solid rgba(196,30,58,0.4); border-radius: 999px; font-size: 0.7rem; color: var(--rojo); letter-spacing: 0.2em; text-transform: uppercase; background: rgba(196,30,58,0.06); margin-bottom: 1.5rem; }
@@ -884,12 +871,12 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 .btn-hero-wp .btn-hero-wp-ico { width: 1.15rem; height: 1.15rem; flex-shrink: 0; fill: #fff; }
 
-/* ── MARCAS ── */
+
 .marcas-wrap { background: var(--bg2); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 1.25rem 0; overflow: hidden; }
 .marcas-track { display: flex; gap: 3rem; animation: scrollX 20s linear infinite; width: max-content; }
 .marca-item { font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; white-space: nowrap; padding: 0 1rem; }
 
-/* ── SECCIONES ── */
+
 #products {
   scroll-margin-top: calc(4.75rem + env(safe-area-inset-top, 0px));
 }
@@ -898,12 +885,12 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .sec-label { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rojo); margin-bottom: .5rem; }
 .sec-titulo { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; text-transform: uppercase; color: var(--titulo); line-height: 1; margin-bottom: 2.5rem; }
 
-/* ── PRODUCTOS ── */
+
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.75rem; }
 .prod-card { background: #ffffff; border: 1px solid var(--borde); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all .3s; opacity: 0; animation: fadeUp .6s ease forwards var(--card-delay, 0s); box-shadow: var(--shadow-sm); }
 .prod-card:hover { border-color: rgba(196,30,58,0.4); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(13,27,42,0.1), 0 0 0 1px rgba(196,30,58,0.1); }
 
-/* ── IMAGEN DE PRODUCTO — altura fija uniforme ── */
+
 .prod-img-wrap {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -929,7 +916,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   filter: drop-shadow(0 0 16px rgba(196,30,58,0.4));
 }
 
-/* Tarjetas: imagen un poco mayor (p. ej. sub con mucho “aire” en el PNG) */
+
 .prod-card--media-lg .prod-img-wrap img:first-child {
   padding: 0.4rem;
   transform: scale(1.12);
@@ -937,7 +924,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .prod-card--media-lg:hover .prod-img-wrap img:first-child {
   transform: scale(1.22);
 }
-/* Variante más suave (p. ej. bumper PAHL30A) */
+
 .prod-card--media-md .prod-img-wrap img:first-child {
   padding: 0.58rem;
   transform: scale(1.05);
@@ -948,7 +935,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 .prod-badge { position: absolute; top: .75rem; left: .75rem; background: var(--rojo); color: white; font-size: 0.6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 4px; z-index: 2; }
 
-/* Contador de medios en la tarjeta (no estilo “chip de categoría”) */
+
 .prod-gallery-count {
   position: absolute;
   bottom: .55rem;
@@ -985,7 +972,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 
 .prod-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); width: 70%; max-width: 180px; opacity: 0.08; pointer-events: none; z-index: 1; mix-blend-mode: normal; object-fit: contain; filter: grayscale(100%) brightness(0.4); }
 
-/* ── BANNER CARRUSEL — alto del marco = proporción real de la imagen (sin caja 4:3) ── */
+
 .banner-wrap {
   width: 100%;
   overflow: hidden;
@@ -1028,7 +1015,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   box-shadow: 0 10px 28px rgba(196,30,58,0.18);
   transform: translateY(-4px);
 }
-/* Imagen anclada al marco w×H (JS): evita huecos por % height en algunos navegadores */
+
 .banner-item img {
   position: absolute;
   inset: 0;
@@ -1047,7 +1034,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 }
 @keyframes bannerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ── NOSOTROS ── */
+
 .nos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .nos-logo-box { width: 100%; aspect-ratio: 1; background: var(--bg); border: 1px solid var(--borde); border-radius: 16px; display: flex; align-items: center; justify-content: center; padding: 3rem; }
 .nos-logo-box img { width: 100%; object-fit: contain; }
@@ -1060,7 +1047,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .nos-item h4 { font-size: 0.88rem; font-weight: 600; color: var(--titulo); margin-bottom: .15rem; }
 .nos-item p { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 
-/* ── CONTACTO ── */
+
 .con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .con-titulo { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 700; text-transform: uppercase; color: var(--titulo); line-height: 1; margin-bottom: 1rem; }
 .con-titulo span { color: var(--rojo); }
@@ -1172,14 +1159,14 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
 .btn-wp-grande:hover { background: #1e6b35; box-shadow: 0 0 28px rgba(45,140,78,0.4); transform: translateY(-2px); }
 .btn-wp-grande svg { width: 22px; height: 22px; fill: white; }
 
-/* ── FOOTER ── */
+
 footer { background: #ffffff; border-top: 1px solid var(--borde); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 -2px 12px rgba(13,27,42,0.06); }
 .footer-logo img { height: 40px; object-fit: contain; }
 footer p { font-size: 0.72rem; color: var(--muted); }
 .footer-info { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
 .footer-credit { font-size: 0.75rem; color: var(--muted); opacity: 0.8; }
 
-/* ── MODAL ── */
+
 .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(13,27,42,0.7); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 1rem; }
 .modal-overlay.open { display: flex; }
 .modal { background: #ffffff; border: 1px solid var(--borde); border-radius: 16px; width: 100%; max-width: 960px; max-height: 90vh; overflow-y: auto; animation: modalIn .3s ease; position: relative; box-shadow: var(--shadow-lg); }
@@ -1192,14 +1179,14 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 
 .modal-imgs { display: flex; flex-direction: column; gap: 1rem; }
 
-/* Imagen principal del modal con posición relativa para flechas */
+
 .modal-img-main {
   width: 100%;
   aspect-ratio: 1/1;
   max-height: 65vh;
   border-radius: 10px;
   overflow: hidden;
-  background: #ffffff;  /* ✅ Fondo blanco sólido móvil también */
+  background: #ffffff;  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1208,7 +1195,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 
 @media (max-width: 768px) {
   .modal-img-main {
-    background: #ffffff;  /* ✅ Blanco sólido móvil */
+    background: #ffffff;  
   }
 }
 
@@ -1233,7 +1220,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal-img-main img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ✅ Imagen COMPLETA sin cortar/dimensionada perfecta */
+  object-fit: contain; 
   padding: 0.5rem;
   image-rendering: -webkit-optimize-contrast;
   transition: opacity .15s ease, transform .15s ease;
@@ -1245,7 +1232,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   padding: 0.32rem;
 }
 
-/* Flechas de navegación de galería */
+
 .modal-nav-arrow {
   position: absolute;
   top: 50%;
@@ -1276,7 +1263,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal-nav-arrow.left  { left: .65rem; }
 .modal-nav-arrow.right { right: .65rem; }
 
-/* Thumbs de galería — más grandes, scroll horizontal */
+
 .modal-img-thumbs {
   display: flex;
   gap: .65rem;
@@ -1332,12 +1319,12 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .modal-wp:hover { background: #1e6b35; box-shadow: 0 0 24px rgba(45,140,78,0.3); }
 .modal-wp svg { width: 20px; height: 20px; fill: white; }
 
-/* ── BOTÓN PDF ── */
+
 .modal-pdf-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.25rem; background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); color: white; border: none; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.25s; width: 100%; margin: 1rem 0; justify-content: center; box-shadow: 0 4px 12px rgba(44,90,160,0.2); }
 .modal-pdf-btn:hover { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); box-shadow: 0 6px 20px rgba(44,90,160,0.3); transform: translateY(-2px); }
 .modal-pdf-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(44,90,160,0.3); }
 
-/* ── ANIMACIONES ── */
+
 @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes heroSlideUp { from { transform: translateY(16px); } to { transform: translateY(0); } }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .2; } }
@@ -1346,24 +1333,24 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── HAMBURGER ── */
-/* ── MOBILE SIDEBAR ── */
+
+
 @media (max-width: 1024px) {
   :root {
     --sidebar-w: min(300px, 92vw);
-    /* Altura aproximada de la barra (hamburguesa + logo + iconos + padding) */
-    /* Altura barra móvil (una sola fila de iconos + padding) */
+    
+    
     --mobile-nav-stack-height: calc(env(safe-area-inset-top, 0px) + 3.75rem);
   }
   #main-content {
     margin-left: 0;
   }
-  /* Marca de agua en móvil/tablet: más saturación y opacidad para que el color del equipo se note. */
+  
   .page-watermark {
     filter: brightness(0.97) saturate(1.28) contrast(1.03);
     opacity: 0.5;
   }
-  /* Hero: velos más suaves que antes — el blanco tapaba el fondo; así se ve el color de la foto detrás. */
+  
   .hero-bg {
     background-image:
       radial-gradient(ellipse 60% 70% at 65% 50%, rgba(196, 30, 58, 0.09) 0%, transparent 65%),
@@ -1375,7 +1362,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   .hero-content {
     animation: none;
   }
-  /* Oscurece solo el contenido detrás del menú; la barra superior queda limpia */
+  
   .sidebar-overlay {
     display: block;
     top: var(--mobile-nav-stack-height);
@@ -1385,12 +1372,12 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     background: rgba(44, 62, 80, 0.86);
     backdrop-filter: none;
   }
-  /* Menú categorías: ancho completo debajo del navbar (como referencia) */
+  
   .sidebar {
     top: var(--mobile-nav-stack-height);
     left: 0;
     right: 0;
-    /* Deja una franja inferior para poder tocar el overlay y cerrar */
+    
     bottom: max(20px, env(safe-area-inset-bottom, 0px));
     width: 100%;
     max-width: none;
@@ -1413,14 +1400,14 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     transform: translateY(0);
     pointer-events: auto;
   }
-  /* Si se abre la búsqueda en la barra, bajar el panel del menú */
+  
   body:has(#mainNavbar.nav-search-open) .sidebar.open {
     top: calc(env(safe-area-inset-top, 0px) + 6.75rem);
   }
   body:has(#mainNavbar.nav-search-open) .sidebar-overlay.open {
     top: calc(env(safe-area-inset-top, 0px) + 6.75rem);
   }
-  /* Cierre con la X del navbar; lista empieza en “Todas las categorías” */
+  
   .sidebar-panel-header {
     display: none;
   }
@@ -1461,7 +1448,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     border: 1px solid var(--borde);
   }
 
-  /* Flyout subcategorías: tarjeta blanca redondeada sobre el listado */
+  
   .sidebar-flyout--sheet {
     width: min(360px, calc(100vw - 1.25rem)) !important;
     left: 50% !important;
@@ -1501,7 +1488,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     font-size: 0.76rem;
   }
 
-  /* Navbar móvil / tablet — barra oscura marca + logo centrado + acciones */
+  
   #mainNavbar.nav-shell {
     left: 0;
     display: grid;
@@ -1552,10 +1539,10 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     align-self: center;
     display: flex;
     align-items: center;
-    /* Ligero bajado respecto al centro óptico (iconos + sombra del logo) */
+    
     margin-top: 0.22rem;
   }
-  /* Logo: sin caja blanca; contraste sobre barra oscura */
+  
   #mainNavbar .nav-logo a {
     display: inline-flex;
     align-items: center;
@@ -1576,7 +1563,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     width: auto;
     max-width: min(132px, 42vw);
     object-fit: contain;
-    /* Logo oscuro + rojo legible sobre #141f33 */
+    
     filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65));
   }
 
@@ -1627,7 +1614,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     text-decoration: none;
     transition: background 0.2s, border-color 0.2s, transform 0.15s;
   }
-  /* Solo búsqueda: más pequeño que WhatsApp y resto de iconos */
+  
   #mainNavbar #navMobileSearchToggle {
     width: 32px;
     height: 32px;
@@ -1704,12 +1691,12 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .nav-hamburger.active span:nth-child(2) { opacity: 0; }
 .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 .nav-hamburger:hover span { background: var(--rojo); }
-/* ── Hide old mobile menu ── */
+
 .nav-links { display: none !important; }
 .nav-mobile-overlay { display: none !important; }
 .nav-hamburger { display: none !important; }
 
-/* ── RESPONSIVE TABLET ── */
+
 @media (max-width: 1024px) {
   #mainNavbar.nav-shell { overflow-x: clip; min-width: 0; }
   .nav-logo { flex-shrink: 0; }
@@ -1734,13 +1721,13 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   }
 }
 
-/* Categoría en catálogo: solo vía sidebar / hamburguesa (el <select> sigue en el DOM para sincronía JS) */
+
 #mobileCatalogCategoryWrap,
 .mobile-catalog-category-wrap {
   display: none !important;
 }
 
-/* ── RESPONSIVE MÓVIL ── */
+
 @media (max-width: 768px) {
   #mainNavbar.nav-shell {
     position: fixed;
@@ -1796,7 +1783,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   .nos-titulo, .con-titulo { font-size: 1.6rem; }
   .btn-rojo, .btn-outline, .btn-hero-wp { padding: 0.7rem 1.5rem; font-size: 0.85rem; }
 
-  /* Modal móvil */
+  
   .modal { max-width: 100%; border-radius: 12px; max-height: 92vh; margin-top: 0; padding-bottom: 1.5rem; }
   .modal-overlay { padding: clamp(0.35rem, 2.5vw, 0.75rem); align-items: center; }
   .modal-body { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
@@ -1815,7 +1802,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   .modal-wp svg { width: 16px; height: 16px; }
   .modal-pdf-btn { padding: 0.75rem 1rem; font-size: 0.9rem; }
 
-  /* Grids */
+  
   .nos-grid, .con-grid { grid-template-columns: 1fr; gap: 2rem; }
   .products-grid {
     display: grid;
@@ -1861,7 +1848,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     padding-bottom: 2rem;
   }
 
-  /* Banner — ancho slide = --banner-slide-w (JS, interior real del wrap); sin 100vw para no desincronizar object-fit */
+  
   .banner-wrap {
     padding: 0.35rem max(0px, env(safe-area-inset-left, 0px)) 0.45rem max(0px, env(safe-area-inset-right, 0px));
   }
@@ -1942,7 +1929,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 
 .mobile-catalog-controls { display: none; position: fixed; bottom: 1rem; left: 0; right: 0; padding: 0.75rem 1rem; background: var(--bg2); border-top: 1px solid var(--borde); z-index: 150; gap: 0.75rem; justify-content: center; }
 
-/* ── CONTADOR (contrasta con .sec blanco; contorno claro) ── */
+
 .products-count {
   display: flex;
   align-items: center;
@@ -1961,7 +1948,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   box-shadow: none;
   filter: none;
 }
-/* Ej.: "Página 1 6-6" = productos en esta página / máx. por página */
+
 .products-count .count-page-line {
   display: inline-flex;
   align-items: baseline;
@@ -1991,7 +1978,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   letter-spacing: 0.02em;
 }
 .products-count .count-separator { color: var(--muted); margin: 0 0.1rem; font-weight: 400; }
-/* Total: tipografía de dato (no botón rojo, para no confundir con categorías) */
+
 .products-count .count-total-wrap {
   display: inline-flex;
   align-items: baseline;
@@ -2040,7 +2027,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   }
 }
 
-/* Refuerzo: mismo fondo que .sec (#fff) hacía invisible el borde; #products alza especificidad */
+
 #products #productsCount.products-count.catalog-stats {
   background: var(--bg);
   border: 2px solid #9aacbd;
@@ -2051,7 +2038,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .products-count .count-total { color: var(--titulo); font-weight: 700; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; }
 .products-count .count-suffix { color: var(--muted); font-size: 0.75rem; font-weight: 500; margin-left: 0.15rem; }
 
-/* ── CATEGORÍA ACTIVA ── */
+
 .category-active {
   display: flex;
   align-items: center;
@@ -2096,7 +2083,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .categoria-activa .categoria-badge { font-size: 0.7rem; font-weight: 600; color: var(--rojo); text-transform: uppercase; letter-spacing: 0.08em; }
 .categoria-activa .categoria-nombre { font-size: 0.85rem; font-weight: 600; color: var(--titulo); }
 
-/* ── MOBILE FILTER ── */
+
 .mobile-filter-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 1.25rem; background: var(--bg3); border: 1px solid var(--borde); border-radius: 8px; color: var(--texto); font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; flex: 1; max-width: 160px; }
 .mobile-filter-btn:hover { border-color: var(--rojo); color: var(--rojo); }
 .mobile-filter-btn.active { background: var(--rojo); border-color: var(--rojo); color: white; }
@@ -2117,7 +2104,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .mobile-filter-clear { width: 100%; padding: 0.85rem; background: transparent; border: 1px solid var(--borde); border-radius: 8px; color: var(--muted); font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; margin-top: 0.75rem; transition: all 0.2s ease; }
 .mobile-filter-clear:hover { border-color: var(--rojo); color: var(--rojo); }
 
-/* ── PAGINACIÓN ── */
+
 .pagination-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1.25rem 2rem; background: var(--bg2); border-radius: 50px; border: 1px solid var(--borde); box-shadow: var(--shadow-sm); }
 .pagination-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--borde); background: var(--bg); color: var(--texto); font-size: 1.25rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); box-shadow: var(--shadow-sm); }
 .pagination-btn:hover:not([disabled]) { border-color: var(--rojo); color: var(--rojo); background: rgba(196,30,58,0.06); transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 20px rgba(196,30,58,0.2); }
@@ -2128,13 +2115,13 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 .pagination-separator { color: var(--muted); font-weight: 400; }
 .pagination-total { color: var(--muted); font-weight: 500; }
 
-/* ── LIGHTBOX — zoom + paneo ── */
+
 #lightboxOverlay {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(255,255,255,0.98);  /* ✅ MODO BLANCO */
+  background: rgba(255,255,255,0.98);  
   backdrop-filter: blur(12px);
   flex-direction: column;
   align-items: center;
@@ -2206,8 +2193,8 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   position: relative;
   z-index: 1;
   max-width: 70vw;
-  max-height: 55vh;  /* ✅ Más pequeña/representativa como modal */
-  width: 85%;        /* ✅ Fija más pequeña */
+  max-height: 55vh;  
+  width: 85%;        
   height: 70%;
   object-fit: contain;
   border-radius: 12px;

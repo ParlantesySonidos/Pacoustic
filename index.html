@@ -1,39 +1,39 @@
-<!DOCTYPE html> <!-- HTML5; el idioma del documento es español (SEO y lectores de pantalla). -->
+<!DOCTYPE html> 
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/> <!-- Codificación UTF-8 para tildes y símbolos. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> <!-- Móvil + recorte iOS “notch”. -->
-  <meta name="description" content="P.Acoustic — Audio profesional en Medellín, Colombia. Altavoces, line array, subwoofers, drivers y cabinas amplificadas; controles de calidad rigurosos. Envíos en Colombia."/> <!-- Snippet en resultados de búsqueda. -->
-  <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/> <!-- Referencia SEO menor (Google prioriza description). -->
-  <meta name="author" content="P.Acoustic"/> <!-- Metadato editorial. -->
-  <meta name="theme-color" content="#c41e3a"/> <!-- Color de barra de UI en navegadores móviles. -->
-  <meta name="google-site-verification" content="UnLq7Y1oCmKLKN5vtWscXJqsmsrWGMxFaQQCiNulo8M" /> <!-- Verificación Search Console. -->
-  <!-- Fuentes en /fonts (css/fonts.css) — sin Google Fonts: evita timeouts y el refreshCSS de Live Server sobre URLs externas -->
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/> <!-- Ahorra RTT al resolver Cloudinary antes de imágenes. -->
-  <!-- LCP: foto de fondo (.page-watermark) — misma URL que en css/styles.css para caché + pintura antes -->
+  <meta charset="UTF-8"/> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> 
+  <meta name="description" content="P.Acoustic — Audio profesional en Medellín, Colombia. Altavoces, line array, subwoofers, drivers y cabinas amplificadas; controles de calidad rigurosos. Envíos en Colombia."/> 
+  <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/> 
+  <meta name="author" content="P.Acoustic"/> 
+  <meta name="theme-color" content="#c41e3a"/> 
+  <meta name="google-site-verification" content="UnLq7Y1oCmKLKN5vtWscXJqsmsrWGMxFaQQCiNulo8M" /> 
+  
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/> 
+  
   <link rel="preload" as="image" fetchpriority="high"
     href="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_640,c_limit/v1776290344/mafondo_mo86qx.jpg"
-    media="(max-width: 1024px)"/> <!-- Imagen más ligera en móvil/tablet (LCP). -->
+    media="(max-width: 1024px)"/> 
   <link rel="preload" as="image" fetchpriority="high"
     href="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_1600,c_limit/v1776290344/mafondo_mo86qx.jpg"
-    media="(min-width: 1025px)"/> <!-- Imagen ancha en escritorio. -->
-  <link rel="dns-prefetch" href="https://wa.me"/> <!-- Resolución temprana del host de enlaces WhatsApp. -->
-  <meta property="og:title" content="P.Acoustic — Audio profesional | Medellín, Colombia"/> <!-- Open Graph: título al compartir. -->
-  <meta property="og:description" content="Marca de audio profesional: altavoces, line array, subwoofers, drivers y cabinas amplificadas. Calidad y desempeño en cada equipo. Envíos en Colombia."/> <!-- OG: descripción al compartir. -->
-  <meta property="og:type" content="website"/> <!-- Tipo de objeto para redes (página genérica). -->
-  <meta property="og:locale" content="es_CO"/> <!-- Idioma/región del contenido. -->
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/> <!-- Pista opcional para rastreadores. -->
-  <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/> <!-- Favicon en pestaña del navegador. -->
-  <title>P.Acoustic — Audio profesional | Medellín, Colombia</title> <!-- Título de pestaña y resultado de búsqueda. -->
-<link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/> <!-- @font-face Rajdhani + Nunito locales. -->
-<link rel="stylesheet" href="css/styles.css?v=social-padding-1"/> <!-- Estilos globales del sitio; ?v= invalida caché al cambiar. -->
-<link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/> <!-- Botón “ficha PDF” en modal. -->
-<link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/> <!-- Asesor flotante (chatAdvisor.js). -->
+    media="(min-width: 1025px)"/> 
+  <link rel="dns-prefetch" href="https://wa.me"/> 
+  <meta property="og:title" content="P.Acoustic — Audio profesional | Medellín, Colombia"/> 
+  <meta property="og:description" content="Marca de audio profesional: altavoces, line array, subwoofers, drivers y cabinas amplificadas. Calidad y desempeño en cada equipo. Envíos en Colombia."/> 
+  <meta property="og:type" content="website"/> 
+  <meta property="og:locale" content="es_CO"/> 
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/> 
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/> 
+  <title>P.Acoustic — Audio profesional | Medellín, Colombia</title> 
+<link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/> 
+<link rel="stylesheet" href="css/styles.css?v=social-padding-1"/> 
+<link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/> 
+<link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/> 
 </head>
 
-<body data-theme="light"> <!-- Tema claro fijo; main.js también fuerza data-theme en DOMContentLoaded. -->
+<body data-theme="light"> 
 
-<!-- SVG WHATSAPP -->
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="ico-wp" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -42,7 +42,7 @@
 
 <div class="page-watermark"></div>
 
-<!-- NAVEGACIÓN -->
+
 <nav aria-label="Navegación principal" id="mainNavbar" class="nav-shell">
   <button type="button" class="nav-sidebar-toggle" id="navSidebarToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar" aria-label="Menú categorías">
     <span></span><span></span><span></span>
@@ -95,11 +95,11 @@
   </div>
 </nav>
 
-<!-- Estado de filtros catálogo (sincronizado con el sidebar) -->
+
 <select id="catalogCategory" class="visually-hidden" aria-hidden="true" tabindex="-1" title="Categoría seleccionada"></select>
 <input type="hidden" id="catalogSubcategory" name="catalogSubcategory" value="" autocomplete="off"/>
 
-<!-- SIDEBAR -->
+
 <aside class="sidebar" id="sidebar" aria-label="Menú de categorías">
   <div class="sidebar-panel-header">
     <h2 class="sidebar-panel-title">Categorías</h2>
@@ -124,14 +124,14 @@
 <div id="sidebarFlyout" class="sidebar-flyout" aria-hidden="true"></div>
 <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
-<!-- MAIN CONTENT -->
+
 <main id="main-content">
-<!-- HERO -->
+
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <!-- ✅ class="hero-logo-img" y alt añadidos — sin esto el CSS no limita el tamaño -->
+    
     <img
       class="hero-logo-img"
       src="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_400,c_limit/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"
@@ -165,12 +165,12 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   </div>
 </section>
 
-<!-- BANNER -->
+
 <div class="banner-wrap">
   <div class="banner-track" id="bannerTrack"></div>
 </div>
 
-<!-- CATÁLOGO -->
+
 <section id="products" class="sec" aria-labelledby="titulo-products">
   <div class="reveal">
     <div class="sec-label">— Nuestros Equipos</div>
@@ -188,7 +188,7 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
-<!-- NOSOTROS -->
+
 <section id="nosotros" class="sec-alt" aria-labelledby="titulo-nosotros">
   <div class="nos-grid">
     <div class="nos-logo-box reveal">
@@ -207,7 +207,7 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   </div>
 </section>
 
-<!-- CONTACTO -->
+
 <section id="contacto" class="sec" aria-labelledby="titulo-contacto">
   <div class="reveal" style="margin-bottom:2.5rem">
     <div class="sec-label">— Estamos para ayudarte</div>
@@ -261,7 +261,7 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   </div>
 </section>
 
-<!-- FOOTER -->
+
 </main>
 <footer>
   <div class="footer-logo"><img src="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png" alt="P.Acoustic"/></div>
@@ -271,7 +271,7 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   </div>
 </footer>
 
-<!-- MODAL -->
+
 <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal(event)">
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -288,7 +288,7 @@ https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_720,c_limit/v1
   </div>
 </div>
 
-<!-- AUDIO -->
+
 <audio id="introAudio" preload="none">
   <source src="audio/intro.mp3" type="audio/mpeg">
 </audio>
