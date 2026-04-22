@@ -10,8 +10,10 @@ const WP_SVG = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.75
 /** Sube en 1 cuando cambies categorías/productos en data/products.json (rompe caché en GitHub Pages y móviles). */
 const CATALOG_JSON_VERSION = 3;
 
-/** Vista previa algo mayor (PNGs con mucho margen). IDs = `name` en kebab-case al cargar el catálogo. */
-const PRODUCT_MEDIA_ZOOM_IDS = new Set(['bumper-pahl30a', 'pa-118a-sub']);
+/** Vista previa mayor (PNGs con mucho margen). IDs = `name` en kebab-case al cargar el catálogo. */
+const PRODUCT_MEDIA_ZOOM_IDS = new Set(['pa-118a-sub']);
+/** Mismo criterio pero más suave (p. ej. bumper PAHL30A). */
+const PRODUCT_MEDIA_ZOOM_IDS_MILD = new Set(['bumper-pahl30a']);
 
 // ========================================
   // CACHE DOM - Optimización rendimiento
@@ -1189,7 +1191,9 @@ function renderProducts() {
       const hasMedia  = p.imgs.length > 1 || numVideos > 0;
       const mediaCount = p.imgs.length + numVideos;
       const mediaIcon = numVideos > 0 ? '🎬' : (p.imgs.length > 1 ? '📷' : '');
-      const prodMediaCls = PRODUCT_MEDIA_ZOOM_IDS.has(p.id) ? ' prod-card--media-lg' : '';
+      const prodMediaCls = PRODUCT_MEDIA_ZOOM_IDS.has(p.id)
+        ? ' prod-card--media-lg'
+        : (PRODUCT_MEDIA_ZOOM_IDS_MILD.has(p.id) ? ' prod-card--media-md' : '');
       html += `
         <div class="prod-card${prodMediaCls}" style="--card-delay:${delay*0.07}s" onclick="openModal('${p.id}')">
           <div class="prod-img-wrap">
@@ -1382,6 +1386,7 @@ function openModal(id) {
 
   const mainWrap = document.getElementById('modalImgMain').parentElement;
   mainWrap.classList.toggle('modal-img-main--media-lg', PRODUCT_MEDIA_ZOOM_IDS.has(p.id));
+  mainWrap.classList.toggle('modal-img-main--media-md', PRODUCT_MEDIA_ZOOM_IDS_MILD.has(p.id));
   const oldVideo = mainWrap.querySelector('.modal-video-wrap');
   if (oldVideo) oldVideo.remove();
 
@@ -1591,7 +1596,7 @@ function cerrarModalBtn() {
   if (typeof modalZoomCleanup === 'function') modalZoomCleanup();
   const mainWrap = document.getElementById('modalImgMain')?.parentElement;
   if (mainWrap) {
-    mainWrap.classList.remove('modal-img-main--media-lg');
+    mainWrap.classList.remove('modal-img-main--media-lg', 'modal-img-main--media-md');
     const videoWrap = mainWrap.querySelector('.modal-video-wrap');
     if (videoWrap) videoWrap.remove();
     const mainImg = document.getElementById('modalImgMain');
