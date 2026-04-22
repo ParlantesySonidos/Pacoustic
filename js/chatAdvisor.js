@@ -12,25 +12,25 @@
 
   // Ponderaciones por “intención”: palabras clave en specs/nombre + refuerzo por categoría/subcategoría.
   const SCENARIOS = {
-    eventos: {
+    eventos: { // SPL, rigging, grandes formatos → prioriza Cabinas / Line Array.
       label: 'Eventos y conciertos',
       keywords: ['concierto', 'evento', 'spl', 'rigging', 'line array', 'array', 'gran formato', 'vivo', 'escenario', 'refuerzo', 'potencia', 'dsp', '137', '133'],
       catBoost: { Cabinas: 14 },
       subBoost: { 'Line Array': 12 }
     },
-    iglesia: {
+    iglesia: { // Vocal inteligible, espacios medianos.
       label: 'Iglesia, teatro o auditorio',
       keywords: ['iglesia', 'teatro', 'auditorio', 'corporativ', 'conferencia', 'cultura', 'vocal', 'inteligible', 'colegio', 'convención'],
       catBoost: { Cabinas: 12, Woofer: 5 },
       subBoost: { 'Line Array': 8 }
     },
-    dj: {
+    dj: { // Portátil, club, refuerzo móvil.
       label: 'DJ, club o sistema móvil',
       keywords: ['dj', 'club', 'móvil', 'portátil', 'refuerzo', 'evento', 'spl', 'potencia', 'bafle'],
       catBoost: { Cabinas: 10, Woofer: 8 },
       subBoost: { 'Line Array': 6, Neodimio: 4, Ferrita: 3 }
     },
-    instalacion: {
+    instalacion: { // Fija, rack, hoteles.
       label: 'Instalación fija',
       keywords: ['instalación', 'fija', 'hotel', 'centro', 'convención', 'auditorio', 'network', 'dsp', 'rack'],
       catBoost: { Cabinas: 12, Woofer: 6 },
@@ -354,14 +354,14 @@
       }
     });
 
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition; // API prefijada en Chromium.
     const inpVoice = root.querySelector('.pa-advisor-input');
     const vbtn = root.querySelector('.pa-advisor-voice');
     const voiceSecure =
       window.isSecureContext ||
-      /^localhost$|^127\.0\.0\.1$/i.test(window.location.hostname || '');
+      /^localhost$|^127\.0\.0\.1$/i.test(window.location.hostname || ''); // Mic suele exigir HTTPS.
     if (!SR || !inpVoice || !vbtn || !voiceSecure) {
-      vbtn?.remove();
+      vbtn?.remove(); // Sin API o contexto inseguro: oculta el botón de voz.
     } else {
       let recognition = null;
       let voiceListening = false;
@@ -403,6 +403,7 @@
     }
   }
 
+  /** Evita duplicar el widget si init se llama dos veces. */
   function init() {
     if (document.getElementById('paAdvisorRoot')) return;
     buildUI();
