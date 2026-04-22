@@ -813,7 +813,7 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776811731/crossover2viasps2v_bkhse0.png",
        "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776811731/crossover2viasps2v1_orrv1f.png"]
      },
-     "description": "Crossover pasivo de 2 vías diseñado para dividir la señal de audio entre un woofer y un driver de compresión en sistemas de sonido profesional. Con componentes de alta calidad, ofrece una respuesta precisa y confiable, ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas."
+     "description": "Crossover pasivo de 2 vías 12 dB/octava, rango de frecuencia 2.5 khz - 18khz, diseño Linkwitz - Riley de 1000W."
   },
   {
     "id": 33,
@@ -824,7 +824,7 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812085/crossover1viarf215_im29al.png",
        "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812085/crossover1viarf2151_fuieq4.png"]
      },
-     "description": "Crossover pasivo de 1 vía diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división simple de la señal."
+     "description": "Crossover 1 vía 18 dB/octava, rango de frecuencia 2.2 khz - 16khz, diseño Linkwitz - Riley de 1300W."
   },
     {
       "id": 34,
@@ -835,7 +835,7 @@
         "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1776812434/crossover1viaPS1V1_khzyad.png",
         "gallery": ["https://res.cloudinary.com/djlr3wszq/image/upload/v1776812434/crossover1viaPS1V_nbfnxz.png"]
       },
-      "description": "Crossover pasivo de 1 vía diseñado para dividir la señal de audio en sistemas de sonido profesional, permitiendo una separación eficiente entre frecuencias bajas y altas. Ideal para aplicaciones de refuerzo sonoro en vivo e instalaciones fijas donde se requiere una división simple de la señal."
+      "description": "Crossover 1 via 12 dB/octava, rango de frecuencia 2.5khz - 18khz, diseño Linkwitz - Riley de 600W"
     }
 ]
   
