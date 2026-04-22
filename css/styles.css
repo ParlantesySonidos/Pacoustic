@@ -1549,16 +1549,24 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     grid-area: logo;
     justify-self: center;
   }
+  /* Logo: mismo lenguaje visual que la hamburguesa (sin bloque blanco que compita) */
   #mainNavbar .nav-logo a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.1rem 0.38rem;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 4px 12px rgba(0, 0, 0, 0.18);
+    padding: 0.08rem 0.32rem;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
-  #mainNavbar .nav-logo img { height: 28px; max-width: 86px; object-fit: contain; }
+  #mainNavbar .nav-logo img {
+    height: 26px;
+    max-width: 80px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.96;
+  }
 
   #mainNavbar .nav-trailing-wrap {
     grid-area: actions;
@@ -1615,6 +1623,18 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     cursor: pointer;
     text-decoration: none;
     transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  /* Solo búsqueda: más pequeño que WhatsApp y resto de iconos */
+  #mainNavbar #navMobileSearchToggle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 8px;
+  }
+  #mainNavbar #navMobileSearchToggle .nav-icon-svg {
+    width: 16px;
+    height: 16px;
   }
   .nav-icon-btn:hover,
   .nav-icon-link:hover {
