@@ -812,17 +812,9 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
     flex-wrap: nowrap;
     max-width: none;
   }
-  #mainNavbar .social-nav--nav {
-    order: 0;
-    flex-basis: auto;
-    padding-top: 0;
-    margin-top: 0;
-    border-top: none;
-  }
-  #mainNavbar .nav-mobile-trailing,
-  #mainNavbar .nav-trailing-wrap .nav-wp-icon,
-  #mainNavbar .nav-trailing-wrap .nav-wp {
-    order: 0;
+  #mainNavbar .nav-logo img {
+    filter: none;
+    max-width: none;
   }
 }
 .nav-wp-mobile { display: none; }
@@ -1351,8 +1343,8 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   :root {
     --sidebar-w: min(300px, 92vw);
     /* Altura aproximada de la barra (hamburguesa + logo + iconos + padding) */
-    /* Altura barra móvil: fila principal + fila de redes (wrap) + margen */
-    --mobile-nav-stack-height: calc(env(safe-area-inset-top, 0px) + 5.35rem);
+    /* Altura barra móvil (una sola fila de iconos + padding) */
+    --mobile-nav-stack-height: calc(env(safe-area-inset-top, 0px) + 3.75rem);
   }
   #main-content {
     margin-left: 0;
@@ -1414,10 +1406,10 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   }
   /* Si se abre la búsqueda en la barra, bajar el panel del menú */
   body:has(#mainNavbar.nav-search-open) .sidebar.open {
-    top: calc(env(safe-area-inset-top, 0px) + 8rem);
+    top: calc(env(safe-area-inset-top, 0px) + 6.75rem);
   }
   body:has(#mainNavbar.nav-search-open) .sidebar-overlay.open {
-    top: calc(env(safe-area-inset-top, 0px) + 8rem);
+    top: calc(env(safe-area-inset-top, 0px) + 6.75rem);
   }
   /* Cierre con la X del navbar; lista empieza en “Todas las categorías” */
   .sidebar-panel-header {
@@ -1509,8 +1501,8 @@ footer p { font-size: 0.72rem; color: var(--muted); }
       "menu logo actions"
       "search search search";
     align-items: center;
-    gap: 0.3rem 0.45rem;
-    padding: max(0.42rem, env(safe-area-inset-top, 0px)) 0.5rem 0.4rem;
+    gap: 0.25rem 0.35rem;
+    padding: max(0.32rem, env(safe-area-inset-top, 0px)) 0.45rem 0.28rem;
     background: linear-gradient(168deg, #141f33 0%, var(--titulo) 48%, #0a121f 100%);
     border-bottom: 2px solid var(--rojo);
     box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
@@ -1522,8 +1514,8 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     flex-direction: column;
     justify-content: center;
     gap: 4px;
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     padding: 0;
     margin: 0;
     background: rgba(255, 255, 255, 0.06);
@@ -1549,68 +1541,62 @@ footer p { font-size: 0.72rem; color: var(--muted); }
     grid-area: logo;
     justify-self: center;
   }
-  /* Logo: fondo blanco compacto (solo el tamaño del gráfico + mínimo aire) */
+  /* Logo: sin caja blanca; contraste sobre barra oscura */
   #mainNavbar .nav-logo a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: max-content;
-    max-width: min(104px, 34vw);
-    padding: 0.1rem 0.26rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    box-shadow: 0 0 0 1px rgba(13, 27, 42, 0.05), 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+    width: auto;
     box-sizing: border-box;
   }
   #mainNavbar .nav-logo img {
     display: block;
-    height: 26px;
+    height: 30px;
     width: auto;
-    max-width: 100%;
+    max-width: min(132px, 42vw);
     object-fit: contain;
+    /* Logo oscuro + rojo legible sobre #141f33 */
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65));
   }
 
   #mainNavbar .nav-trailing-wrap {
     grid-area: actions;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-end;
-    align-content: flex-end;
-    gap: 0.22rem 0.32rem;
+    gap: 0.22rem;
     min-width: 0;
-    max-width: min(200px, 56vw);
+    max-width: min(220px, 58vw);
   }
   #mainNavbar .nav-mobile-trailing {
-    order: 1;
     display: flex;
   }
   #mainNavbar .nav-trailing-wrap .nav-wp-icon {
-    order: 2;
     display: inline-flex;
   }
-  /* Segunda línea: redes alineadas a la derecha con WhatsApp */
   #mainNavbar .social-nav--nav {
-    order: 10;
-    flex-basis: 100%;
-    justify-content: flex-end;
-    gap: 0.28rem;
-    padding-top: 0.08rem;
-    margin-top: 0.02rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 0.22rem;
+    padding: 0;
+    margin: 0;
+    border: none;
   }
   #mainNavbar .social-nav--nav .social-link {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 8px;
   }
   #mainNavbar .social-nav--nav .social-link svg {
-    width: 14px;
-    height: 14px;
-  }
-  #mainNavbar .nav-wp {
-    order: 3;
+    width: 13px;
+    height: 13px;
   }
   .nav-icon-btn,
   .nav-icon-link {
@@ -1786,7 +1772,10 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   .hero-sub { font-size: 0.9rem; }
   .hero-btns { flex-direction: column; }
   .hero-btns a { width: 100%; justify-content: center; min-height: 44px; -webkit-tap-highlight-color: transparent; }
-  #mainNavbar .nav-logo img { height: 26px; max-width: 80px; }
+  #mainNavbar .nav-logo img {
+    height: 28px;
+    max-width: min(124px, 40vw);
+  }
   .hero-logo-img { height: 72px; max-width: min(220px, 58vw); margin-bottom: 1rem; }
   .hero-tag { font-size: 0.6rem; padding: 0.25rem 0.75rem; }
   .sec-titulo { font-size: 1.6rem; margin-bottom: 1.5rem; }
