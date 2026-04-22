@@ -1,6 +1,14 @@
 /* ══════════════════════════════════════
    PA ACOUSTIC — styles.css
    TEMA CLARO PERMANENTE - Sin modo oscuro
+   ══════════════════════════════════════
+   Cómo leer este archivo (no está comentado propiedad por propiedad):
+   - :root … variables de color, sombras y anchos reutilizados en todo el sitio.
+   - Reset breve (*, html, body) y .page-watermark (foto LCP de fondo).
+   - Navegación: .nav-shell, búsqueda, redes (#mainNavbar .social-nav--nav).
+   - Hero, banner, secciones .sec / .sec-alt, tarjetas de catálogo y modal/lightbox.
+   - Sidebar, paginación, contacto, footer, utilidades (.reveal, .visually-hidden).
+   Busca comentarios /* … */ encima de bloques para decisiones de diseño o PageSpeed.
    ══════════════════════════════════════ */
 
 :root {
