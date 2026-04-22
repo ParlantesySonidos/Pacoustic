@@ -36,13 +36,13 @@
       catBoost: { Cabinas: 12, Woofer: 6 },
       subBoost: { 'Line Array': 8 }
     },
-    graves: {
+    graves: { // Subs y woofers por tamaño SPL.
       label: 'Graves y subwoofers',
       keywords: ['woofer', 'sub', 'grave', 'bajo', '18', '15', '12', 'neodimio', 'ferrita', 'spl', 'w'],
       catBoost: { Woofer: 18 },
       subBoost: { Neodimio: 5, Ferrita: 5 }
     },
-    drivers: {
+    drivers: { // Agudos, compresión, horns.
       label: 'Drivers y agudos',
       keywords: ['driver', 'agudo', 'compresión', 'diafragma', 'titanio', 'bobina', 'horn', '1.4', '2'],
       catBoost: { Drivers: 18 },
@@ -409,7 +409,9 @@
     buildUI();
   }
 
+  // main.js dispara este evento al terminar de parsear products.json (también en error con array vacío).
   document.addEventListener('pacoustic:catalog-ready', init, { once: true });
+  // Si el script se carga tarde y el catálogo ya existía, monta UI sin esperar otro evento.
   document.addEventListener('DOMContentLoaded', () => {
     if (window.PAcousticCatalog && window.PAcousticCatalog.length) init();
   });
