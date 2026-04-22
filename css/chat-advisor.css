@@ -1,23 +1,24 @@
-/* P.Acoustic — asesor de producto (chat flotante) */
+/* P.Acoustic — asesor de producto (chat flotante; markup desde js/chatAdvisor.js). */
+/* Estructura: #paAdvisorRoot > .pa-advisor-wrap > panel + botón flotante; variables de color locales. */
 
 #paAdvisorRoot {
-  --pa-chat-bg: #0d1b2a;
-  --pa-chat-panel: #ffffff;
-  --pa-chat-muted: #5a6a7a;
-  --pa-chat-rojo: #c41e3a;
-  --pa-chat-rojo2: #e63950;
+  --pa-chat-bg: #0d1b2a; /* Fondo cabecera panel. */
+  --pa-chat-panel: #ffffff; /* Fondo cuerpo mensajes. */
+  --pa-chat-muted: #5a6a7a; /* Texto secundario. */
+  --pa-chat-rojo: #c41e3a; /* Marca P.Acoustic. */
+  --pa-chat-rojo2: #e63950; /* Degradado botón. */
   font-family: 'Nunito', system-ui, sans-serif;
-  position: fixed;
-  z-index: 285;
-  right: max(1rem, env(safe-area-inset-right, 0px));
+  position: fixed; /* Siempre visible sobre el contenido. */
+  z-index: 285; /* Por encima del navbar y por debajo de un posible modal si se subiera z-index. */
+  right: max(1rem, env(safe-area-inset-right, 0px)); /* Respeta “safe area” en iPhone con notch. */
   bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: column; /* Panel encima del botón redondo. */
+  align-items: flex-end; /* Alinea todo al borde derecho. */
   gap: 0.65rem;
-  pointer-events: none;
+  pointer-events: none; /* Deja pasar clics fuera del widget; hijos reactivan abajo. */
 }
-#paAdvisorRoot * { pointer-events: auto; box-sizing: border-box; }
+#paAdvisorRoot * { pointer-events: auto; box-sizing: border-box; } /* Todos los hijos reciben eventos; border-box coherente. */
 
 .pa-advisor-toggle {
   position: relative;
