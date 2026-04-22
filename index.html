@@ -1,37 +1,37 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- HTML5; el idioma del documento es español (SEO y lectores de pantalla). -->
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <meta name="description" content="P.Acoustic — Audio profesional en Medellín, Colombia. Altavoces, line array, subwoofers, drivers y cabinas amplificadas; controles de calidad rigurosos. Envíos en Colombia."/>
-  <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/>
-  <meta name="author" content="P.Acoustic"/>
-  <meta name="theme-color" content="#c41e3a"/>
-  <meta name="google-site-verification" content="UnLq7Y1oCmKLKN5vtWscXJqsmsrWGMxFaQQCiNulo8M" />
+  <meta charset="UTF-8"/> <!-- Codificación UTF-8 para tildes y símbolos. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> <!-- Móvil + recorte iOS “notch”. -->
+  <meta name="description" content="P.Acoustic — Audio profesional en Medellín, Colombia. Altavoces, line array, subwoofers, drivers y cabinas amplificadas; controles de calidad rigurosos. Envíos en Colombia."/> <!-- Snippet en resultados de búsqueda. -->
+  <meta name="keywords" content="audio profesional, line array activo, woofer 18, parlantes profesionales, Medellín, Colombia, P.Acoustic"/> <!-- Referencia SEO menor (Google prioriza description). -->
+  <meta name="author" content="P.Acoustic"/> <!-- Metadato editorial. -->
+  <meta name="theme-color" content="#c41e3a"/> <!-- Color de barra de UI en navegadores móviles. -->
+  <meta name="google-site-verification" content="UnLq7Y1oCmKLKN5vtWscXJqsmsrWGMxFaQQCiNulo8M" /> <!-- Verificación Search Console. -->
   <!-- Fuentes en /fonts (css/fonts.css) — sin Google Fonts: evita timeouts y el refreshCSS de Live Server sobre URLs externas -->
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/>
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin/> <!-- Ahorra RTT al resolver Cloudinary antes de imágenes. -->
   <!-- LCP: foto de fondo (.page-watermark) — misma URL que en css/styles.css para caché + pintura antes -->
   <link rel="preload" as="image" fetchpriority="high"
     href="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_640,c_limit/v1776290344/mafondo_mo86qx.jpg"
-    media="(max-width: 1024px)"/>
+    media="(max-width: 1024px)"/> <!-- Imagen más ligera en móvil/tablet (LCP). -->
   <link rel="preload" as="image" fetchpriority="high"
     href="https://res.cloudinary.com/djlr3wszq/image/upload/f_auto,q_auto,w_1600,c_limit/v1776290344/mafondo_mo86qx.jpg"
-    media="(min-width: 1025px)"/>
-  <link rel="dns-prefetch" href="https://wa.me"/>
-  <meta property="og:title" content="P.Acoustic — Audio profesional | Medellín, Colombia"/>
-  <meta property="og:description" content="Marca de audio profesional: altavoces, line array, subwoofers, drivers y cabinas amplificadas. Calidad y desempeño en cada equipo. Envíos en Colombia."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:locale" content="es_CO"/>
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-  <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/>
-  <title>P.Acoustic — Audio profesional | Medellín, Colombia</title>
-<link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/>
-<link rel="stylesheet" href="css/styles.css?v=social-padding-1"/>
-<link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/>
-<link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/>
+    media="(min-width: 1025px)"/> <!-- Imagen ancha en escritorio. -->
+  <link rel="dns-prefetch" href="https://wa.me"/> <!-- Resolución temprana del host de enlaces WhatsApp. -->
+  <meta property="og:title" content="P.Acoustic — Audio profesional | Medellín, Colombia"/> <!-- Open Graph: título al compartir. -->
+  <meta property="og:description" content="Marca de audio profesional: altavoces, line array, subwoofers, drivers y cabinas amplificadas. Calidad y desempeño en cada equipo. Envíos en Colombia."/> <!-- OG: descripción al compartir. -->
+  <meta property="og:type" content="website"/> <!-- Tipo de objeto para redes (página genérica). -->
+  <meta property="og:locale" content="es_CO"/> <!-- Idioma/región del contenido. -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/> <!-- Pista opcional para rastreadores. -->
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/djlr3wszq/image/upload/v1774903848/LOGO_PA_alta_resolucion_tisjr6.png"/> <!-- Favicon en pestaña del navegador. -->
+  <title>P.Acoustic — Audio profesional | Medellín, Colombia</title> <!-- Título de pestaña y resultado de búsqueda. -->
+<link rel="stylesheet" href="css/fonts.css?v=local-woff2-1"/> <!-- @font-face Rajdhani + Nunito locales. -->
+<link rel="stylesheet" href="css/styles.css?v=social-padding-1"/> <!-- Estilos globales del sitio; ?v= invalida caché al cambiar. -->
+<link rel="stylesheet" href="css/pdf-btn.css?v=stats-v3"/> <!-- Botón “ficha PDF” en modal. -->
+<link rel="stylesheet" href="css/chat-advisor.css?v=stats-v3"/> <!-- Asesor flotante (chatAdvisor.js). -->
 </head>
 
-<body data-theme="light">
+<body data-theme="light"> <!-- Tema claro fijo; main.js también fuerza data-theme en DOMContentLoaded. -->
 
 <!-- SVG WHATSAPP -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
