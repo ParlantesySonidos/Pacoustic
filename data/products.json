@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "hl10a",
+    "name": "PAhl10a",
     "category": "Cabinas",
     "subcategory": "Line Array",
     "images": {
@@ -177,7 +177,7 @@
   },
   {
     "id": 7,
-    "name": "parlante 10 sheffieeld",
+    "name": "sheffieeld 10",
     "category": "Woofer",
     "subcategory": "Ferrita",
     "images": {
@@ -204,7 +204,7 @@
   },
   {
     "id": 8,
-    "name": "parlante 12 sheffield",
+    "name": "sheffield 12",
     "category": "Woofer",
     "subcategory": "Ferrita",
     "images": {
@@ -638,7 +638,7 @@
   }, 
   {
     "id": 24,
-    "name": "HL20A",
+    "name": "PAHL20A",
     "category": "Cabinas",
     "subcategory": "Line Array",
     "bannerImg": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775771047/pahl20a_ut5z8j.jpg",
