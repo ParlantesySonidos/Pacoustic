@@ -1,5 +1,14 @@
 # PAcoustic — Parlantes Profesionales ⚡
 
+**Última actualización documentación: 22/04/26**
+
+**22/04/26 — Cambios recientes**
+- Redes sociales (Facebook, Instagram, TikTok) en la barra superior con colores de marca; enlaces configurables en `js/main.js` (`SOCIAL_*`).
+- Navbar móvil/tablet: menos saturación, logo sin caja blanca (contraste con sombra), alineación vertical, icono de búsqueda más compacto, más espacio lateral en el bloque de redes.
+- Catálogo: orden PA10N-900 antes de 10NDL76 cuando comparten tamaño de ordenación.
+- Sección “Nosotros”: retiradas las tarjetas “Alta Potencia” y “Precisión Acústica”.
+- Vista previa de imagen en tarjetas: ajustes para Bumper PAHL30A (suave) y PA 118A SUB (más grande).
+
 **✅ Políticas Técnicas 100% + PageSpeed Optimizations: 08/04/26**  
 **✅ main.js comentarios LÍNEA x LÍNEA 100%: 08/04/26**  
 **✅ js/modalZoom.js auditado: Perfecto**  
@@ -15,7 +24,7 @@
 | Español variables/comentarios | ✅ 100% |
 | NO código muerto/duplicados | ✅ Verificado |
 | NO sobrescribir archivos | ✅ Cumple |
-| README actualizado | ✅ **Esta entrada** |
+| README actualizado | ✅ **22/04/26** |
 
 ## 📈 PageSpeed Progreso (Objetivo 100/100)
 ✅ **Actual: 95+** → Lazy loading, cache DOM, sanitization XSS  
@@ -31,6 +40,7 @@ Próximo: npx lighthouse --output=html --output-path=pagespeed.html
 - ⚡ Filtros/paginación 8 items + contador
 - 📄 PDF viewer fichas técnicas
 - 💬 WhatsApp auto-text inquiry
+- 🔗 Redes sociales en navbar (FB / IG / TikTok)
 
 ## 🎯 Métricas Verificadas
 - **LCP <1s** → Hero logo `fetchpriority="high"`
