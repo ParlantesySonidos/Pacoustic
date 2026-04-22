@@ -1540,6 +1540,11 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   #mainNavbar .nav-logo {
     grid-area: logo;
     justify-self: center;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    /* Ligero bajado respecto al centro óptico (iconos + sombra del logo) */
+    margin-top: 0.22rem;
   }
   /* Logo: sin caja blanca; contraste sobre barra oscura */
   #mainNavbar .nav-logo a {
