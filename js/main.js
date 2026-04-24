@@ -8,7 +8,7 @@ const SOCIAL_INSTAGRAM = "https://www.instagram.com/parlantesysonido?igsh=MTh2MX
 
 const SOCIAL_TIKTOK = "https://www.tiktok.com/@parlantesysonido?_r=1&_t=ZS-95lB0AWz0yq";
 
-const CATALOG_JSON_VERSION = 3;
+const CATALOG_JSON_VERSION = 7;
 
 const PRODUCT_MEDIA_ZOOM_IDS = new Set([ "pa-118a-sub" ]);
 
@@ -1357,7 +1357,8 @@ function openModal(id) {
         thumbsEl.innerHTML = "";
         thumbsEl.style.display = "none";
     }
-    document.getElementById("modalInfo").innerHTML = `\n    <span class="modal-badge">${escapeHtml(p.badge)}</span>\n    <div class="modal-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="modal-subcat">· ${escapeHtml(p.subcat)}</span>` : ""}</div>\n    <div class="modal-name">${escapeHtml(p.name)}</div>\n    <div class="modal-desc">${escapeHtml(p.desc)}</div>\n    <table class="modal-tabla">\n      ${(p.specs || []).map(([k, v]) => `<tr><td>${escapeHtml(k)}</td><td>${escapeHtml(String(v || "-"))}</td></tr>`).join("")}\n    </table>\n    <div class="modal-apps"><h4>Aplicaciones</h4>\n      <ul>${(p.apps || []).map(a => `<li>${escapeHtml(a)}</li>`).join("")}</ul>\n    </div>\n    ${p.doc ? `<button class="modal-pdf-btn" onclick="event.stopPropagation();abrirPDF('${escapeAttr(p.doc)}','${escapeAttr(p.name)}')">&#128196; Ver Ficha Técnica ${escapeHtml(p.name)}</button>` : ""}\n    <a href="${WP}?text=${encodeURIComponent("Hola, me interesa el " + p.name + ". ¿Pueden darme información y precio?")}"\n       target="_blank" rel="noopener noreferrer" class="modal-wp">${WP_SVG} Consultar por WhatsApp</a>`;
+    const appsHtml = (p.apps || []).length ? `\n    <div class="modal-apps"><h4>Aplicaciones</h4>\n      <ul>${(p.apps || []).map(a => `<li>${escapeHtml(a)}</li>`).join("")}</ul>\n    </div>` : "";
+    document.getElementById("modalInfo").innerHTML = `\n    <span class="modal-badge">${escapeHtml(p.badge)}</span>\n    <div class="modal-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="modal-subcat">· ${escapeHtml(p.subcat)}</span>` : ""}</div>\n    <div class="modal-name">${escapeHtml(p.name)}</div>\n    <div class="modal-desc">${escapeHtml(p.desc)}</div>\n    <table class="modal-tabla">\n      ${(p.specs || []).map(([k, v]) => `<tr><td>${escapeHtml(k)}</td><td>${escapeHtml(String(v || "-"))}</td></tr>`).join("")}\n    </table>${appsHtml}\n    ${p.doc ? `<button class="modal-pdf-btn" onclick="event.stopPropagation();abrirPDF('${escapeAttr(p.doc)}','${escapeAttr(p.name)}')">&#128196; Ver Ficha Técnica ${escapeHtml(p.name)}</button>` : ""}\n    <a href="${WP}?text=${encodeURIComponent("Hola, me interesa el " + p.name + ". ¿Pueden darme información y precio?")}"\n       target="_blank" rel="noopener noreferrer" class="modal-wp">${WP_SVG} Consultar por WhatsApp</a>`;
     openModal._currentThumbIdx = 0;
     openModal._imgs = p.imgs;
     openModal._productName = p.name;

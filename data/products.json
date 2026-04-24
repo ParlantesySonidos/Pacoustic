@@ -706,7 +706,15 @@
       "main": "https://res.cloudinary.com/djlr3wszq/image/upload/v1775085304/crosover_x02v8h.jpg",
       "gallery": []
     },
-    "description": "Crossover pasivo para integrar subwoofer en sistemas de refuerzo, con ajuste de frecuencia de corte y conexiones pensadas para rack o instalación fija."
+    "description": "🔊 Crossover para subwoofer de 500 W de potencia, precisión y potencia para tu sistema de audio. Optimiza el rendimiento de tus parlantes con este crossover de alta calidad, diseñado para sistemas de sonido exigentes. Su función principal es separar las frecuencias medias y altas, optimizando las frecuencias bajas y permitiendo que el woofer sea más eficiente en su rango de frecuencia. Pendiente de filtrado aproximada de 12 dB por octava, logrando una transición suave y eficiente entre vías. Rango de frecuencia: 35 Hz - 120 Hz.",
+    "specs": {
+      "Potencia máxima": "500 W",
+      "Rango de frecuencia": "35 Hz - 150 Hz",
+      "Bobina interna": "4 mH",
+      "Capacitores": "4 capacitores de 10 µF / 200 V",
+      "Pendiente de filtrado": "Aproximadamente 12 dB por octava",
+      "Rango de filtrado": "35 Hz - 120 Hz"
+    }
   },
   {
     "id": 27,
