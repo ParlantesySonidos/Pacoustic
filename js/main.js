@@ -212,7 +212,7 @@ function renderBanner() {
         id: p.id
     }));
     const dup = [ ...items, ...items, ...items ];
-    track.innerHTML = dup.map(({src: src, alt: alt, id: id}) => `\n    <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">\n      <img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async"/>\n    </div>`).join("");
+    track.innerHTML = dup.map(({src: src, alt: alt, id: id}) => `\n    <div class="banner-item" onclick="onBannerItemClick('${id}')" role="button" tabindex="0" aria-label="Ver ${escapeAttr(alt)}">\n      <img ${getImageAttrs(src, alt, "banner")}/>\n    </div>`).join("");
     initBannerItemSizing(track);
 }
 
@@ -722,10 +722,10 @@ function showCategoryFlyout(anchorBtn) {
     const isMobile = window.innerWidth <= 1024;
     const imgAll = getRepresentativeImage(cat, "");
     if (isMobile) {
-        fly.innerHTML = `\n      <div class="sidebar-flyout-title">${escapeHtml(cat)}</div>\n      <div class="sidebar-flyout-inner sidebar-flyout-inner--grid" role="group" aria-label="Subcategorías de ${escapeAttr(cat)}">\n        <button type="button" class="sidebar-flyout-tile${isFlyoutItemActive(cat, "") ? " active" : ""}" data-cat="${escapeAttr(cat)}" data-sub="">\n          <div class="sidebar-flyout-tile-img">${imgAll ? `<img src="${escapeAttr(imgAll)}" alt="" loading="lazy"/>` : '<span class="sidebar-flyout-placeholder" aria-hidden="true"></span>'}</div>\n          <span class="sidebar-flyout-pill">Ver todos</span>\n          <span class="sidebar-flyout-tile-n">${countAll}</span>\n        </button>\n        ${subs.map(sub => {
+        fly.innerHTML = `\n      <div class="sidebar-flyout-title">${escapeHtml(cat)}</div>\n      <div class="sidebar-flyout-inner sidebar-flyout-inner--grid" role="group" aria-label="Subcategorías de ${escapeAttr(cat)}">\n        <button type="button" class="sidebar-flyout-tile${isFlyoutItemActive(cat, "") ? " active" : ""}" data-cat="${escapeAttr(cat)}" data-sub="">\n          <div class="sidebar-flyout-tile-img">${imgAll ? `<img ${getImageAttrs(imgAll, "", "flyout")}/>` : '<span class="sidebar-flyout-placeholder" aria-hidden="true"></span>'}</div>\n          <span class="sidebar-flyout-pill">Ver todos</span>\n          <span class="sidebar-flyout-tile-n">${countAll}</span>\n        </button>\n        ${subs.map(sub => {
             const n = products.filter(p => (p.cat || "").toLowerCase() === cat.toLowerCase() && (p.subcat || "").trim().toLowerCase() === sub.toLowerCase()).length;
             const img = getRepresentativeImage(cat, sub);
-            return `<button type="button" class="sidebar-flyout-tile${isFlyoutItemActive(cat, sub) ? " active" : ""}" data-cat="${escapeAttr(cat)}" data-sub="${escapeAttr(sub)}">\n          <div class="sidebar-flyout-tile-img">${img ? `<img src="${escapeAttr(img)}" alt="" loading="lazy"/>` : '<span class="sidebar-flyout-placeholder" aria-hidden="true"></span>'}</div>\n          <span class="sidebar-flyout-pill">${escapeHtml(sub)}</span>\n          <span class="sidebar-flyout-tile-n">${n}</span>\n        </button>`;
+            return `<button type="button" class="sidebar-flyout-tile${isFlyoutItemActive(cat, sub) ? " active" : ""}" data-cat="${escapeAttr(cat)}" data-sub="${escapeAttr(sub)}">\n          <div class="sidebar-flyout-tile-img">${img ? `<img ${getImageAttrs(img, "", "flyout")}/>` : '<span class="sidebar-flyout-placeholder" aria-hidden="true"></span>'}</div>\n          <span class="sidebar-flyout-pill">${escapeHtml(sub)}</span>\n          <span class="sidebar-flyout-tile-n">${n}</span>\n        </button>`;
         }).join("")}\n      </div>`;
     } else {
         fly.innerHTML = `\n    <div class="sidebar-flyout-title">${escapeHtml(cat)}</div>\n    <div class="sidebar-flyout-inner sidebar-flyout-inner--list" role="group" aria-label="Subcategorías de ${escapeAttr(cat)}">\n      <button type="button" class="sidebar-flyout-row${isFlyoutItemActive(cat, "") ? " active" : ""}" data-cat="${escapeAttr(cat)}" data-sub="">\n        <span>Ver todos</span><span class="sidebar-flyout-n">${countAll}</span>\n      </button>\n      ${subs.map(sub => {
@@ -1007,6 +1007,98 @@ function escapeAttr(t) {
     return String(t || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+const IMAGE_PRESETS = {
+    card: {
+        widths: [ 360, 640, 960 ],
+        quality: "q_auto:good",
+        sizes: "(max-width: 768px) min(400px, calc(100vw - 1.25rem)), (max-width: 1024px) calc((100vw - 4rem) / 2), 360px"
+    },
+    banner: {
+        widths: [ 800, 1400, 2000 ],
+        quality: "q_auto:good",
+        sizes: "(max-width: 768px) 100vw, min(820px, calc(100vw - 2.75rem))"
+    },
+    modal: {
+        widths: [ 720, 1100, 1500 ],
+        quality: "q_auto:best",
+        sizes: "(max-width: 768px) calc(100vw - 2rem), 480px"
+    },
+    lightbox: {
+        widths: [ 1000, 1600, 2200 ],
+        quality: "q_auto:best",
+        sizes: "96vw"
+    },
+    thumb: {
+        widths: [ 96, 160, 240 ],
+        quality: "q_auto:eco",
+        sizes: "90px"
+    },
+    flyout: {
+        widths: [ 180, 320, 480 ],
+        quality: "q_auto:good",
+        sizes: "(max-width: 1024px) 45vw, 150px"
+    }
+};
+
+function isCloudinaryImageUrl(src) {
+    return /^https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\//i.test(String(src || ""));
+}
+
+function getImagePreset(name) {
+    return IMAGE_PRESETS[name] || IMAGE_PRESETS.card;
+}
+
+function getCloudinaryImageUrl(src, width, presetName) {
+    if (!isCloudinaryImageUrl(src)) return src || "";
+    const preset = getImagePreset(presetName);
+    const transform = [ "f_auto", preset.quality, `w_${width}`, "c_limit" ].join(",");
+    return String(src).replace("/image/upload/", `/image/upload/${transform}/`);
+}
+
+function getImageSrcset(src, presetName) {
+    if (!isCloudinaryImageUrl(src)) return "";
+    const preset = getImagePreset(presetName);
+    return preset.widths.map(w => `${getCloudinaryImageUrl(src, w, presetName)} ${w}w`).join(", ");
+}
+
+function getOptimizedImageUrl(src, presetName) {
+    const preset = getImagePreset(presetName);
+    const maxWidth = preset.widths[preset.widths.length - 1];
+    return getCloudinaryImageUrl(src, maxWidth, presetName);
+}
+
+function getImageAttrs(src, alt = "", presetName = "card", options = {}) {
+    const preset = getImagePreset(presetName);
+    const attrs = [
+        `src="${escapeAttr(getOptimizedImageUrl(src, presetName))}"`,
+        `alt="${escapeAttr(alt)}"`,
+        `loading="${escapeAttr(options.loading || "lazy")}"`,
+        'decoding="async"'
+    ];
+    const srcset = getImageSrcset(src, presetName);
+    if (srcset) {
+        attrs.push(`srcset="${escapeAttr(srcset)}"`);
+        attrs.push(`sizes="${escapeAttr(options.sizes || preset.sizes)}"`);
+    }
+    if (options.fetchpriority) attrs.push(`fetchpriority="${escapeAttr(options.fetchpriority)}"`);
+    return attrs.join(" ");
+}
+
+function applyResponsiveImage(img, src, presetName) {
+    if (!img) return;
+    const preset = getImagePreset(presetName);
+    const srcset = getImageSrcset(src, presetName);
+    img.dataset.fullSrc = src || "";
+    img.src = getOptimizedImageUrl(src, presetName);
+    if (srcset) {
+        img.srcset = srcset;
+        img.sizes = preset.sizes;
+    } else {
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+    }
+}
+
 const _SOCIAL_ICONS = {
     facebook: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
     instagram: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
@@ -1107,7 +1199,7 @@ function renderProducts() {
             const mediaCount = p.imgs.length + numVideos;
             const mediaIcon = numVideos > 0 ? "🎬" : p.imgs.length > 1 ? "📷" : "";
             const prodMediaCls = PRODUCT_MEDIA_ZOOM_IDS.has(p.id) ? " prod-card--media-lg" : PRODUCT_MEDIA_ZOOM_IDS_MILD.has(p.id) ? " prod-card--media-md" : "";
-            html += `\n        <div class="prod-card${prodMediaCls}" style="--card-delay:${delay * .07}s" onclick="openModal('${p.id}')">\n          <div class="prod-img-wrap">\n            <img src="${escapeAttr(p.imgs[0])}" alt="${escapeAttr(p.name)}" loading="lazy"/>\n            ${p.watermark ? `<img src="${escapeAttr(p.watermark)}" alt="" class="prod-watermark"/>` : ""}\n            <span class="prod-badge">${escapeHtml(p.badge)}</span>\n            ${hasMedia ? `<span class="prod-gallery-count">${mediaIcon} ${mediaCount}</span>` : ""}\n          </div>\n          <div class="prod-body">\n            <div class="prod-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="prod-sub">· ${escapeHtml(p.subcat)}</span>` : ""}</div>\n            <div class="prod-name">${escapeHtml(p.name)}</div>\n            <div class="prod-desc">${escapeHtml(p.desc)}</div>\n            <div class="prod-specs">${(p.tags || []).map(t => `<span class="spec-tag">${escapeHtml(t)}</span>`).join("")}</div>\n            <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>\n          </div>\n        </div>`;
+            html += `\n        <div class="prod-card${prodMediaCls}" style="--card-delay:${delay * .07}s" onclick="openModal('${p.id}')">\n          <div class="prod-img-wrap">\n            <img ${getImageAttrs(p.imgs[0], p.name, "card")}/>\n            ${p.watermark ? `<img ${getImageAttrs(p.watermark, "", "card")} class="prod-watermark"/>` : ""}\n            <span class="prod-badge">${escapeHtml(p.badge)}</span>\n            ${hasMedia ? `<span class="prod-gallery-count">${mediaIcon} ${mediaCount}</span>` : ""}\n          </div>\n          <div class="prod-body">\n            <div class="prod-cat">${escapeHtml(p.cat)}${p.subcat ? ` <span class="prod-sub">· ${escapeHtml(p.subcat)}</span>` : ""}</div>\n            <div class="prod-name">${escapeHtml(p.name)}</div>\n            <div class="prod-desc">${escapeHtml(p.desc)}</div>\n            <div class="prod-specs">${(p.tags || []).map(t => `<span class="spec-tag">${escapeHtml(t)}</span>`).join("")}</div>\n            <div class="prod-footer"><button class="prod-btn">Ver más →</button></div>\n          </div>\n        </div>`;
             delay++;
         });
     });
@@ -1306,15 +1398,14 @@ function openModal(id) {
         mb.appendChild(wm);
     }
     document.getElementById("modalTitulo").textContent = p.name;
-    mainImg.src = p.imgs[0];
+    applyResponsiveImage(mainImg, p.imgs[0], "modal");
     mainImg.alt = "Imagen de " + p.name;
-    mainImg.removeAttribute("srcset");
-    mainImg.removeAttribute("sizes");
     mainImg.style.cursor = "zoom-in";
     mainImg.onclick = e => {
         e.stopPropagation();
-        const ix = Math.max(0, p.imgs.indexOf(mainImg.src));
-        abrirLightbox(mainImg.src, p.name, p.imgs, ix);
+        const currentSrc = mainImg.dataset.fullSrc || p.imgs[0];
+        const ix = Math.max(0, p.imgs.indexOf(currentSrc));
+        abrirLightbox(currentSrc, p.name, p.imgs, ix);
     };
     mainWrap.querySelectorAll(".modal-nav-arrow").forEach(a => a.remove());
     const totalMedia = p.imgs.length + (p.videos || []).length;
@@ -1345,7 +1436,7 @@ function openModal(id) {
     const hasVideo = numVideos > 0;
     const totalItems = p.imgs.length + numVideos;
     if (totalItems > 1) {
-        let thumbsHTML = p.imgs.map((img, i) => `\n      <div class="modal-thumb ${i === 0 ? "active" : ""}"\n           onclick="if(typeof modalZoomCleanup==='function')modalZoomCleanup(); cambiarImg('${escapeAttr(img)}', this)"\n           role="tab" data-type="img" aria-label="Imagen ${i + 1} de ${p.imgs.length}">\n        <img src="${escapeAttr(img)}" alt="Vista ${i + 1}" loading="lazy"/>\n      </div>`).join("");
+        let thumbsHTML = p.imgs.map((img, i) => `\n      <div class="modal-thumb ${i === 0 ? "active" : ""}"\n           onclick="if(typeof modalZoomCleanup==='function')modalZoomCleanup(); cambiarImg('${escapeAttr(img)}', this)"\n           role="tab" data-type="img" aria-label="Imagen ${i + 1} de ${p.imgs.length}">\n        <img ${getImageAttrs(img, `Vista ${i + 1}`, "thumb")}/>\n      </div>`).join("");
         (p.videos || []).forEach((videoUrl, vIdx) => {
             const embed = getVideoEmbed(videoUrl);
             const thumbBg = embed?.thumb ? `style="background-image:url('${escapeAttr(embed.thumb)}');background-size:cover;background-position:center;"` : "";
@@ -1447,8 +1538,7 @@ function cambiarImg(src, el) {
     mainImg.style.opacity = "0";
     mainImg.style.transition = "opacity 0.15s ease";
     setTimeout(() => {
-        mainImg.src = src;
-        mainImg.removeAttribute("srcset");
+        applyResponsiveImage(mainImg, src, "modal");
         mainImg.style.opacity = "1";
         mainImg.style.cursor = "zoom-in";
         mainImg.onclick = e => {
@@ -1589,7 +1679,7 @@ function lbNav(dir) {
     lbReset();
     const img = document.getElementById("lbImg");
     if (!img) return;
-    img.src = LB_Gallery.urls[LB_Gallery.idx];
+    applyResponsiveImage(img, LB_Gallery.urls[LB_Gallery.idx], "lightbox");
     const base = LB_Gallery.productName || "";
     img.alt = base ? `${base} — foto ${LB_Gallery.idx + 1}` : `Foto ${LB_Gallery.idx + 1}`;
     lbUpdateLightboxNav();
@@ -1703,7 +1793,7 @@ function abrirLightbox(src, nombre, galleryUrls, startIdx) {
     LBState.dragging = false;
     const img = document.getElementById("lbImg");
     const cur = LB_Gallery.urls[LB_Gallery.idx] || src;
-    img.src = cur;
+    applyResponsiveImage(img, cur, "lightbox");
     const base = LB_Gallery.productName || nombre || "";
     img.alt = base ? `${base} — foto ${LB_Gallery.idx + 1}` : `Foto ${LB_Gallery.idx + 1}`;
     img.style.transform = "";

@@ -142,7 +142,8 @@
             const sub = p.subcat ? ` · ${esc(p.subcat)}` : "";
             const card = document.createElement("div");
             card.className = "pa-advisor-pcard";
-            card.innerHTML = `\n        ${img ? `<img src="${esc(p.imgs[0])}" alt="" loading="lazy"/>` : "<div></div>"}\n        <div class="pa-advisor-pcard-meta">\n          <strong>${esc(p.name)}</strong>\n          <small>${esc(p.cat)}${sub}</small>\n        </div>\n        <button type="button" class="pa-advisor-pcard-btn" data-open="${esc(p.id)}">Ver</button>`;
+            const imgAttrs = img && typeof getImageAttrs === "function" ? getImageAttrs(p.imgs[0], "", "thumb") : "";
+            card.innerHTML = `\n        ${img ? `<img ${imgAttrs || `src="${esc(p.imgs[0])}" alt="" loading="lazy"`}/>` : "<div></div>"}\n        <div class="pa-advisor-pcard-meta">\n          <strong>${esc(p.name)}</strong>\n          <small>${esc(p.cat)}${sub}</small>\n        </div>\n        <button type="button" class="pa-advisor-pcard-btn" data-open="${esc(p.id)}">Ver</button>`;
             wrap.appendChild(card);
         });
         msgs.appendChild(wrap);

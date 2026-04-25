@@ -907,8 +907,7 @@ body { background: var(--bg); color: var(--texto); font-family: 'Nunito', sans-s
   height: 100%;
   object-fit: contain;
   padding: 0.75rem;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  image-rendering: auto;
   transition: transform .4s ease;
 }
 .prod-card:hover .prod-img-wrap img:first-child {
@@ -1238,7 +1237,7 @@ footer p { font-size: 0.72rem; color: var(--muted); }
   height: 100%;
   object-fit: contain; 
   padding: 0.5rem;
-  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
   transition: opacity .15s ease, transform .15s ease;
 }
 .modal-img-main.modal-img-main--media-lg img {
@@ -2217,10 +2216,10 @@ footer p { font-size: 0.72rem; color: var(--muted); }
 #lbImg {
   position: relative;
   z-index: 1;
-  max-width: 70vw;
-  max-height: 55vh;  
-  width: 85%;        
-  height: 70%;
+  max-width: min(96vw, 1600px);
+  max-height: calc(100dvh - 8rem);
+  width: auto;
+  height: auto;
   object-fit: contain;
   border-radius: 12px;
   user-select: none;
